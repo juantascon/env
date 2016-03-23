@@ -14,7 +14,6 @@ pushd ~/ >/dev/null
 lnk env/bash.d/bashrc .bashrc
 lnk env/bash.d/bashrc .bash_profile
 lnk ../../env/fish.d/config.fish .config/fish/config.fish
-lnk ../../env/fish.d/completions .config/fish/completions
 
 lnk env/python/pythonrc .pythonrc
 lnk env/tmux/tmux.conf .tmux.conf
