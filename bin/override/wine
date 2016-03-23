@@ -1,0 +1,4 @@
+#! /bin/bash
+unset LD_PRELOAD
+export WINEARCH=win32
+exec /usr/bin/wine "$@"

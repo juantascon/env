@@ -1,0 +1,11 @@
+[Unit]
+Description=socks proxy
+After=sshd.service
+
+[Service]
+ExecStart=/usr/bin/ssh -CND 9870 user@server
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

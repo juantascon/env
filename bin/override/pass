@@ -1,0 +1,3 @@
+#!/bin/bash
+export PASSWORD_STORE_X_SELECTION=primary
+exec /usr/bin/pass "$@"

@@ -1,0 +1,3 @@
+#!/bin/bash
+export TRASH_OFF="YES"
+exec /bin/rm "$@"

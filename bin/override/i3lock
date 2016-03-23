@@ -1,0 +1,4 @@
+#! /bin/bash
+
+/usr/bin/i3lock -n "$@"
+xsetroot -solid "#000000"

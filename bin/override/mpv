@@ -1,0 +1,7 @@
+#! /bin/bash
+
+if [ ! -p "$XDG_RUNTIME_DIR/mpv.fifo" ]; then
+    mkfifo "$XDG_RUNTIME_DIR/mpv.fifo"
+fi
+
+exec /usr/bin/mpv "$@"

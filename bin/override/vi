@@ -1,0 +1,2 @@
+#!/bin/bash
+exec vim -u ~/env/vim/vimrc "$@"

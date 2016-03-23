@@ -1,0 +1,19 @@
+#! /bin/bash
+
+usage()
+{
+	echo -e "Uso: $(basename $0) <dir>|<file> ..."
+	exit $*
+}
+
+[ -z "$1" ] && usage
+
+find "$@" | while read f
+do
+	if [ -f "$f" ]; then
+		sudo chmod 644 "$f"
+	else
+		sudo chmod 755 "$f"
+	fi
+done
+

@@ -1,0 +1,11 @@
+[Unit]
+Description=autossh reverse tunnel
+After=sshd.service
+
+[Service]
+ExecStart=/usr/bin/autossh -M 20000 -q -N user@server -R 0.0.0.0:2013:localhost:2012
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

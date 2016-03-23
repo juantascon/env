@@ -1,0 +1,6 @@
+# bashrc
+
+. ~/env/bash.d/bashrc
+
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec xinit -- -keeptty
+

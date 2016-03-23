@@ -1,0 +1,11 @@
+#! /bin/bash
+
+usage()
+{
+	echo -e "Uso: $(basename $0) <dir>|<file> ..."
+	exit $*
+}
+
+[ -z "$1" ] && usage
+
+sudo chown -R "$USER:$GROUPS" "$@"

@@ -1,0 +1,30 @@
+#! /bin/bash
+
+#
+# autologin
+#
+i3lock &
+
+#
+# xorg
+#
+xrdb -merge ~/.Xresources
+[ -f ~/.Xresources.$(hostname) ] && xrdb -merge ~/.Xresources.$(hostname)
+
+xsetroot -solid "#000000" &
+xset b 0 &
+setxkbmap -layout us -variant altgr-intl &
+synclient MinSpeed=0.4 MaxSpeed=4.0 &
+synclient TapButton1=-1 TapButton2=-1 TapButton3=-1 &
+
+#
+# desktop
+#
+
+xbindkeys -n &
+start-pulseaudio-x11 &
+dunst &
+term.sh &
+clipit -n &
+
+systemctl --user start psd &

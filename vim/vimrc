@@ -1,0 +1,40 @@
+"" General
+set nocompatible
+
+"" Files
+set nobackup
+set enc=utf-8
+
+"" UI
+set showcmd
+set showmatch "display search results
+set statusline=%<%1*===\ %5*%F%1*%(\ ===\ %4*%h%1*%)%(\ ===\ %4*%m%1*%)%(\ ===\ %4*%r%1*%)\ ===%====\ %3*%l,%c%V%1*\ ===\ %5*%P%1*\ ===%0*
+set laststatus=2 "always show status bar
+set nu! "line numbers
+set history=100
+set ruler
+set wildmenu
+set wildmode=longest:full,full "better :command completion
+set confirm "before closing windows
+set incsearch
+set hlsearch
+syntax on
+color desert "ron aqua vividchalk
+set t_ti= t_te= "disable clear screen on exit
+
+"" Mouse - Keyboard
+set mouse="" "Activa el mouse
+set selectmode=key
+set keymodel=startsel
+set selection=old "includes everything on 1 selection
+set clipboard=unnamed "only uses * registry
+vnoremap <BS> d "backspace deletes selection on visual mode
+
+"" Indentation
+set tabstop=4 softtabstop=4 shiftwidth=4
+set expandtab "insert spaces instead of tab
+set autoindent
+set backspace=indent,eol,start whichwrap+=<,>,[,] "backspace on
+filetype plugin indent on
+" goto last selection
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif

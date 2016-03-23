@@ -1,0 +1,7 @@
+inside bluetoothctl:
+power on
+agent on
+default-agent
+pair 08:EF:3B:13:FA:C9
+connect 08:EF:3B:13:FA:C9
+exit
