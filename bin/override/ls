@@ -1,2 +1,2 @@
 #!/bin/bash
-exec /bin/ls --color=auto --file-type -h "$@"
+exec /bin/ls --color=auto --human-readable "$@"
