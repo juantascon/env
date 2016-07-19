@@ -9,7 +9,15 @@ set -x LD_PRELOAD "/usr/lib/libtrash.so"
 set -x PYTHONSTARTUP $HOME/.pythonrc
 set -x GEM_HOME $HOME/.gem
 set -x NODE_PATH $HOME/.npm-packages/lib/node_modules $NODE_PATH
-set -x PATH $PATH $GEM_HOME/ruby/*/bin /usr/lib/ruby/gems/*/bin /usr/bin/core_perl $HOME/.npm-packages/bin
+for dir in \
+    $GEM_HOME/ruby/*/bin /usr/lib/ruby/gems/*/bin \
+    $HOME/.npm-packages/bin/ \
+    /usr/bin/core_perl/ \
+    /opt/erlang/erlang-r16/bin/
+    
+    [ -d "$dir" ]; and set -x PATH $PATH "$dir"
+
+end
 
 #
 # gpg
