@@ -31,7 +31,7 @@ tune = next((t for t in TUNES if t["id"] == args.tune), False)
 record = args.record
 
 if tune:
-    if tune["type"] == "list": cmd += "--playlist"
+    if tune["type"] == "list": cmd += ["--playlist"]
     cmd += [tune["url"]]
 
 if record: cmd += ["--stream-dump", record.name]
