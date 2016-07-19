@@ -5,15 +5,10 @@ error(){
     exit 1
 }
 
-tabname=$(xdotool getwindowfocus getwindowname)
-IFS="- " read -ra parts <<< "${tabname}"
-len=${#parts[@]}
-browser=${parts[$(($len-1))]}
-url=${parts[$(($len-2))]}
+tabname=$(xdotool getactivewindow getwindowname)
+url=$(echo $tabname |grep -oP " \- .+ - Chromium"|awk '{print $2}')
 
-if [[ -z "${browser}" || -z "{url}" || "${browser}" != "Chromium" ]]; then
-    error "window not supported: $tabname"
-fi
+[[ -z "${url}" ]] && error "window not supported: $tabname"
 
 prefix=${PASSWORD_STORE_DIR-~/.password-store}
 password_list=( "$prefix"/**/*.gpg )
@@ -23,8 +18,8 @@ password_list=( "${password_list[@]%.gpg}" )
 choices=""
 for password in ${password_list[@]}; do
     if [[ "$(basename $password)" == ${url}* ]]; then
-        choices="${choices}${password} - password\n"
-        choices="${choices}"$(pass $password|awk '$1 ~ "^.+:" {sub(":", "", $1); print "'${password}' - "$1}')
+        choices="${choices}"$(pass $password|awk '$1 ~ "^.+:" {sub(":", "", $1); print "'${password}' - "$1}')"\n"
+        choices="${choices}${password} - password"
     fi
 done
 
