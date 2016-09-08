@@ -6,7 +6,7 @@ error(){
 }
 
 tabname=$(xdotool getactivewindow getwindowname)
-url=$(echo $tabname |grep -oP " \- .+ - Chromium"|awk '{print $2}')
+url=$(echo $tabname | tr " " "\n" | tac | tr "\n" " "|awk '{print $3}')
 
 [[ -z "${url}" ]] && error "window not supported: $tabname"
 
@@ -18,14 +18,14 @@ password_list=( "${password_list[@]%.gpg}" )
 choices=""
 for password in ${password_list[@]}; do
     if [[ "$(basename $password)" == ${url}* ]]; then
-        choices="${choices}"$(pass $password|awk '$1 ~ "^.+:" {sub(":", "", $1); print "'${password}' - "$1}')"\n"
-        choices="${choices}${password} - password"
+        choices="${choices}"$(pass $password|tail -n +3|awk '$1 ~ "^.+:" {sub(":", "", $1); print "'${password}' - "$1}')"\n"
+        choices="${choices}${password} - password\n"
     fi
 done
 
 [ -z "${choices}" ] && error "match not found: ${url}"
 
-choice=$(echo -e "${choices}"|rofi -dmenu -p "select entry:")
+choice=$(echo -e "${choices}"|grep -v "^$"| rofi -dmenu -p "select entry:")
 entry=${choice% - *}
 field=${choice#* - }
 
