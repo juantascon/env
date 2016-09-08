@@ -12,7 +12,7 @@ set -x NODE_PATH $HOME/.npm-packages/lib/node_modules $NODE_PATH
 for dir in \
     $GEM_HOME/ruby/*/bin /usr/lib/ruby/gems/*/bin \
     $HOME/.npm-packages/bin/ \
-    /usr/bin/core_perl/ \
+    /usr/bin/core_perl/ /usr/bin/vendor_perl/ \
     /opt/erlang/erlang-r16/bin/
     
     [ -d "$dir" ]; and set -x PATH $PATH "$dir"
