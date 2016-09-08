@@ -26,5 +26,3 @@ start-pulseaudio-x11 &
 dunst &
 term.sh &
 clipit -n &
-
-systemctl --user start psd &
