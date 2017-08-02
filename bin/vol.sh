@@ -2,10 +2,9 @@
 
 sink=$(pactl list short sinks | grep RUNNING | awk '{print $2}')
 [ -z "${sink}" ] && sink=$(pactl info|grep "Default Sink"|awk '{print $3}')
-echo $sink
 
 vol=$(pactl list sinks | grep "Name: ${sink}" -A 9|grep "Volume:"|grep -o "[0-9]*%"|head -n 1|sed "s/%//g")
-step=5
+step=3
 
 case "$1" in
     "up"|"down")
