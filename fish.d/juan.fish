@@ -16,7 +16,7 @@ for dir in \
     [ -d "$dir" ]; and set -x PATH $PATH "$dir"
 end
 
-if -x /opt/erlang/19.1/activate.fish
+if [ -x /opt/erlang/19.1/activate.fish ]
     source /opt/erlang/19.1/activate.fish
 end
 
