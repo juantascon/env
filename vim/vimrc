@@ -1,5 +1,6 @@
 "" General
 set nocompatible
+let g:netrw_dirhistmax=0 
 
 "" Files
 set nobackup
