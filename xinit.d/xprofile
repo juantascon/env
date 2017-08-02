@@ -21,7 +21,7 @@ synclient TapButton1=-1 TapButton2=-1 TapButton3=-1 &
 # desktop
 #
 
-xbindkeys -n &
+sxhkd &
 start-pulseaudio-x11 &
 dunst &
 term.sh &
