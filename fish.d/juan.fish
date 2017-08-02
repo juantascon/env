@@ -10,13 +10,14 @@ set -x PYTHONSTARTUP $HOME/.pythonrc
 set -x GEM_HOME $HOME/.gem
 set -x NODE_PATH $HOME/.npm-packages/lib/node_modules $NODE_PATH
 for dir in \
-    $GEM_HOME/ruby/*/bin /usr/lib/ruby/gems/*/bin \
-    $HOME/.npm-packages/bin/ \
-    /usr/bin/core_perl/ /usr/bin/vendor_perl/ \
-    /opt/erlang/erlang-r16/bin/
-    
+        $GEM_HOME/ruby/*/bin /usr/lib/ruby/gems/*/bin \
+        $HOME/.npm-packages/bin/ \
+        /usr/bin/core_perl/ /usr/bin/vendor_perl/
     [ -d "$dir" ]; and set -x PATH $PATH "$dir"
+end
 
+if -x /opt/erlang/19.1/activate.fish
+    source /opt/erlang/19.1/activate.fish
 end
 
 #
@@ -29,7 +30,7 @@ end
 #
 # calendar
 #
-pal -c 0 -r 2-3
+#pal -c 0 -r 2-3
 
 #
 # ssh
