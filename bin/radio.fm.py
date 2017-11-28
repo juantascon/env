@@ -1,8 +1,6 @@
 #! /usr/bin/env python3
 
-import subprocess, argparse, logging, os
-
-logging.basicConfig(level=logging.DEBUG)
+import argparse, os
 
 TUNES = [
     {"id": "ah", "url": "http://www.ah.fm/96k.m3u", "type": "list"},
@@ -27,16 +25,16 @@ args, extra = parser.parse_known_args()
 
 cmd = ["mpv"]
 
-tune = next((t for t in TUNES if t["id"] == args.tune), False)
 record = args.record
+if record:
+    cmd += ["--stream-dump", record.name]
 
-if tune:
-    if tune["type"] == "list": cmd += ["--playlist"]
-    cmd += [tune["url"]]
+tune = next((t for t in TUNES if t["id"] == args.tune), False)
+if tune["type"] == "list":
+    cmd += ["--playlist"]
+cmd += [tune["url"]]
 
-if record: cmd += ["--stream-dump", record.name]
 if extra: cmd += extra
 
-logging.info("running command: %s" % (" ".join(cmd)))
-
-subprocess.call(cmd)
+print("running command: %s" % (" ".join(cmd)))
+os.execvp(cmd[0], cmd)
