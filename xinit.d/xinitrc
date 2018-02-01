@@ -1,4 +1,4 @@
 #! /bin/bash
 
-$HOME/.xprofile &
+$HOME/env/xinit.d/xprofile &
 exec i3

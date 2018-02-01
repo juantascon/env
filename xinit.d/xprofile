@@ -8,14 +8,12 @@ i3lock &
 #
 # xorg
 #
-xrdb -merge ~/.Xresources
-[ -f ~/.Xresources.$(hostname) ] && xrdb -merge ~/.Xresources.$(hostname)
-
+xrdb -merge $HOME/env/xinit.d/Xresources
 xsetroot -solid "#000000" &
 xset b 0 &
 setxkbmap -layout us -variant altgr-intl &
 #synclient MinSpeed=0.8 MaxSpeed=4.0 &
-synclient TapButton1=-1 TapButton2=-1 TapButton3=-1 &
+#synclient TapButton1=-1 TapButton2=-1 TapButton3=-1 &
 
 #
 # desktop
