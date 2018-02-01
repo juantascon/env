@@ -1,10 +1,10 @@
 #
 # defaults
 #
-set -x PATH ~/env/bin/override ~/env/bin /usr/bin
+set -x PATH ~/env/bin/override ~/env/bin /usr/bin /usr/bin/core_perl/ /usr/bin/vendor_perl/
 set -x LANG en_US.UTF-8
 set -x EDITOR vim
-set -x BROWSER f
+set -x BROWSER c
 set -x PAGER most
 
 set -u LD_PRELOAD
@@ -14,7 +14,7 @@ set -u LD_PRELOAD
 #
 set fish_greeting "" #silent fish
 function prompt_pwd --description 'Print the current working directory'
-    echo $PWD | sed -e "s|^$HOME|~|" -e 's|^/private||'
+    echo $PWD | sed -e "s|^$HOME|~|"
 end
 
 #
