@@ -2,15 +2,6 @@
 icon_on="✓"
 icon_off="✗"
 
-name="$1"
-case ${name} in
-    "eth") interface=enp0s31f6;;
-    "wifi") interface=wlp2s0;;
-    *) echo "interface not found"; exit 1;;
-esac
-
-if ip addr ls dev "${interface}" |grep "state UP" &> /dev/null; then
-    echo -e "${name} ${icon_on}"
-else
-    echo -e "${name} ${icon_off}"
-fi
+raw_routes=$(ip route list 0/0|grep -o "dev.*"|awk '{print $2}')
+routes=$(echo $raw_routes |tr " " "\n" |sed "s/^en.*/eth/g" |sed "s/^wl.*/wifi/g" |sed "s/^hxvpn.*/hxvpn/g")
+echo "routes: $(echo $routes)"
