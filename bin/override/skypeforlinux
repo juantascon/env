@@ -1,4 +1,0 @@
-#!/bin/bash
-#export PULSE_LATENCY_MSEC=60
-unset LD_PRELOAD
-exec /usr/bin/skypeforlinux "$@"
