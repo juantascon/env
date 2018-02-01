@@ -5,10 +5,13 @@ error(){
     exit 1
 }
 
-tabname=$(xdotool getactivewindow getwindowname)
-url=$(echo $tabname | tr " " "\n" | tac | tr "\n" " "|awk '{print $3}')
-
-[[ -z "${url}" ]] && error "window not supported: $tabname"
+windowname=$(xdotool getactivewindow getwindowname | tr " " "\n" | tac | tr "\n" " ")
+browser=$(echo $windowname | awk '{print $1}')
+case $browser in
+    "Firefox")  url=$(echo $windowname|awk '{print $4}') ;;
+    "Chromium") url=$(echo $windowname|awk '{print $3}') ;;
+    *) error "window not supported: $browser";;
+esac
 
 prefix=${PASSWORD_STORE_DIR-~/.password-store}
 password_list=( "$prefix"/**/*.gpg )
@@ -24,8 +27,9 @@ for password in ${password_list[@]}; do
 done
 
 [ -z "${choices}" ] && error "match not found: ${url}"
+choices=$(echo -e "${choices}"|grep -v "^$")
 
-choice=$(echo -e "${choices}"|grep -v "^$"| rofi -dmenu -p "select entry:")
+choice=$(echo "${choices}"| rofi -l $(echo "${choices}"|wc -l) -hide-scrollbar -dmenu -no-custom -p "select entry:")
 entry=${choice% - *}
 field=${choice#* - }
 
