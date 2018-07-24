@@ -16,13 +16,6 @@ for dir in $GEM_HOME/ruby/*/bin $HOME/.npm-packages/bin/
 end
 
 #
-# gpg
-#
-#if not pgrep -u $USER gpg-agent 2>/dev/null >/dev/null
-#    gpg-agent --daemon
-#end
-
-#
 # calendar
 #
 pal -c 0 -r 2-3
@@ -33,6 +26,9 @@ pal -c 0 -r 2-3
 #if [ ! -d "$XDG_RUNTIME_DIR/ssh_control" ]
 #    mkdir -p "$XDG_RUNTIME_DIR/ssh_control"
 #end
+
+# runs all compose in the same project
+set -x COMPOSE_PROJECT_NAME docker
 
 #
 # autologin
