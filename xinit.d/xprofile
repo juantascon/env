@@ -24,3 +24,9 @@ start-pulseaudio-x11 &
 dunst &
 term.sh &
 clipit -n &
+
+#
+# Custom
+#
+
+[ -x ~/env/xinit.d/nuc.xprofile ] && ~/env/xinit.d/nuc.xprofile
