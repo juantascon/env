@@ -8,7 +8,7 @@ error(){
 windowname=$(xdotool getactivewindow getwindowname | tr " " "\n" | tac | tr "\n" " ")
 browser=$(echo $windowname | awk '{print $1}')
 case $browser in
-    "Firefox")  url=$(echo $windowname|awk '{print $4}') ;;
+    "Firefox")  url=$(echo $windowname|awk '{print $4}'|tr -d "/") ;;
     "Chromium") url=$(echo $windowname|awk '{print $3}') ;;
     *) error "window not supported: $browser";;
 esac
