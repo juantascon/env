@@ -1,0 +1,7 @@
+mkdir -p /usr/lib/openssl-erl
+cd /usr/lib/openssl-erl
+ln -sf /usr/lib/openssl-1.0 lib
+ln -sf /usr/include/openssl-1.0 include
+
+export KERL_CONFIGURE_OPTIONS="--with-ssl=/usr/lib/openssl-erl"
+kerl build 19.3 19.3
