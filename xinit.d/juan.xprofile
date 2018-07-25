@@ -1,0 +1,7 @@
+#! /bin/bash
+
+#
+# autologin
+#
+
+i3lock &

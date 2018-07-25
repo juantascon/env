@@ -1,13 +1,9 @@
 #! /bin/bash
 
 #
-# autologin
-#
-i3lock &
-
-#
 # xorg
 #
+
 xrdb -merge $HOME/env/xinit.d/Xresources
 xsetroot -solid "#000000" &
 xset b 0 &
@@ -26,7 +22,9 @@ term.sh &
 clipit -n &
 
 #
-# Custom
+# user specific config
 #
 
-[ -x ~/env/xinit.d/nuc.xprofile ] && ~/env/xinit.d/nuc.xprofile
+if [ -x ~/env/xinit.d/$USER.xprofile ]
+    ~/env/xinit.d/$USER.xprofile
+end
