@@ -1,0 +1,23 @@
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+    vol.sh {up,down,mute}
+
+super + {Up,Down,0}
+    vol.sh {up,down,mute}
+
+XF86Audio{Play,Next,Prev}
+    music.sh {toggle,next,prev}
+
+XF86KbdBrightness{Down,Up}
+    brigth.sh {down,up}
+
+XF86MonBrightness{Down,Up}
+    brigth.sh {down,up}
+
+super + {t,l,s}
+    {xterm,i3lock,maim -s ~/shot.png}
+
+super + {m,p,a}
+    {passmenu --type,tabpass.sh,mfa.sh}
+
+#"xrandr.sh toggle"
+#  Mod4 + p
