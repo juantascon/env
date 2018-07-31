@@ -1,8 +1,0 @@
-#! /bin/bash
-
-if [ "$1" == "--print-architecture" ]; then
-    echo "amd64"
-else
-    echo "invalid command"
-    exit 1
-fi

@@ -1,8 +1,0 @@
-#! /bin/bash
-
-unset LD_PRELOAD
-
-export STEAM_FRAME_FORCE_CLOSE=1
-export STEAM_RUNTIME=0
-
-exec /usr/bin/steam "$@"
