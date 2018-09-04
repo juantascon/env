@@ -22,7 +22,7 @@ sxhkd &
 start-pulseaudio-x11 &
 dunst &
 term.sh &
-clipit -n &
+copyq &
 
 #
 # user specific config
