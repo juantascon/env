@@ -1,10 +1,22 @@
 #requirements: partiton - format - mount
 
+
+# partitions:
+#   1        128.0 MiB   EFI System                efi
+#   2        256.0 MiB   Linux filesystem          boot
+#   3        48.0 GiB    Linux filesystem          rootfs
+#   4        40.0 GiB    Linux filesystem          juan
+#   5        256.0 GiB   Linux filesystem          data
+
+# EFI:
+# mkfs.vfat -F 32 -n efi /dev/sda1
+# mount /dev/sda1 /mnt/boot/EFI
+
 #set these vars
 hostname=hostname
 drive=/dev/vda
 
-pacstrap /mnt base base-devel vim wget net-tools ipset ethtool grub openssh
+pacstrap /mnt base base-devel vim wget net-tools ipset ethtool grub openssh efibootmgr
 genfstab -L -p /mnt >> /mnt/etc/fstab
 echo $hostname > /mnt/etc/hostname
 ln -s /usr/share/zoneinfo/America/Bogota /mnt/etc/localtime
