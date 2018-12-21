@@ -27,6 +27,6 @@ copyq &
 #
 # user specific config
 #
-if [ -x ~/env/xinit.d/$USER.xprofile ]
+if [ -x ~/env/xinit.d/$USER.xprofile ]; then
     ~/env/xinit.d/$USER.xprofile
 fi
