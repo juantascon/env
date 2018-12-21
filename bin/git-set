@@ -1,0 +1,14 @@
+#! /bin/bash
+
+case "$1" in
+    "pr")
+        git config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*' ;;
+    "hx"|"horlux")
+        git config user.name juantascon
+        git config user.email juantascon@horlux.org ;;
+    "rz"|"rezolve")
+        git config user.name juantascon
+        git config user.email juantascon@rezolve.com;;
+    *)
+        echo "invalid option, use any of: pr|al|horlux"
+esac
