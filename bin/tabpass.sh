@@ -5,11 +5,11 @@ error(){
     exit 1
 }
 
-windowname=$(xdotool getactivewindow getwindowname | tr " " "\n" | tac | tr "\n" " ")
-browser=$(echo $windowname | awk '{print $1}')
+windowname=$(xdotool getactivewindow getwindowname)
+browser=$(echo $windowname | awk 'NF{ print $NF }')
 case $browser in
-    "Firefox")  url=$(echo $windowname|awk '{print $4}'|tr -d "/") ;;
-    "Chromium") url=$(echo $windowname|awk '{print $3}') ;;
+    "Firefox") url=$(echo $windowname| awk '{print $1}') ;;
+    "Chromium"|"Vivaldi") url=$(echo $windowname| tr " " "\n" | tac | tr "\n" " " | awk '{print $3}') ;;
     *) error "window not supported: $browser";;
 esac
 
