@@ -38,7 +38,7 @@
 [shortcuts]
     close = ctrl+space
     close_all = ctrl+shift+space
-    history = ctrl+mod1+h
+    #history = ctrl+mod1+h
     context = ctrl+mod1+j
 
 [urgency_low]
