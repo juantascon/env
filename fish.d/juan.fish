@@ -4,11 +4,21 @@
 set -x LD_PRELOAD "/usr/lib/libtrash.so"
 
 #
+# ssh agent
+#
+eval (keychain --eval -q)
+ssh-add .ssh/keys/juan.key  2> /dev/null
+
+#
 # langs
 #
+if [ -f ~/.asdf/asdf.fish ]
+    source ~/.asdf/asdf.fish
+end
 set -x PYTHONSTARTUP $HOME/.pythonrc
 set -x GEM_HOME $HOME/.gem
 set -x NODE_PATH $HOME/.npm-packages/lib/node_modules $NODE_PATH
+
 for dir in $GEM_HOME/ruby/*/bin $HOME/.npm-packages/bin/
     if [ -d "$dir" ]; 
         set -x PATH $PATH "$dir"
@@ -27,8 +37,10 @@ pal -c 0 -r 2-3
 #    mkdir -p "$XDG_RUNTIME_DIR/ssh_control"
 #end
 
-# runs all compose in the same project
+# rezolve
 set -x COMPOSE_PROJECT_NAME docker
+set -x EXOMETER_DISABLED true
+set -x MIX_ENV local_dev
 
 #
 # autologin
