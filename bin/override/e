@@ -1,0 +1,4 @@
+#! /bin/bash
+#exec /usr/bin/subl3 -w "$@"
+unset LD_PRELOAD
+exec /usr/bin/code-oss -w "$@"
