@@ -1,11 +1,4 @@
 #!/bin/bash
 
-while [ $(pgrep rsync|wc -l) -ge 3 ]; do
-    echo "psd still running, waiting ..."
-    sleep 3
-done
-
-echo "running firefox"
-
 unset LD_PRELOAD
 exec /usr/bin/firefox "$@"
