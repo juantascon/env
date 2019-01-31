@@ -1,0 +1,4 @@
+#!/bin/bash
+
+unset LD_PRELOAD
+exec /usr/bin/whatsapp-nativefier "$@"
