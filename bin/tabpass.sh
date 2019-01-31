@@ -6,10 +6,13 @@ error(){
 }
 
 windowname=$(xdotool getactivewindow getwindowname)
+windowname_r=$(echo $windowname| tr " " "\n" | tac | tr "\n" " ")
 browser=$(echo $windowname | awk 'NF{ print $NF }')
 case $browser in
-    "Firefox") url=$(echo $windowname| awk '{print $1}') ;;
-    "Chromium"|"Vivaldi") url=$(echo $windowname| tr " " "\n" | tac | tr "\n" " " | awk '{print $3}') ;;
+    # extension: https://addons.mozilla.org/en-US/firefox/addon/hostname-in-title/
+    "Firefox") url=$(echo $windowname_r| awk '{print $4}') ;;
+    # extension: https://chrome.google.com/webstore/detail/url-in-title/ignpacbgnbnkaiooknalneoeladjnfgb
+    "Chromium"|"Vivaldi") url=$(echo $windowname_r| awk '{print $3}') ;;
     *) error "window not supported: $browser";;
 esac
 
