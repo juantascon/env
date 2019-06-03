@@ -9,6 +9,7 @@ i3lock &
 # xorg
 #
 xrdb -merge $HOME/env/xinit.d/Xresources
+xrdb -merge $HOME/env/urxvt/Xresources
 xsetroot -solid "#000000" &
 xset b 0 &
 setxkbmap -layout us -variant altgr-intl &

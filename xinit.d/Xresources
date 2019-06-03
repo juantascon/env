@@ -1,9 +1,11 @@
-Xcursor.theme: Oxygen_Blue
+Xcursor.theme: Breeze
+!Xcursor.theme: Oxygen_Blue
 
-!Xft.autohint: false
-!Xft.hintstyle: hintfull
-!Xfg.lcdfilter: lcddefault
-!Xft.antialias: true
-!Xft.hinting: true
-!Xft.rgba: rgb
-!Xft.dpi: 96
+Xft.autohint: false
+Xft.hintstyle: hintfull
+Xfg.lcdfilter: lcddefault
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.dpi: 96
+

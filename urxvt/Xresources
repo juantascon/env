@@ -3,14 +3,11 @@ URxvt.font: xft:FiraMono:size=13
 URxvt.boldFont: xft:FiraMono:size=13
 
 URxvt.secondaryScreen: false
+!URxvt.secondaryScroll: 0
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: true
 URxvt.scrollBar: false
 URxvt.iso14755 : false
-
-URxvt.scrollTtyOutput:      false
-URxvt.scrollWithBuffer:     true
-URxvt.scrollTtyKeypress:    true
 
 URxvt.perl-ext-common:      default,clipboard,keyboard-select
 URxvt.url-select.underline: true
