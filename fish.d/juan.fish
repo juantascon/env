@@ -37,11 +37,6 @@ pal -c 0 -r 2-3
 #    mkdir -p "$XDG_RUNTIME_DIR/ssh_control"
 #end
 
-# rezolve
-set -x COMPOSE_PROJECT_NAME docker
-set -x EXOMETER_DISABLED true
-set -x MIX_ENV local_dev
-
 #
 # autologin
 #
