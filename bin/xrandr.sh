@@ -1,11 +1,11 @@
 #! /bin/bash
 
 choices=$(xrandr|awk '/ connected/ {print $1}')
-choice=$(echo "${choices}"| rofi -l $(echo "${choices}"|wc -l) -hide-scrollbar -dmenu -p "select entry:")
-
+for c in $choices; do dialog_choices="$dialog_choices $c $c "; done
+exec 3>&1
+choice=$(dialog --nocancel --clear --notags --menu Screen 0 0 0 $dialog_choices 2>&1 1>&3)
+exec 3>&-
 [ -z "$choice" ] && exit 0
-
-cmd="xrandr "
 
 for m in $choices; do
     if [ "$m" == "$choice" ]; then
@@ -13,8 +13,7 @@ for m in $choices; do
     else
         mode="--off"
     fi
-    
-    cmd="$cmd --output $m $mode "
+    modes="$modes --output $m $mode "
 done
 
-$cmd
+xrandr $modes
