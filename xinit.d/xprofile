@@ -17,13 +17,17 @@ setxkbmap -layout us -variant altgr-intl &
 #synclient TapButton1=-1 TapButton2=-1 TapButton3=-1 &
 
 #
+# HW
+#
+start-pulseaudio-x11 &
+
+#
 # desktop
 #
-sxhkd &
-start-pulseaudio-x11 &
-dunst &
-term.sh &
-copyq &
+supervise.sh sxhkd &
+supervise.sh dunst &
+supervise.sh term.sh &
+supervise.sh copyq &
 
 #
 # user specific config
