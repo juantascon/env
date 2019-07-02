@@ -1,34 +1,10 @@
 #
 # defaults
 #
-export PATH=~/env/bin/override:~/env/bin:/usr/bin
+export PATH=~/env/bin/override:~/env/bin:/usr/bin:/usr/bin/core_perl:/usr/bin/vendor_perl
 export LANG=en_US.UTF-8
-export EDITOR=vim
-export BROWSER=f
-export PAGER=most
 
-unset LD_PRELOAD
-
-#
-# bash
-#
-unalias -a
-if [ -r /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-fi
-
-#
-# xdg
-#
 export XDG_DESKTOP_DIR=$HOME
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$XDG_CONFIG_HOME/DATA
-mkdir -p $XDG_CONFIG_HOME $XDG_CACHE_HOME $XDG_DATA_HOME
-
-#
-# user specific config
-#
-if [ -f ~/env/bash.d/$USER.bash ]; then
-    . ~/env/bash.d/$USER.bash
-fi
+export XDG_DATA_HOME=$HOME/.data
