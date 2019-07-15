@@ -19,7 +19,7 @@ super + {t,l,s}
 super + {m,p,a}
     {passmenu --type,tabpass.sh,mfa.sh}
 control + alt + v
-    copyq menu
+    clipmenu
 
 #"xrandr.sh toggle"
 #  Mod4 + p
