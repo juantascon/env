@@ -1,0 +1,2 @@
+#!/bin/bash
+CM_LAUNCHER=rofi exec /usr/bin/clipmenu "$@"
