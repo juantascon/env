@@ -1,51 +1,39 @@
 [options]
-    resize_grip = false
-    scroll_on_keystroke = true
-    audible_bell = false
-    visible_bell = false
-    mouse_autohide = true
-    allow_bold = true
-    dynamic_title = true
-    urgent_on_bell = true
-    clickable_url = true
-    font = FiraMono 16
-    #scrollback_lines = 1000
-    #search_wrap = true
-    cursor_blink = on
-    cursor_shape = ibeam
+resize_grip = false
+scroll_on_keystroke = true
+audible_bell = false
+visible_bell = false
+mouse_autohide = true
+allow_bold = true
+dynamic_title = false
+clickable_url = false
+font = InputMonoNarrowExLight 15
+cursor_blink = on
+cursor_shape = ibeam
 
+# https://github.com/arcticicestudio/nord-termite
 [colors]
-    foreground = #c5c8c6
-    background = #1d1f21
-    cursor = #c5c8c6
+cursor = #d8dee9
+cursor_foreground = #2e3440
+foreground = #d8dee9
+foreground_bold = #d8dee9
+background = #1d1f21
+#background = #2e3440asdada
+highlight = #4c566a
 
-    # if unset, will reverse foreground and background
-    #highlight = #2f2f2f
-
-    color0 = #1d1f21
-    color1 = #cc6666
-    color2 = #b5bd68
-    color3 = #f0c674
-    color4 = #81a2be
-    color5 = #b294bb
-    color6 = #8abeb7
-    color7 = #c5c8c6
-    color8 = #969896
-    color9 = #cc6666
-    color10 = #b5bd68
-    color11 = #f0c674
-    color12 = #81a2be
-    color13 = #b294bb
-    color14 = #8abeb7
-    color15 = #ffffff
-
-#[hints]
-    #foreground = #55FFFF
-
-    #font = Monospace 12
-    #foreground = #dcdccc
-    #background = #3f3f3f
-    #padding = 2
-    #border = #3f3f3f
-    #border_width = 0.5
-    #roundness = 2.0
+color0  = #3b4252
+color1  = #bf616a
+color2  = #a3be8c
+color3  = #ebcb8b
+color4  = #81a1c1
+color5  = #b48ead
+color6  = #88c0d0
+color7  = #e5e9f0
+color8  = #4c566a
+color9  = #bf616a
+color10 = #a3be8c
+color11 = #ebcb8b
+color12 = #81a1c1
+color13 = #b48ead
+color14 = #8fbcbb
+color15 = #eceff4
