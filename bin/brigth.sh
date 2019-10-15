@@ -1,10 +1,10 @@
 #!/bin/bash
 
-sys="$(ls -d /sys/class/backlight/*|head -n 1)"
+sys="$(/bin/ls -d /sys/class/backlight/*|head -n 1)"
 value=$(cat $sys/brightness)
 max=$(cat $sys/max_brightness)
 
-step=$(echo "$max" |awk '{print int(($1*0.05)+0.5)}' ) # 0.05 = 5%
+step=$(echo "$max" |awk '{print int(($1*0.03)+0.3)}' ) # 0.03 = 3%
 
 case "$1" in
     "up") value=$(( ${value} + ${step} )) ;;
