@@ -21,8 +21,8 @@ function ls; command ls $argv; end
 function prompt_pwd; echo $PWD | sed -e "s|^$HOME|~|"; end
 
 #
-# user specific config
+# user and host specific config
 #
-if [ -f ~/env/fish.d/$USER.fish ]
-  source ~/env/fish.d/$USER.fish
+if [ -f ~/env/fish.d/$hostname.$USER.fish ]
+  source ~/env/fish.d/$hostname.$USER.fish
 end
