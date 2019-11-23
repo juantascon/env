@@ -1,6 +1,0 @@
-#! /bin/bash
-
-for pk in "$@"
-do
-	aunpack -q "$pk" && rm "$pk"
-done
