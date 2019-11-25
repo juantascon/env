@@ -13,8 +13,8 @@ XF86KbdBrightness{Down,Up}
 XF86MonBrightness{Down,Up}
     brigth.sh {down,up}
 
-super + {t,l,s}
-    {xterm,i3lock,maim -s ~/shot.png}
+super + {t,l,s,x}
+    {xterm,i3lock,maim -s ~/shot.png,autorandr -c}
 
 super + {m,p,a}
     {passmenu --type,tabpass.sh,mfa.sh}
