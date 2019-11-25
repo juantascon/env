@@ -11,6 +11,7 @@ i3lock &
 xrdb -merge $HOME/env/xinit.d/Xresources
 xsetroot -solid "#000000" &
 xset b 0 &
+autorandr -c &
 #setxkbmap -layout us -variant altgr-intl &
 #synclient MinSpeed=0.8 MaxSpeed=4.0 &
 #synclient TapButton1=-1 TapButton2=-1 TapButton3=-1 &
@@ -21,7 +22,7 @@ xset b 0 &
 supervise.sh xsettingsd &
 supervise.sh sxhkd &
 supervise.sh dunst &
-supervise.sh termite -e tmux &
+supervise.sh alacritty -e tmux &
 supervise.sh clipmenud &
 supervise.sh batsignal &
 
