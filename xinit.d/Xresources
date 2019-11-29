@@ -1,5 +1,4 @@
-Xcursor.theme: Breeze
-!Xcursor.theme: Oxygen_Blue
+Xcursor.theme: capitaine-cursors
 
 Xft.autohint: false
 Xft.hintstyle: hintfull
@@ -8,4 +7,3 @@ Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
 Xft.dpi: 96
-
