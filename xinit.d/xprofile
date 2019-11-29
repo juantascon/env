@@ -8,7 +8,7 @@ i3lock &
 #
 # xorg
 #
-xrdb -merge $HOME/env/xinit.d/Xresources
+xrdb $HOME/env/xinit.d/xresources
 xsetroot -solid "#000000" &
 xset b 0 &
 autorandr -c &
@@ -19,7 +19,6 @@ autorandr -c &
 #
 # desktop
 #
-supervise.sh xsettingsd &
 supervise.sh sxhkd &
 supervise.sh dunst &
 supervise.sh alacritty -e tmux &
