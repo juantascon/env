@@ -1,7 +1,7 @@
 #
 # defaults
 #
-export PATH=~/env/bin/override:~/env/bin:/usr/bin:/usr/bin/core_perl:/usr/bin/vendor_perl
+export PATH=~/env/bin/override:~/env/bin:/usr/bin
 export LANG=en_US.UTF-8
 
 export XDG_DESKTOP_DIR=$HOME

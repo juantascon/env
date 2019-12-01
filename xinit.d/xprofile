@@ -23,7 +23,7 @@ supervise.sh sxhkd &
 supervise.sh dunst &
 supervise.sh alacritty -e tmux &
 supervise.sh clipmenud &
-supervise.sh batsignal &
+#supervise.sh batsignal &
 
 #
 # user specific config

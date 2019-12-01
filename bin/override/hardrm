@@ -1,2 +1,0 @@
-#!/bin/bash
-TRASH_OFF="YES" exec /bin/rm "$@"

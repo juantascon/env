@@ -1,4 +1,0 @@
-#!/bin/bash
-unset LD_PRELOAD
-unset GEM_HOME
-exec /usr/bin/makepkg "$@"
