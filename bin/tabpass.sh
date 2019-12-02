@@ -1,8 +1,8 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 error(){
   rofi -e "$@"
-  exit 1
+  exec rofi-pass
 }
 
 windowname=$(xdotool getactivewindow getwindowname)
@@ -13,7 +13,7 @@ case $browser in
   "Firefox") url=$(echo $windowname_r| awk '{print $4}') ;;
   # extension: https://chrome.google.com/webstore/detail/url-in-title/ignpacbgnbnkaiooknalneoeladjnfgb
   "Chromium"|"Vivaldi") url=$(echo $windowname_r| awk '{print $3}') ;;
-  *) error "window not supported: $browser";;
+  *) error "window not supported: $windowname";;
 esac
 
 choices=""
@@ -36,7 +36,7 @@ choice_key=${choice#* - }
 
 case "${choice_key}" in
   "password") result=$(gopass show -o ${choice_entry}) ;;
-  "otp") result=$(gopass otp -o ${choice_entry}) ;;
+  "totp") result=$(gopass otp -o ${choice_entry}) ;;
   *) result=$(gopass show ${choice_entry} ${choice_key}) ;;
 esac
 

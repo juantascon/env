@@ -10,7 +10,7 @@ end
 def rename(filename)
   base = File.basename(filename)
   dir = File.dirname(filename)
-  
+
   base_dest = base.clone.instance_eval do
     downcase!
     gsub!("ñ","nh"); gsub!("Ñ","nh"); gsub!("&","_and_")

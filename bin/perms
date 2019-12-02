@@ -1,12 +1,6 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
-usage()
-{
-	echo -e "Uso: $(basename $0) <dir>|<file> ..."
-	exit $*
-}
+[ -z "$1" ] && echo "usage: $0 <dir>|<file> ..." && exit 1
 
-[ -z "$1" ] && usage
-
-find "$@" -type f | while read f; do chmod 600 "$f"; done
-find "$@" -type d | while read d; do chmod 700 "$d"; done
+fd --full-path ./ -t file -x chmod 600 {}
+fd --full-path ./ -t directory -x chmod 700 {}

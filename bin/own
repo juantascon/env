@@ -1,11 +1,5 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
-usage()
-{
-	echo -e "Uso: $(basename $0) <dir>|<file> ..."
-	exit $*
-}
+[ -z "$1" ] && echo "usage: $0 <dir>|<file> ..." && exit 1
 
-[ -z "$1" ] && usage
-
-sudo chown -R "$USER:$GROUPS" "$@"
+sudo chown -R "$(id -un):$(id -gn)" "$@"

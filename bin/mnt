@@ -1,2 +1,2 @@
-#!/bin/bash
-udisksctl mount -b "${*}"
+#! /usr/bin/env bash
+exec udisksctl mount -b "${*}"
