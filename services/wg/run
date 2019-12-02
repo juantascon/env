@@ -1,0 +1,4 @@
+#!/bin/sh
+[ -f /etc/wireguard/wg0.conf ] || exit 1
+wg-quick up wg0 || exit 1
+exec chpst -b wg pause
