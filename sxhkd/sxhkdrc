@@ -1,20 +1,26 @@
-XF86Audio{RaiseVolume,LowerVolume,Mute}
-    vol.sh {up,down,mute}
+XF86Audio{RaiseVolume,LowerVolume}
+  ponymix -N {increase,decrease} 3
 
-super + {Up,Down,0}
-    vol.sh {up,down,mute}
+XF86Audio + Mute
+  ponymix -N toggle
 
-XF86Audio{Play,Next,Prev}
-    music.sh {toggle,next,prev}
+super + {Up,Down}
+  ponymix -N {increase,decrease} 3
+
+super + 0
+  ponymix -N toggle
+
+super + {minus,equal}
+  sudo brightnessctl set -q 5%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
 
 XF86KbdBrightness{Down,Up}
-    brigth.sh {down,up}
+  sudo brightnessctl set -q 5%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
 
 XF86MonBrightness{Down,Up}
-    brigth.sh {down,up}
+  sudo brightnessctl set -q 5%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
 
 super + {t,l,p,s,x}
-    {xterm,i3lock, tabpass.sh,maim -s ~/shot.png,autorandr -c}
+  {xterm,i3lock, tabpass.sh,maim -s ~/shot.png,autorandr -c}
 
 control + alt + v
-    clipmenu
+  clipmenu
