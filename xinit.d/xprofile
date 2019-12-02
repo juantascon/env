@@ -13,7 +13,6 @@ xsetroot -solid "#000000" &
 xset b 0 &
 autorandr -c &
 start-pulseaudio-x11 &
-#setxkbmap -layout us -variant altgr-intl &
 #synclient MinSpeed=0.8 MaxSpeed=4.0 &
 #synclient TapButton1=-1 TapButton2=-1 TapButton3=-1 &
 
@@ -22,13 +21,13 @@ start-pulseaudio-x11 &
 #
 supervise.sh sxhkd &
 supervise.sh dunst &
-supervise.sh alacritty -e tmux &
+supervise.sh alacritty -e tmux new-session -A -s main &
 supervise.sh clipmenud &
-#supervise.sh batsignal &
+supervise.sh cbatticon &
 
 #
 # user specific config
 #
 if [ -f ~/env/xinit.d/$USER.xprofile ]; then
-    source ~/env/xinit.d/$USER.xprofile
+  source ~/env/xinit.d/$USER.xprofile
 fi
