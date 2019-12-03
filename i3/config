@@ -3,15 +3,20 @@ set $alt Mod1
 
 set $slack [class="Slack"]
 set $whatsapp [class="whats-app-nativefier-.*"]
-set $termite [class="Termite"]
+set $terminal [class="Alacritty"]
 
 floating_modifier $win
 hide_edge_borders both
 font pango:DejaVu Sans Mono 8
 
-bindsym $win+Shift+r reload
+bindsym $win+r restart
 bindsym $win+c kill
 bindsym $win+space floating toggle
+
+workspace 1 output DP1 eDP1
+workspace 2 output DP1 eDP1
+workspace 3 output DP2 eDP1
+workspace 4 output DP2 eDP1
 
 bindsym $alt+F1 workspace 1
 bindsym $alt+F2 workspace 2
@@ -26,11 +31,11 @@ bindsym $win+F4 move container to workspace 4
 for_window [class="pop-up"] floating enable
 for_window [class="^.*"] border pixel 0
 
-bindsym F12 $slack move to scratchpad, $whatsapp move to scratchpad, $termite scratchpad show
-for_window $termite move to scratchpad, move position 0px 0px, resize set width 1920px height 1080px
+bindsym F12 $slack move to scratchpad, $whatsapp move to scratchpad, $terminal scratchpad show
+for_window $terminal move to scratchpad, move position 0px 0px, resize set width 1920px height 1080px
 
-#bindsym Print $slack move to scratchpad, $termite move to scratchpad, $whatsapp scratchpad show
+#bindsym Print $slack move to scratchpad, $terminal move to scratchpad, $whatsapp scratchpad show
 #for_window $whatsapp move to scratchpad, move position 0px 0px, resize set width 1400px height 1080px
 
-#bindsym Scroll_Lock $whatsapp move to scratchpad, $termite move to scratchpad, $slack scratchpad show
+#bindsym Scroll_Lock $whatsapp move to scratchpad, $terminal move to scratchpad, $slack scratchpad show
 #for_window $slack move to scratchpad, move position 0px 0px, resize set width 1400px height 1080px
