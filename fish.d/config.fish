@@ -13,6 +13,9 @@ set -x EDITOR vi
 set -x BROWSER f
 set -x PAGER bat
 
+# set cursor shape
+printf "\e[5 q" > (tty)
+
 #
 # fish
 #
