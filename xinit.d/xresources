@@ -1,8 +1,8 @@
 Xcursor.theme: elementary
 
-Xft.autohint: true
-Xft.antialias: true
-Xft.hinting: true
-Xft.hintstyle: hintslight
+Xft.autohint: 1
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.antialias: 1
 Xft.rgba: rgb
 Xft.lcdfilter: lcddefault
