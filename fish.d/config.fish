@@ -11,7 +11,7 @@ set -x XDG_DATA_HOME $HOME/.data
 
 set -x EDITOR vi
 set -x BROWSER f
-set -x PAGER less
+set -x PAGER bat
 
 #
 # fish
