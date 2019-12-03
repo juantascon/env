@@ -1,2 +1,3 @@
 #!/bin/bash
-exec vim -u ~/env/vim/vimrc "$@"
+nvim "$@"
+printf "\e[5 q" > $(tty)
