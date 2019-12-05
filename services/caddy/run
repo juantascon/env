@@ -1,2 +1,3 @@
 #!/bin/sh
-exec chpst -o 8192 -u juan caddy
+setcap cap_net_bind_service=+ep /usr/bin/caddy
+CADDYPATH=. exec chpst -o 8192 -u juan caddy
