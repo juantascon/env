@@ -1,2 +1,2 @@
 #!/bin/sh
-exec dnscrypt-proxy -config ~juan/env/dns.d/dnscrypt-proxy.toml
+exec dnscrypt-proxy -config ./dnscrypt-proxy.toml
