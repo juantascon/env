@@ -1,0 +1,2 @@
+#!/bin/sh
+tinycron "0 0 */3 * * * *" rsync -a --del juan@tv.horlux.org:./arr/data/ /home/data/
