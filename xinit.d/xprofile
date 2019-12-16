@@ -19,15 +19,9 @@ start-pulseaudio-x11 &
 #
 # desktop
 #
+supervise.sh alacritty -e tmux -2 new-session -A -s main &
 supervise.sh sxhkd &
 supervise.sh dunst &
-supervise.sh alacritty -e tmux new-session -A -s main &
 supervise.sh clipmenud &
-supervise.sh cbatticon &
+supervise.sh batsignal &
 
-#
-# user specific config
-#
-if [ -f ~/env/xinit.d/$USER.xprofile ]; then
-  source ~/env/xinit.d/$USER.xprofile
-fi
