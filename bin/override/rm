@@ -1,2 +1,7 @@
 #! /bin/bash
-exec /usr/bin/trash-put "$@"
+/usr/bin/trash-put "$@"
+status="$?"
+case $status in
+  "74") exit 1 ;;
+  *) exit $status ;;
+esac
