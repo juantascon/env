@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+shopt -s globstar
+
+repos=""
+for d in $(ls -1 -d hostdir/binpkgs/**/*-repodata binpkgs/**/*-repodata 2>/dev/null); do
+  repos="$repos --repository=$(dirname $d)"
+done
+
+exec sudo xbps-install $repos -S "$@"
