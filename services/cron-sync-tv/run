@@ -1,2 +1,3 @@
 #!/bin/sh
-tinycron "0 0 */3 * * * *" rsync -a --del juan@tv.horlux.org:./arr/data/ /home/data/
+
+exec chpst -u juan tinycron "0 0 */3 * * * *" rsync -a --del juan@tv.horlux.org:./arr/data/ /home/data/
