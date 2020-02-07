@@ -15,5 +15,6 @@ lnk env/bash.d/bashrc .bashrc
 lnk env/bash.d/bashrc .bash_profile
 lnk env/fish.d/config.fish .config/fish/config.fish
 lnk env/fish.d/completions .config/fish/completions
+lnk env/fish.d/functions .config/fish/functions
 
 popd >/dev/null
