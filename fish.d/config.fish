@@ -8,6 +8,7 @@ set -x XDG_DESKTOP_DIR $HOME
 set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
 set -x XDG_DATA_HOME $HOME/.data
+set -x XDG_RUNTIME_DIR /tmp/run-(id -u)
 
 set -x EDITOR vi
 set -x BROWSER f
