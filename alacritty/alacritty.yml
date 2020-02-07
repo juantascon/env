@@ -64,3 +64,5 @@ live_config_reload: true
 key_bindings:
   - { key: Left,      mods: Control|Alt, chars: "\x1b[1;7D"}
   - { key: Right,     mods: Control|Alt, chars: "\x1b[1;7C"}
+  - { key: F12,       chars: ""}
+
