@@ -1,0 +1,1 @@
+[ (tty) = "/dev/tty1" ]; and exec xinit # auto xinit on tty1

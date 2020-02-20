@@ -14,4 +14,5 @@ set -x PAGER bat
 set -u fish_greeting #makes fish silent
 [ -e (tty) ]; and printf "\e[5 q" > (tty) #sets cursor shape
 
-[ -f ~/env/fish.d/$hostname.$USER.fish ]; and source ~/env/fish.d/$hostname.$USER.fish
+[ -f ~/.asdf/asdf.fish ]; and source ~/.asdf/asdf.fish
+[ -f ~/env/fish.d/$USER@$hostname..fish ]; and source ~/env/fish.d/$USER@$hostname.fish
