@@ -1,0 +1,2 @@
+#!/bin/sh
+exec connmand --nodaemon --nodnsproxy --config=./connmand.conf
