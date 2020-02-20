@@ -1,13 +1,2 @@
-#! /usr/bin/env bash
-/usr/bin/trash-put "$@"
-status="$?"
-case $status in
-  "74")
-    forced=$(echo "$@" | grep -o "\-f" | wc -w)
-    if [ $forced == 0 ]; then
-      exit 1
-    else
-      exit 0
-    fi ;;
-  *) exit $status ;;
-esac
+#!/bin/sh
+gomi "$@"
