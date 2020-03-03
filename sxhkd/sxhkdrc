@@ -20,7 +20,7 @@ XF86MonBrightness{Down,Up}
   sudo brightnessctl set -q 5%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
 
 super + {t,l,p,s,x}
-  {xterm,i3lock, tabpass.sh,maim -s ~/shot.png,autorandr -c}
+  {xterm,i3lock,tabpass.py,maim -s ~/shot.png,autorandr -c}
 
 control + alt + v
   clipmenu
