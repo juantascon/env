@@ -16,4 +16,4 @@ set -u fish_greeting #makes fish silent
 
 mkdir -p $XDG_RUNTIME_DIR
 [ -f ~/.asdf/asdf.fish ]; and source ~/.asdf/asdf.fish
-[ -f ~/env/fish.d/$USER@$hostname..fish ]; and source ~/env/fish.d/$USER@$hostname.fish
+[ -f ~/env/fish.d/$USER@$hostname.fish ]; and source ~/env/fish.d/$USER@$hostname.fish
