@@ -1,2 +1,7 @@
-#!/bin/sh
-gomi "$@"
+#! /usr/bin/env bash
+
+if [ -z "$HARDRM" ]; then
+  exec gomi "$@"
+else
+  exec /usr/bin/rm "$@"
+fi
