@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-HARDRM=yes exec sudo vkpurge "$@"
+HARDRM=yes exec sudo /usr/bin/vkpurge "$@"
