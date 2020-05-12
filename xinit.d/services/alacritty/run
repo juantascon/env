@@ -1,0 +1,2 @@
+#!/bin/sh
+exec alacritty --config-file ./alacritty.yml --working-directory ~ -e tmux -2 new-session -A -s main

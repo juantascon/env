@@ -1,2 +1,2 @@
 fish.d/completions/
-services/*/supervise
+**/services/*/supervise

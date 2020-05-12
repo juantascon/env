@@ -12,6 +12,7 @@ font pango:DejaVu Sans Mono 8
 bindsym $win+r restart
 bindsym $win+c kill
 bindsym $win+space floating toggle
+bindsym $win+f fullscreen toggle
 
 workspace 1 output DP1 eDP1
 workspace 2 output DP1 eDP1
@@ -31,9 +32,8 @@ bindsym $win+F4 move container to workspace 4
 for_window [class="pop-up"] floating enable
 for_window [class="^.*"] border pixel 0
 
-bindsym F12 $slack move to scratchpad, $whatsapp move to scratchpad, $terminal scratchpad show
-for_window $terminal move to scratchpad, move position 0px 0px, resize set width 1920px height 1080px
-
+bindsym F12 $slack move to scratchpad, $whatsapp move to scratchpad, $terminal scratchpad show, $terminal fullscreen enable
+for_window $terminal move to scratchpad
 #bindsym Print $slack move to scratchpad, $terminal move to scratchpad, $whatsapp scratchpad show
 #for_window $whatsapp move to scratchpad, move position 0px 0px, resize set width 1400px height 1080px
 
