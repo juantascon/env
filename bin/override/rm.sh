@@ -240,7 +240,7 @@ remove(){
       echo -n "remove $file? "
       read answer
       if [[ ${answer:0:1} =~ [yY] ]]; then
-        [[ $(ls -A "$file") ]] && {
+        [[ $(/usr/bin/ls -A "$file") ]] && {
           echo "$COMMAND: $file: Directory not empty"
 
           return 1
@@ -280,7 +280,7 @@ recursive_remove(){
   # use `ls -A` instead of `for` to list hidden files.
   # and `for $1/*` is also weird if `$1` is neithor a dir nor existing that will print "$1/*" directly and rudely.
   # never use `find $1`, for the searching order is not what we want
-  local list=$(ls -A "$1")
+  local list=$(/usr/bin/ls -A "$1")
 
   [[ -n $list ]] && for path in "$list"; do
     remove "$1/$path"
@@ -339,7 +339,7 @@ trash(){
 # we can't just use `find $file`, 'coz `find` act a inward searching, unlike rm -v
 list_files(){
   if [[ -d "$1" ]]; then
-    local list=$(ls -A "$1")
+    local list=$(/usr/bin/ls -A "$1")
     local f
 
     [[ -n $list ]] && for f in "$list"; do
@@ -387,14 +387,14 @@ for file in "${FILE_NAME[@]}"; do
   fi
 
   #the same check also apply on /. /..
-  if [[ $(basename $file) = "." || $(basename $file) = ".." ]]; then
+  if [[ $(basename "$file") = "." || $(basename "$file") = ".." ]]; then
     echo "$COMMAND: \".\" and \"..\" may not be removed"
     EXIT_CODE=1
     continue
   fi
 
   # deal with wildcard and also, redirect error output
-  ls_result=$(ls -d "$file" 2> /dev/null)
+  ls_result=$(/usr/bin/ls -d "$file" 2> /dev/null)
 
   # debug
   debug "ls_result: $ls_result"
@@ -411,7 +411,11 @@ for file in "${FILE_NAME[@]}"; do
     done
   else
     echo "$COMMAND: $file: No such file or directory"
-    EXIT_CODE=1
+    if [[ "$OPT_FORCE" == 1 ]]; then
+      EXIT_CODE=0
+    else
+      EXIT_CODE=1
+    fi
   fi
 done
 
