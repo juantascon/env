@@ -1,8 +1,6 @@
 set $win Mod4
 set $alt Mod1
 
-set $slack [class="Slack"]
-set $whatsapp [class="whats-app-nativefier-.*"]
 set $terminal [class="Alacritty"]
 
 floating_modifier $win
@@ -32,10 +30,5 @@ bindsym $win+F4 move container to workspace 4
 for_window [class="pop-up"] floating enable
 for_window [class="^.*"] border pixel 0
 
-bindsym F12 $slack move to scratchpad, $whatsapp move to scratchpad, $terminal scratchpad show, $terminal fullscreen enable
 for_window $terminal move to scratchpad
-#bindsym Print $slack move to scratchpad, $terminal move to scratchpad, $whatsapp scratchpad show
-#for_window $whatsapp move to scratchpad, move position 0px 0px, resize set width 1400px height 1080px
-
-#bindsym Scroll_Lock $whatsapp move to scratchpad, $terminal move to scratchpad, $slack scratchpad show
-#for_window $slack move to scratchpad, move position 0px 0px, resize set width 1400px height 1080px
+bindsym F12 scratchpad show, $terminal fullscreen enable
