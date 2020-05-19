@@ -1,0 +1,7 @@
+#!/bin/sh
+_eachd_pwd=$PWD
+while read _eachd_dir; do
+  cd "$_eachd_dir"
+  $@
+  cd "$_eachd_pwd"
+done
