@@ -1,1 +1,2 @@
 services/sshd/sshd.conf filter=git-crypt diff=git-crypt
+services/dnscrypt-proxy/dnscrypt-proxy.toml filter=git-crypt diff=git-crypt
