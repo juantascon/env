@@ -1,7 +1,40 @@
-#! /usr/bin/env bash
+#! /usr/bin/env python3
 
-if [ -z "$HARDRM" ]; then
-  SAFE_RM_TRASH=~/.trash exec rm.sh "$@"
-else
-  exec /usr/bin/rm "$@"
-fi
+TRASH = "~/.trash"
+
+import argparse
+import shutil
+import pathlib
+import datetime
+import os
+import sys
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-f", "--force", action="store_true")
+parser.add_argument("-r", "--recursive", action="store_true")
+parser.add_argument("files", metavar="FILE", nargs="+")
+args = parser.parse_args()
+
+exit_status = 0
+now = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%S.%f")
+trash = os.path.expanduser(TRASH)
+
+for arg_file in args.files:
+  if not os.path.lexists(arg_file):
+    if not args.force:
+      sys.stderr.write("rm: cannot remove '{}': No such file or directory\n".format(arg_file))
+      exit_status = 1
+    continue
+
+  if os.path.isdir(arg_file):
+    if not args.recursive:
+      sys.stderr.write("rm: cannot remove '{}': Is a directory\n".format(arg_file))
+      exit_status = 1
+      continue
+
+  absolute_path = os.path.abspath(arg_file)
+  trash_path = os.path.abspath("{}/{}.{}".format(trash, absolute_path, now))
+  pathlib.Path(os.path.dirname(trash_path)).mkdir(parents=True, exist_ok=True)
+  shutil.move(absolute_path, trash_path)
+
+exit(exit_status)
