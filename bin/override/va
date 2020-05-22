@@ -1,2 +1,2 @@
 #!/bin/bash
-SVDIR=~/arr/service exec /usr/bin/vsv "$@"
+SVDIR=~/arr/services exec /usr/bin/vsv "$@"
