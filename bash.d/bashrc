@@ -1,5 +1,6 @@
 export PATH=~/env/bin/override:~/env/bin:/usr/bin
 export LANG=en_US.UTF-8
+export TERM=screen-256color
 
 export XDG_DESKTOP_DIR=$HOME
 export XDG_CONFIG_HOME=$HOME/.config

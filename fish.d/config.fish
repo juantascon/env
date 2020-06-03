@@ -1,5 +1,6 @@
 set -x PATH ~/env/bin/override ~/env/bin /usr/bin
 set -x LANG en_US.UTF-8
+set -x TERM screen-256color
 
 set -x XDG_DESKTOP_DIR $HOME
 set -x XDG_CONFIG_HOME $HOME/.config
