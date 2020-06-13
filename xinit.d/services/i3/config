@@ -1,7 +1,7 @@
 set $win Mod4
 set $alt Mod1
 
-set $terminal [class="Alacritty"]
+set $terminal [class="kitty"]
 
 floating_modifier $win
 hide_edge_borders both
