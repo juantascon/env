@@ -1,3 +1,2 @@
 #!/bin/bash
-nvim +"set termguicolors" "$@"
-printf "\e[5 q" > $(tty)
+exec nvim +"set termguicolors" "$@"
