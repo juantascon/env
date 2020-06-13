@@ -1,2 +1,2 @@
 #!/bin/sh
-exec batsignal
+exec batsignal 2>&1

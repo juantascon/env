@@ -1,2 +1,2 @@
 #!/bin/sh
-exec clipmenud
+exec clipmenud 2>&1

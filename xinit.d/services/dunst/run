@@ -1,2 +1,2 @@
 #!/bin/sh
-exec dunst -config ./config
+exec dunst -config ./config 2>&1

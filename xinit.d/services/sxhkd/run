@@ -1,2 +1,2 @@
 #!/bin/sh
-exec sxhkd -c ./config
+exec sxhkd -c ./config 2>&1

@@ -1,2 +1,2 @@
 #!/bin/sh
-exec i3 -c ./config
+exec i3 -c ./config 2>&1
