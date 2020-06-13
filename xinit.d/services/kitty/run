@@ -1,0 +1,3 @@
+#!/bin/sh
+_cwd=$(pwd); cd ~
+exec kitty --config $_cwd/kitty.conf
