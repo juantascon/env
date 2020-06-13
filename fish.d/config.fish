@@ -1,6 +1,5 @@
 set -x PATH ~/env/bin/override ~/env/bin /usr/bin
 set -x LANG en_US.UTF-8
-set -x TERM screen-256color
 
 set -x XDG_DESKTOP_DIR $HOME
 set -x XDG_CONFIG_HOME $HOME/.config
@@ -13,8 +12,7 @@ set -x BROWSER f
 set -x PAGER bat
 
 set -u fish_greeting #makes fish silent
-[ -e (tty) ]; and printf "\e[5 q" > (tty) #sets cursor shape
 
-mkdir -p $XDG_RUNTIME_DIR
+xdg-mkdirs
 [ -f ~/.asdf/asdf.fish ]; and source ~/.asdf/asdf.fish
 [ -f ~/env/fish.d/$USER@$hostname.fish ]; and source ~/env/fish.d/$USER@$hostname.fish
