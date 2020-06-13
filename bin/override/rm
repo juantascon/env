@@ -11,7 +11,7 @@ import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", "--force", action="store_true")
-parser.add_argument("-r", "--recursive", action="store_true")
+parser.add_argument("-r", "-R", "--recursive", action="store_true")
 parser.add_argument("files", metavar="FILE", nargs="+")
 args = parser.parse_args()
 
