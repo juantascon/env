@@ -6,6 +6,6 @@ eval $(dbus-launch --sh-syntax --exit-with-x11)
 i3lock &
 xsetroot -solid "#000000"
 xset b 0
-autorandr -c
+autorandr -c &
 
 exec runsvdir -P $HOME/env/xinit.d/services
