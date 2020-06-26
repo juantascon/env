@@ -4,25 +4,26 @@ set -e
 
 yml="$1"
 shift
-[[ ! "$yml" =~ ^.*.yml$ ]] && echo "usage: $0 start|stop <service.yml>" && exit 1
-name=$(basename "$yml" .yml)
+[[ ! "${yml}" =~ ^.*.yml$ ]] && echo "usage: $0 <service.yml>" && exit 1
+name=$(basename ${yml} .yml)
 
-podman stop ${name} 2>/dev/null || true
-pushd $(dirname $yml) > /dev/null
+pushd $(dirname ${yml}) > /dev/null
+yml=$(basename ${yml})
+image=$(yq-go read ${yml} "image")
 [ -f ./env ] && source ./env
-trap "podman stop ${name} 2>/dev/null" SIGINT EXIT
 
-parse_field() {
-  _field=$1
-  _param=$2
-  eval echo \"$(yq-go read $yml "$_field" | xargs -I {} echo "$_param{}")\"
+key_to_args() {
+  _key=$1
+  values=$(yq-go read ${yml} "${_key}.*")
+  [ -z "${values}" ] && values=$(yq-go read ${yml} "${_key}")
+  eval echo \"$(echo "${values}" | xargs -I {} echo "--${_key}={}")\"
 }
 
-fghack podman run "$@" --rm --replace --ulimit=host --name=${name} \
-  $(parse_field "pod" "--pod=") \
-  $(parse_field "hostname" "--hostname=") \
-  $(parse_field "ports.*" "-p=") \
-  $(parse_field "volumes.*" "-v=") \
-  $(parse_field "devices.*" "--device=") \
-  $(parse_field "environment.*" "-e=") \
-  $(parse_field "image")
+args=""
+keys=$(yq-go read -p p ${yml} "*"|grep -v "^image\$")
+for key in $keys; do
+  args="${args} $(key_to_args ${key})"
+done
+
+trap "podman stop -i ${name}" SIGINT EXIT
+fghack podman run "$@" --rm --replace --ulimit=host --name=${name} ${args} ${image}
