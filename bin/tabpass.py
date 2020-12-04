@@ -6,19 +6,22 @@ from plumbum.cmd import xdotool, gopass, rofi, echo
 
 def get_browser_url():
   window_name = xdotool("getactivewindow", "getwindowname")
-  window_name_parts = window_name.strip().split(" - ")
+  window_name_parts = window_name.strip().split(" — ")
   browser = window_name_parts[-1]
-  if browser in ["Mozilla Firefox", "Mozilla Firefox (Private Browsing)", "Chromium", "Vivaldi"]:
+  if browser in ["Chromium", "Vivaldi"]:
     return window_name_parts[-2]
+  elif browser in ["Mozilla Firefox", "Mozilla Firefox (Private Browsing)"]:
+    return window_name_parts[0].split(" - ")[-1]
   else:
     return False
 
 def list_secrets(url):
-  all = gopass("ls", "--flat", "--strip-prefix", "web/").strip().split("\n")
+  all = gopass("ls", "--flat", "--strip-prefix", "web").strip().split("\n")
   if url:
     return ["web/{}".format(p) for p in all if url.endswith(p.split("@")[0])]
   else:
-    return ["web/{}".format(p) for p in all]
+    return []
+    #return ["web/{}".format(p) for p in all]
 
 def list_options(secret):
   parts = gopass("show", secret).split("\n---\n")
@@ -30,13 +33,14 @@ def list_options(secret):
 
 def get_label(option):
   if option["key"] == "pass":
-    return "--> " + option["secret"]
+    sep = "-->"
   else:
-    return "    " + option["secret"] + " : " + option["key"]
+    sep = "   "
+  #TODO use on python 3.9: option["secret"].removeprefix("web/")
+  return " {sep} {secret} . {key}".format(sep=sep, secret=option["secret"][len("web/"):], key=option["key"])
 
 def ask(options):
   labels = [get_label(option) for option in options]
-  #response = (echo["\n".join(labels)] | rofi["-dmenu", "-lines", len(options), "-matching=fuzzy", "-format=i", "-hide-scrollbar", "-no-custom", "-p", "select:"])()
   response = (echo["\n".join(labels)] | rofi["-dmenu", "-matching", "fuzzy", "-format", "i", "-no-custom", "-p", "select:"])()
   index = int(response.strip())
   return options[index]
@@ -49,6 +53,7 @@ def get_totp(secret):
 
 def main():
   url = get_browser_url()
+  print(url)
   secrets = list_secrets(url)
   options_matrix = [list_options(secret) for secret in secrets]
   options = list(itertools.chain.from_iterable(options_matrix))
