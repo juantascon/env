@@ -1,4 +1,4 @@
-export PATH=~/env/bin/override:~/env/bin:/usr/bin
+export PATH=~/env/bin/override:~/env/bin:~/.local/bin:/usr/bin
 export LANG=en_US.UTF-8
 
 export XDG_DESKTOP_DIR=$HOME
