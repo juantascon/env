@@ -25,5 +25,6 @@ for key in $keys; do
   args="${args} $(key_to_args ${key})"
 done
 
+podman pull ${image}
 trap "podman stop -i ${name}" SIGINT EXIT
 fghack podman run "$@" --rm --replace --ulimit=host --name=${name} ${args} ${image}
