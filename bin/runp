@@ -9,18 +9,18 @@ name=$(basename ${yml} .yml)
 
 pushd $(dirname ${yml}) > /dev/null
 yml=$(basename ${yml})
-image=$(yq-go read ${yml} "image")
+image=$(yq-go eval ".image" ${yml})
 [ -f ./env ] && source ./env
 
 key_to_args() {
   _key=$1
-  values=$(yq-go read ${yml} "${_key}.*")
-  [ -z "${values}" ] && values=$(yq-go read ${yml} "${_key}")
+  values=$(yq-go eval ".${_key}[]" ${yml})
+  [ -z "${values}" ] && values=$(yq-go eval ".${_key}" ${yml})
   eval echo \"$(echo "${values}" | xargs -I {} echo "--${_key}={}")\"
 }
 
 args=""
-keys=$(yq-go read -p p ${yml} "*"|grep -v "^image\$")
+keys=$(yq-go eval "keys | .[]" ${yml} |grep -v "^image\$")
 for key in $keys; do
   args="${args} $(key_to_args ${key})"
 done
