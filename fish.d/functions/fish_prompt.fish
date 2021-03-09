@@ -7,7 +7,7 @@ end
 function fish_prompt
   set -l prompt_status $status
   set -l prompt_cwd (string replace -r "$HOME" "~" $PWD)
-  if test $USER = juan -a $hostname = "x1"
+  if test $USER = juan -a $hostname = "lat"
     fish_prompt_echo purple \$
   else
     fish_prompt_echo red $USER
