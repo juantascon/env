@@ -14,10 +14,10 @@ super + {minus,equal}
   sudo brightnessctl set -q 5%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
 
 XF86KbdBrightness{Down,Up}
-  sudo brightnessctl set -q 5%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
+  sudo brightnessctl set -q 2%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
 
 XF86MonBrightness{Down,Up}
-  sudo brightnessctl set -q 5%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
+  sudo brightnessctl set -q 2%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
 
 super + {t,l,p,s,x}
   {xterm,i3lock,tabpass.py,maim -s ~/shot.png,autorandr -c}
