@@ -1,5 +1,6 @@
 export PATH=~/env/bin/override:~/env/bin:~/.local/bin:/usr/bin
 export LANG=en_US.UTF-8
+export TERM=xterm-256color
 
 export XDG_DESKTOP_DIR=$HOME
 export XDG_CONFIG_HOME=$HOME/.config
@@ -7,8 +8,8 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.data
 export XDG_RUNTIME_DIR=/tmp/run-$(id -u)
 
-xdg-mkdirs
-
 export EDITOR=vi
 export BROWSER=f
 export PAGER=bat
+
+xdg-mkdirs
