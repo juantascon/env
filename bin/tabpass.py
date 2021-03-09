@@ -2,18 +2,16 @@
 
 import yaml
 import itertools
-from plumbum.cmd import xdotool, gopass, rofi, echo
+import urllib
+from plumbum.cmd import bt, xdotool, gopass, rofi, echo
+
 
 def get_browser_url():
-  window_name = xdotool("getactivewindow", "getwindowname")
-  window_name_parts = window_name.strip().split(" — ")
-  browser = window_name_parts[-1]
-  if browser in ["Chromium", "Vivaldi"]:
-    return window_name_parts[-2]
-  elif browser in ["Mozilla Firefox", "Mozilla Firefox (Private Browsing)"]:
-    return window_name_parts[0].split(" - ")[-1]
-  else:
-    return False
+  url = bt("query", "+active").split()[-1]
+  print(url)
+  netloc = urllib.parse.urlparse(url).netloc
+  hostname = netloc.split(":")[0]
+  return hostname
 
 def list_secrets(url):
   all = gopass("ls", "--flat", "--strip-prefix", "web").strip().split("\n")
