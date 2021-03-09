@@ -13,7 +13,6 @@ pushd ~/ >/dev/null
 
 lnk env/bash.d/bashrc .bashrc
 lnk env/bash.d/bashrc .bash_profile
-lnk env/fish.d/config.fish .config/fish/config.fish
-lnk env/fish.d/functions .config/fish/functions
+lnk env/fish.d .config/fish
 
 popd >/dev/null
