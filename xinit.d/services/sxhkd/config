@@ -1,17 +1,11 @@
-XF86Audio{RaiseVolume,LowerVolume}
-  ponymix -N {increase,decrease} 3
+control + super + {Up,Down,space,Left,Right}
+  playerctl -a {next,previous,play-pause,position -5, position +5}
 
-XF86Audio + Mute
-  ponymix -N toggle
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+  ponymix -N {increase 3,decrease 3,toggle}
 
-super + {Up,Down}
-  ponymix -N {increase,decrease} 3
-
-super + 0
-  ponymix -N toggle
-
-super + {minus,equal}
-  sudo brightnessctl set -q 5%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
+super + {Up,Down,0}
+  ponymix -N {increase 3,decrease 3,toggle}
 
 XF86KbdBrightness{Down,Up}
   sudo brightnessctl set -q 2%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
