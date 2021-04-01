@@ -1,0 +1,2 @@
+#! /bin/sh
+VAGRANT_INSTALLER_ENV=true exec /usr/bin/vagrant "$@"
