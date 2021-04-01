@@ -1,3 +1,0 @@
-image: juantascon/languagetool:5.0
-publish:
-  - "127.0.0.1:8081:8081"
