@@ -1,0 +1,4 @@
+socks: ssh -CND 9870 user@server
+reverse: autossh -M 20000 -q -N user@server -R 0.0.0.0:2013:localhost:2012
+
+

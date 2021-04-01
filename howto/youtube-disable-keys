@@ -1,0 +1,5 @@
+install ublock origin
+go to ublock origin settings
+go to "My Filters"
+add this filter: youtube.com##+js(addEventListener-defuser.js, keydown)
+apply
