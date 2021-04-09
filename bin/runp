@@ -2,15 +2,11 @@
 
 set -e
 
-yml="$1"
-shift
-[[ ! "${yml}" =~ ^.*.yml$ ]] && echo "usage: $0 <service.yml>" && exit 1
-name=$(basename ${yml} .yml)
-
-pushd $(dirname ${yml}) > /dev/null
-yml=$(basename ${yml})
+yml="p.yml"
+name=$(yq-go eval ".name" ${yml})
 image=$(yq-go eval ".image" ${yml})
-[ -f ./env ] && source ./env
+[ -z "$name" ] && echo "$yml: name not found" && exit 1
+[ -z "$image" ] && echo "$yml: image not found" && exit 1
 
 key_to_args() {
   _key=$1
@@ -20,11 +16,12 @@ key_to_args() {
 }
 
 args=""
-keys=$(yq-go eval "keys | .[]" ${yml} |grep -v "^image\$")
+keys=$(yq-go eval "keys | .[]" ${yml} |grep -v "^image\$" |grep -v "^name\$")
 for key in $keys; do
   args="${args} $(key_to_args ${key})"
 done
 
 podman pull ${image}
-trap "podman stop -i ${name}" SIGINT EXIT
-fghack podman run "$@" --rm --replace --ulimit=host --name=${name} ${args} ${image}
+podman create --rm --replace --name=${name} ${args} ${image}
+podman start -a ${name}
+#--sig-proxy
