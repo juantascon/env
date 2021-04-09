@@ -8,7 +8,9 @@ import babelfish
 import subliminal
 
 def path_multi(video, lang):
-  return "{}.{}.multisubs".format(os.path.splitext(video.name)[0], lang)
+  dir = os.path.dirname(video.name)
+  base = os.path.basename(video.name)
+  return f"{dir}/_{base}.{lang}.multisubs"
 
 def path_sub(video, lang, index):
   return "{}.{}_{:02d}.srt".format(os.path.splitext(video.name)[0], lang, index)
