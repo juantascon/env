@@ -9,7 +9,7 @@ set -x XDG_DATA_HOME $HOME/.data
 set -x XDG_RUNTIME_DIR /tmp/run-(id -u)
 
 set -x EDITOR vi
-set -x BROWSER f
+set -x BROWSER b
 set -x PAGER bat
 
 set -u fish_greeting #makes fish silent
