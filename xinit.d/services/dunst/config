@@ -8,7 +8,7 @@
   # %n  progress value if set without any extra characters
   # %%  Literal %
   format = "<b>%s</b> <big>%p</big> \n%b"
-  font = Input Mono 14
+  font = Input Mono 16
   geometry = "1000x5-30+20"
   shrink = yes
   padding = 10
