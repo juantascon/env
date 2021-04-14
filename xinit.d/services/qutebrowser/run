@@ -1,0 +1,4 @@
+#!/bin/sh
+vx check dunst >/dev/null || exit 1
+cd ~
+exec qutebrowser 2>&1
