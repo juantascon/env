@@ -3,8 +3,9 @@
 set -e
 
 yml="p.yml"
-name=$(yq-go eval ".name" ${yml})
 image=$(yq-go eval ".image" ${yml})
+name=$(yq-go eval ".name" ${yml})
+command=$(yq-go eval ".command" ${yml})
 [ "$name" == "null" ] && echo "$yml: name is null" && exit 1
 [ "$image" == "null" ] && echo "$yml: image is null" && exit 1
 
@@ -16,11 +17,11 @@ key_to_args() {
 }
 
 args=""
-keys=$(yq-go eval "keys | .[]" ${yml} |grep -v "^image\$" |grep -v "^name\$")
+keys=$(yq-go eval "keys | .[]" ${yml} |grep -v -E "^image|name|command\$")
 for key in $keys; do
   args="${args} $(key_to_args ${key})"
 done
 
 podman pull ${image}
-podman create --rm --replace --name=${name} ${args} ${image}
+podman create --rm --replace --name=${name} ${args} ${image} ${command}
 exec podman start -a --sig-proxy ${name}
