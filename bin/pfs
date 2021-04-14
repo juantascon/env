@@ -21,7 +21,9 @@ def do_get(args):
         print(f"field not found")
         exit(2)
     else:
-      print(yaml.dump(entry), end="")
+      for key, value in entry.items():
+        print(key)
+      #print(yaml.dump(entry), end="")
   except KeyError:
     print(f"id not found")
     exit(2)
@@ -42,7 +44,7 @@ parser = argparse.ArgumentParser(prog="pfs")
 subparsers = parser.add_subparsers(dest="subcommand", required=True)
 parser_get = subparsers.add_parser("get", help="gets a single id")
 parser_get.add_argument("id")
-parser_get.add_argument("field", metavar="field", nargs="?")
+parser_get.add_argument("field", metavar="field", nargs="?", help="empty to list all fields for id")
 parser_get.set_defaults(func=do_get)
 parser_list = subparsers.add_parser("list", help="lists all ids")
 parser_list.set_defaults(func=do_list)
