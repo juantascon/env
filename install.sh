@@ -14,5 +14,6 @@ pushd ~/ >/dev/null
 lnk env/bash.d/bashrc .bashrc
 lnk env/bash.d/bashrc .bash_profile
 lnk env/fish.d .config/fish
+lnk env/git .config/git
 
 popd >/dev/null

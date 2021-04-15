@@ -1,0 +1,24 @@
+[core]
+  pager = delta --dark --theme TwoDark
+[user]
+  useConfigOnly = true
+[push]
+  default = simple
+[pull]
+  rebase = true
+[rebase]
+  autoStash = true
+[color]
+  ui = true
+[alias]
+  ss = status --short --branch
+  s = status
+  b = branch -vv
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --date=short
+[includeIf "gitdir:~/ath/"]
+  path = ~/env/git/ath
+[includeIf "gitdir:~/dev/"]
+  path = ~/env/git/hx
+[includeIf "gitdir:~/my/"]
+  path = ~/.gitconfig@hx
+
