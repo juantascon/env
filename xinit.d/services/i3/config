@@ -5,12 +5,9 @@ set $terminal [class="kitty"]
 
 floating_modifier $win
 hide_edge_borders both
-font pango:DejaVu Sans Mono 8
 
-bindsym $win+r restart
-bindsym $win+c kill
-bindsym $win+space floating toggle
-bindsym $win+f fullscreen toggle
+bindsym shift+$alt+r restart
+bindsym shift+$alt+q kill
 
 workspace 1 output DP1 eDP1
 workspace 2 output DP1 eDP1
