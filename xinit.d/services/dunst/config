@@ -7,9 +7,11 @@
   # %p  progress value if set ([  0%] to [100%]) or nothing
   # %n  progress value if set without any extra characters
   # %%  Literal %
-  format = "<b>%s</b> <big>%p</big> \n%b"
-  font = Input Mono 16
-  geometry = "1000x5-30+20"
+  format = "%s %p \n%b"
+  font = Input Mono 18
+  icon_path = /usr/share/icons/Adwaita/48x48/status/:/usr/share/icons/Adwaita/48x48/devices/:/usr/share/icons/Adwaita/48x48/legacy/
+  max_icon_size = 48
+  geometry = "1000x10-30+20"
   shrink = yes
   padding = 10
   horizontal_padding = 10
