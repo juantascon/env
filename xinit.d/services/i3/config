@@ -1,31 +1,23 @@
 set $win Mod4
 set $alt Mod1
 
-set $terminal [class="kitty"]
-
 floating_modifier $win
 hide_edge_borders both
+default_border pixel 0
 
 bindsym shift+$alt+r restart
 bindsym shift+$alt+q kill
 
-workspace 1 output DP1 eDP1
-workspace 2 output DP1 eDP1
-workspace 3 output DP2 eDP1
-workspace 4 output DP2 eDP1
+bindsym shift+$alt+Left exec ./i3tool.sh to_prev
+bindsym shift+$alt+Right exec ./i3tool.sh to_next
 
 bindsym $alt+F1 workspace 1
 bindsym $alt+F2 workspace 2
 bindsym $alt+F3 workspace 3
 bindsym $alt+F4 workspace 4
 
-bindsym $win+F1 move container to workspace 1
-bindsym $win+F2 move container to workspace 2
-bindsym $win+F3 move container to workspace 3
-bindsym $win+F4 move container to workspace 4
-
 for_window [class="pop-up"] floating enable
-for_window [class="^.*"] border pixel 0
 
+set $terminal [class="kitty"]
 for_window $terminal move to scratchpad
 bindsym F12 scratchpad show, $terminal fullscreen enable
