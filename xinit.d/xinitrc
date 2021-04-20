@@ -3,7 +3,6 @@
 xrdb $HOME/env/xinit.d/xresources
 eval $(dbus-launch --sh-syntax --exit-with-x11)
 
-start-pulseaudio-x11 &
 i3lock &
 xsetroot -solid "#000000"
 xset b 0
