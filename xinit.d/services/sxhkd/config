@@ -1,20 +1,18 @@
-control + super + {Up,Down,space,Left,Right}
-  playerctl -a {next,previous,play-pause,position -5, position +5}
+super + {Left,Right,space}
+  playerctl -a {previous,next,play-pause}; noti.sh playerctl
 
 XF86Audio{RaiseVolume,LowerVolume,Mute}
-  ponymix -N {increase 3,decrease 3,toggle}
+  ponymix {increase 3,decrease 3,toggle}; noti.sh volume
 
 super + {Up,Down,0}
-  ponymix -N {increase 3,decrease 3,toggle}
+  ponymix {increase 3,decrease 3,toggle}; noti.sh volume
 
 XF86KbdBrightness{Down,Up}
-  sudo brightnessctl set -q 2%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
+  brillo -{U,A} 2; noti.sh brightness
 
 XF86MonBrightness{Down,Up}
-  sudo brightnessctl set -q 2%{-,+} ; notify-send -h int:value:(brightnessctl info -m |cut -f 4 -d,) brightnessctl
+  brillo -{U,A} 2; noti.sh brightness
 
-super + {t,l,p,s,x}
-  {xterm,i3lock,tabpass.sh,maim -s ~/shot.png,autorandr -c}
+super + {t,l,p,v,s,x}
+  {xterm,i3lock,tabpass.sh,clipmenu,maim -s ~/shot.png,autorandr -c}
 
-control + alt + v
-  clipmenu
