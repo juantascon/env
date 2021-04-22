@@ -8,6 +8,7 @@ name=$(yq-go eval ".name" ${yml})
 command=$(yq-go eval ".command" ${yml})
 [ "$name" == "null" ] && echo "$yml: name is null" && exit 1
 [ "$image" == "null" ] && echo "$yml: image is null" && exit 1
+[ "$command" == "null" ] && command=""
 
 key_to_args() {
   _key=$1
