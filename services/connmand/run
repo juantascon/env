@@ -1,2 +1,0 @@
-#!/bin/sh
-exec connmand --nodaemon --nodnsproxy --noplugin=vpn --config=./connmand.conf
