@@ -3,9 +3,10 @@
 if (mount | grep ~/my >/dev/null); then
   if ! (umount ~/my); then
     notify-send -u critical "WARNING: unable to umount ~/my"
-    sleep 2
+    sleep 3
+    args="-c ff5500"
   fi
 fi
 
-/usr/bin/i3lock -n "$@"
+/usr/bin/i3lock $args -n "$@"
 xsetroot -solid "#000000"
