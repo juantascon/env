@@ -15,5 +15,6 @@ set -x PAGER bat
 set -u fish_greeting #makes fish silent
 
 xdg-mkdirs
-[ -f ~/.asdf/asdf.fish ]; and source ~/.asdf/asdf.fish
-[ -f ~/env/fish.d/$USER@$hostname.fish ]; and source ~/env/fish.d/$USER@$hostname.fish
+[ -f ~/.asdf/asdf.fish ] && source ~/.asdf/asdf.fish
+[ -f ~/.config/base16-shell/profile_helper.fish ] && source ~/.config/base16-shell/profile_helper.fish 
+[ -f ~/env/fish.d/$USER@$hostname.fish ] && source ~/env/fish.d/$USER@$hostname.fish
