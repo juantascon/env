@@ -16,5 +16,5 @@ set -u fish_greeting #makes fish silent
 
 xdg-mkdirs
 [ -f ~/.asdf/asdf.fish ] && source ~/.asdf/asdf.fish
-[ -f ~/.config/base16-shell/profile_helper.fish ] && source ~/.config/base16-shell/profile_helper.fish 
+status --is-interactive && [ -f $XDG_CONFIG_HOME/base16-shell/profile_helper.fish ] && source $XDG_CONFIG_HOME/base16-shell/profile_helper.fish
 [ -f ~/env/fish.d/$USER@$hostname.fish ] && source ~/env/fish.d/$USER@$hostname.fish
