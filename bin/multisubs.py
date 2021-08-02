@@ -10,7 +10,7 @@ import subliminal
 def path_multi(video, lang):
   dir = os.path.dirname(video.name)
   base = os.path.basename(video.name)
-  return f"{dir}/_{base}.{lang}.multisubs"
+  return f"{dir}/.multisubs-{lang}/{base}"
 
 def path_sub(video, lang, index):
   return "{}.{}_{:02d}.srt".format(os.path.splitext(video.name)[0], lang, index)
@@ -37,4 +37,6 @@ for video in videos:
     path = path_sub(video, args.lang, i)
     with io.open(path, "w", encoding="utf-8") as f:
       f.write(sub.text)
-  os.mknod(path_multi(video, args.lang))
+  path = path_multi(video, args.lang)
+  os.makedirs(os.path.dirname(path), exist_ok=True)
+  os.mknod(path)
