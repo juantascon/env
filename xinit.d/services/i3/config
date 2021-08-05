@@ -3,7 +3,6 @@ set $alt Mod1
 
 floating_modifier $win
 hide_edge_borders both
-default_border pixel 0
 
 bindsym shift+$alt+r restart
 bindsym shift+$alt+q kill
@@ -15,9 +14,11 @@ bindsym $alt+F1 workspace 1
 bindsym $alt+F2 workspace 2
 bindsym $alt+F3 workspace 3
 bindsym $alt+F4 workspace 4
+bindsym $alt+F5 workspace 5
+bindsym F12 workspace 5
 
+for_window [class=".*"] border pixel 0
 for_window [class="pop-up"] floating enable
+for_window [class="kitty"] move to workspace 5
+for_window [class="gnvim"] move to workspace 3
 
-set $terminal [class="kitty"]
-for_window $terminal move to scratchpad
-bindsym F12 scratchpad show, $terminal fullscreen enable
