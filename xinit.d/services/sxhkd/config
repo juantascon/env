@@ -1,6 +1,9 @@
 super + {Left,Right,space}
   playerctl -a {previous,next,play-pause}; noti.sh playerctl
 
+XF86AudioPlay
+  playerctl -a play-pause; noti.sh playerctl
+
 XF86Audio{RaiseVolume,LowerVolume,Mute}
   ponymix {increase 3,decrease 3,toggle}; noti.sh volume
 
