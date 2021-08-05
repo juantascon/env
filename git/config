@@ -15,6 +15,7 @@
   s = status
   b = branch -vv
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --date=short
+  f = fetch
 [includeIf "gitdir:~/ath/"]
   path = ~/env/git/ath
 [includeIf "gitdir:~/dev/"]
