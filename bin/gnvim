@@ -1,0 +1,8 @@
+#! /bin/bash
+
+dir=$1
+
+[ -z "$dir" ] && dir="."
+[ ! -d "$dir" ] && echo "usage: $(basename $0) <dir>" && exit
+
+exec kitty -c ~/env/nvim/kitty.conf -d "$dir" --class $(basename $0) vi
