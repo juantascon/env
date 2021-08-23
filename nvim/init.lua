@@ -19,6 +19,7 @@ vim.opt.shiftwidth = 2
 -- vim.opt.listchars = { space = '·', tab = '➜ ' }
 vim.cmd("set list listchars=space:·,tab:\\➜\\ ")
 
+
 disabled_builtin = {
   "netrw", "netrwPlugin", "netrwSettings", "netrwFileHandlers",
   "gzip", "zip", "zipPlugin", "tar", "tarPlugin",
@@ -28,6 +29,51 @@ disabled_builtin = {
 for _, plugin in pairs(disabled_builtin) do
   vim.g["loaded_" .. plugin] = 1
 end
+
+
+local fn = vim.fn
+local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
+end
+
+require "paq" {
+  'savq/paq-nvim';
+  'RRethy/nvim-base16';
+  'nvim-lua/plenary.nvim';
+  'nvim-lua/popup.nvim';
+  'nvim-telescope/telescope-media-files.nvim';
+  'nvim-telescope/telescope.nvim';
+  'b3nj5m1n/kommentary';
+  'editorconfig/editorconfig-vim';
+  'nvim-treesitter/nvim-treesitter';
+  'p00f/nvim-ts-rainbow';
+  'kyazdani42/nvim-web-devicons';
+  'akinsho/nvim-bufferline.lua';
+  'mbbill/undotree';
+  'kyazdani42/nvim-web-devicons';
+  'famiu/feline.nvim';
+  'simrat39/symbols-outline.nvim';
+  'rmagatti/auto-session';
+  'nvim-lua/plenary.nvim';
+  'rmagatti/session-lens';
+  'nvim-lua/plenary.nvim';
+  'lewis6991/gitsigns.nvim';
+  'karb94/neoscroll.nvim';
+  {'ms-jpq/coq_nvim', branch = 'coq'};
+  -- 'hrsh7th/nvim-compe';
+  'ethanholz/nvim-lastplace';
+  'kosayoda/nvim-lightbulb';
+  'ray-x/lsp_signature.nvim';
+ 	'kyazdani42/nvim-web-devicons';
+  'folke/trouble.nvim';
+  'kabouzeid/nvim-lspinstall';
+  'neovim/nvim-lspconfig';
+  'folke/which-key.nvim';
+}
+vim.schedule(function() vim.cmd('PaqInstall') end)
+vim.schedule(function() vim.cmd('PaqUpdate') end)
+vim.schedule(function() vim.cmd('PaqClean') end)
 
 
 vim.cmd('inoremap <expr> <Tab> pumvisible() ? "\\<C-n>" : "\\<Tab>"')
@@ -42,26 +88,14 @@ map('n', 'L', 'g_')
 map('n', '<C-m>', '%')
 map('n', '<C-s>', ':w<CR>')
 map('i', '<C-s>', '<esc>:w<CR>')
+map('n', '<C-o>', ':SymbolsOutline<CR>')
 
 
-vim.cmd 'packadd paq-nvim'
-local paq_nvim = require('paq-nvim')
-local paq = paq_nvim.paq
-paq {'savq/paq-nvim', opt=true}
-
-
-paq 'RRethy/nvim-base16'
 require'base16-colorscheme'.setup('seti')
 
-
-paq 'nvim-lua/popup.nvim'
-paq 'nvim-telescope/telescope-media-files.nvim'
-paq 'nvim-telescope/telescope.nvim'
 local telescope = require("telescope")
 telescope.setup()
 
-
-paq 'b3nj5m1n/kommentary'
 local kommentary_config = require("kommentary.config")
 kommentary_config.configure_language("default", {
   prefer_single_line_comments = true,
@@ -70,12 +104,6 @@ kommentary_config.configure_language("elixir", {
   single_line_comment_string = "#"
 })
 
-
-paq 'editorconfig/editorconfig-vim'
-
-
-paq 'nvim-treesitter/nvim-treesitter'
-paq 'p00f/nvim-ts-rainbow'
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
@@ -90,9 +118,6 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 
-
-paq 'kyazdani42/nvim-web-devicons'
-paq 'akinsho/nvim-bufferline.lua'
 require'bufferline'.setup()
 map('n', '<C-w>', ':bd<CR>')
 map('n', '<C-k>', ':BufferLineCyclePrev<CR>')
@@ -103,29 +128,12 @@ for i = 1, 5 do
   map('n', '<C-t>' .. i, ':lua require("bufferline").go_to_buffer(' .. i .. ')<CR>')
 end
 
-
-paq 'mbbill/undotree'
-
-
-paq 'kyazdani42/nvim-web-devicons'
-paq 'famiu/feline.nvim'
 require'feline'.setup()
 
-
-paq 'simrat39/symbols-outline.nvim'
-map('n', '<C-o>', ':SymbolsOutline<CR>')
-
-
-paq 'rmagatti/auto-session'
 require'auto-session'.setup()
-paq 'vim-lua/plenary.nvim'
-paq 'rmagatti/session-lens'
 telescope.load_extension("session-lens")
 require"telescope._extensions.session-lens".setup { shorten_path = false }
 
-
-paq 'vim-lua/plenary.nvim'
-paq 'lewis6991/gitsigns.nvim'
 require'gitsigns'.setup {
   signs = {
     add = {hl = "DiffAdded"},
@@ -134,15 +142,10 @@ require'gitsigns'.setup {
   }
 }
 
-
-paq 'karb94/neoscroll.nvim'
 require'neoscroll'.setup()
 
-
-paq {'ms-jpq/coq_nvim', branch = 'coq'}
 vim.schedule(function() vim.cmd('COQnow -s') end)
 
--- paq 'hrsh7th/nvim-compe'
 -- require('compe').setup {
 --   enabled = true,
 --   autocomplete = true,
@@ -167,26 +170,15 @@ vim.schedule(function() vim.cmd('COQnow -s') end)
 --   }
 -- }
 
-
-paq 'ethanholz/nvim-lastplace'
 require('nvim-lastplace').setup()
 
-
-paq 'kosayoda/nvim-lightbulb'
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]
-paq 'ray-x/lsp_signature.nvim'
 local on_attach = function(_, _)
   require('lsp_signature').on_attach()
 end
 
-
-paq 'kyazdani42/nvim-web-devicons'
-paq 'folke/trouble.nvim'
 require("trouble").setup()
 
-
-paq 'kabouzeid/nvim-lspinstall'
-paq 'neovim/nvim-lspconfig'
 local lspconfig = require('lspconfig')
 lspconfig.gopls.setup{on_attach = on_attach}
 lspconfig.elixirls.setup({
@@ -200,10 +192,9 @@ lspconfig.elixirls.setup({
   }
 })
 
-
-paq 'folke/which-key.nvim'
-require("which-key").setup()
-require("which-key").register({
+local whichkey = require("which-key")
+whichkey.setup()
+whichkey.register({
   ["<leader><leader>"] = { function() require("telescope.builtin").buffers({show_all_buffers = true}) end, 'buffers' },
   ["<leader>p"] = { function() require("telescope.builtin").find_files{hidden = true, previewer = false} end, 'find_files' },
   ["<leader>g"] = { function() require("telescope.builtin").live_grep{hidden = true} end, 'live_grep' },
@@ -225,12 +216,7 @@ require("which-key").register({
   ["<leader>s"] = { function() vim.lsp.buf.signature_help() end, "lsp_signature" },
 
 })
-require("which-key").register({
+whichkey.register({
   ["<leader>c"] = { "<Plug>kommentary_visual_default", "toggle_comments" }
 }, {mode = "v"})
-
-
-paq_nvim.install()
-paq_nvim.update()
-paq_nvim.clean()
 
