@@ -167,6 +167,10 @@ local on_attach = function(_, _)
 end
 local lspconfig = require('lspconfig')
 lspconfig.gopls.setup{on_attach = on_attach}
+lspconfig.clangd.setup{
+  cmd = {require("lspinstall.util").install_path('cpp') .. '/clangd/bin/clangd', '--background-index'},
+  on_attach = on_attach,
+}
 lspconfig.elixirls.setup({
   cmd = {require("lspinstall.util").install_path('elixir') .. '/elixir-ls/language_server.sh'},
   on_attach = on_attach,
