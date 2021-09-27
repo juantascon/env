@@ -23,7 +23,8 @@ require "paq" {
   'nvim-treesitter/nvim-treesitter';
   'nvim-telescope/telescope-media-files.nvim';
   'nvim-telescope/telescope.nvim';
-  'Shatur/neovim-session-manager';
+  'rmagatti/auto-session';
+  'rmagatti/session-lens';
   'b3nj5m1n/kommentary';
   'editorconfig/editorconfig-vim';
   'p00f/nvim-ts-rainbow';
@@ -88,8 +89,8 @@ require'base16-colorscheme'.setup('seti')
 local telescope = require('telescope')
 local telescope_builtin = require('telescope.builtin')
 telescope.setup()
-telescope.load_extension('session_manager')
 
+require'auto-session'.setup()
 
 local kommentary_config = require("kommentary.config")
 kommentary_config.configure_language("default", {prefer_single_line_comments = true})
@@ -184,11 +185,11 @@ whichkey.register({
   ["<leader>p"] = { function() telescope_builtin.find_files{hidden = true, previewer = false} end, 'find_files' },
   ["<leader>g"] = { function() telescope_builtin.live_grep{hidden = true} end, 'live_grep' },
   ["<leader>f"] = { function() telescope_builtin.file_browser{hidden = true, previewer = false} end, 'file_browser' },
-  ["<leader>r"] = { function() telescope.extensions.session_manager.load{} end, 'sessions' },
   ["<leader>l"] = { ':noh<CR>', 'clear_highlight' },
   ["<leader>c"] = { "<Plug>kommentary_line_default", "toggle_comments" },
   ["<leader>t"] = { ":TroubleToggle<CR>", "toggle_trouble" },
   ["<leader>u"] = { ":UndotreeToggle<CR>"},
+  ["<leader>r"] = { ':SearchSession<CR>', 'sessions' },
 
   ["<leader>qs"] = { ":wq<CR>", "quit save" },
   ["<leader>qq"] = { ":q<CR>", "quit" },
@@ -204,4 +205,3 @@ whichkey.register({
 whichkey.register({
   ["<leader>c"] = { "<Plug>kommentary_visual_default", "toggle_comments" }
 }, {mode = "v"})
-
