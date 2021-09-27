@@ -185,27 +185,30 @@ lspconfig.elixirls.setup({
 local whichkey = require("which-key")
 whichkey.setup()
 whichkey.register({
-  ["<leader><leader>"] = { function() telescope_builtin.buffers({show_all_buffers = true}) end, 'buffers' },
   ["<leader>p"] = { function() telescope_builtin.find_files{hidden = true, previewer = false} end, 'find_files' },
   ["<leader>g"] = { function() telescope_builtin.live_grep{hidden = true} end, 'live_grep' },
   ["<leader>f"] = { function() telescope_builtin.file_browser{hidden = true, previewer = false} end, 'file_browser' },
-  ["<leader>l"] = { ':noh<CR>', 'clear_highlight' },
-  ["<leader>c"] = { "<Plug>kommentary_line_default", "toggle_comments" },
-  ["<leader>t"] = { ":TroubleToggle<CR>", "toggle_trouble" },
-  ["<leader>u"] = { ":UndotreeToggle<CR>"},
   ["<leader>r"] = { ':SearchSession<CR>', 'sessions' },
+  ["<leader>l"] = { ':noh<CR>', 'clear' },
+  ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
+  ["<leader>u"] = { ":UndotreeToggle<CR>", "undotree" },
+  ["<leader>F"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
+  -- ["<leader>F"] = { ":%s/<C-r><C-w>//gc<Left><Left><Left>", "find&replace" },
+-- "sy:%s/<C-r>s//gc<Left>
 
   ["<leader>qs"] = { ":wq<CR>", "quit save" },
   ["<leader>qq"] = { ":q<CR>", "quit" },
   ["<leader>qf"] = { ":q!<CR>", "quit force" },
+  ["<leader>s"] = { ":w<CR>", "save" },
 
+  ["<leader>t"] = { ":TroubleToggle<CR>", "toggle_trouble" },
   ["<leader>a"] = { function() telescope_builtin.lsp_code_actions() end, 'lsp_actions' },
   ["<leader><tab>"] = { function() vim.lsp.buf.formatting() end, "lsp_formatting" },
   ["<leader>d"] = { function() vim.lsp.buf.definition() end, "lsp_definition" },
   ["<leader>k"] = { function() vim.lsp.buf.hover() end, "lsp_hover" },
-  ["<leader>s"] = { function() vim.lsp.buf.signature_help() end, "lsp_signature" },
+  ["<leader>h"] = { function() vim.lsp.buf.signature_help() end, "lsp_signature" },
 
 })
 whichkey.register({
-  ["<leader>c"] = { "<Plug>kommentary_visual_default", "toggle_comments" }
+  ["<leader>c"] = { "<Plug>kommentary_visual_default", "comment" }
 }, {mode = "v"})
