@@ -16,27 +16,28 @@ end
 
 require "paq" {
   'savq/paq-nvim';
+  'editorconfig/editorconfig-vim';
   'nvim-lua/plenary.nvim';
   'kyazdani42/nvim-web-devicons';
   'nvim-lua/popup.nvim';
   'RRethy/nvim-base16';
   'nvim-treesitter/nvim-treesitter';
+  'p00f/nvim-ts-rainbow';
   'nvim-telescope/telescope-media-files.nvim';
   'nvim-telescope/telescope.nvim';
+  'ethanholz/nvim-lastplace';
   'rmagatti/auto-session';
   'rmagatti/session-lens';
   'b3nj5m1n/kommentary';
-  'editorconfig/editorconfig-vim';
-  'p00f/nvim-ts-rainbow';
   'akinsho/nvim-bufferline.lua';
   'mbbill/undotree';
   'famiu/feline.nvim';
   'simrat39/symbols-outline.nvim';
   'lewis6991/gitsigns.nvim';
   'karb94/neoscroll.nvim';
-  -- {'ms-jpq/coq_nvim', branch = 'coq'};
-  'hrsh7th/nvim-compe';
-  'ethanholz/nvim-lastplace';
+  'hrsh7th/cmp-nvim-lsp';
+  'hrsh7th/cmp-buffer';
+  'hrsh7th/nvim-cmp';
   'kosayoda/nvim-lightbulb';
   'ray-x/lsp_signature.nvim';
   'folke/trouble.nvim';
@@ -54,7 +55,7 @@ vim.opt.timeoutlen = 250
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.writebackup = false
-vim.opt.completeopt = {"menuone", "noselect", "noinsert"}
+vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.showtabline = 0
 vim.opt.clipboard = "unnamedplus"
 vim.opt.inccommand = "nosplit"
@@ -96,6 +97,7 @@ local telescope = require('telescope')
 local telescope_builtin = require('telescope.builtin')
 telescope.setup()
 
+require('nvim-lastplace').setup()
 require'auto-session'.setup()
 
 local kommentary_config = require("kommentary.config")
@@ -138,31 +140,26 @@ require'gitsigns'.setup {
 
 require'neoscroll'.setup()
 
-require('compe').setup {
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = 'disable',
-  throttle_time = 80,
-  source_timeout = 200,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  documentation = true,
-  source = {
-    path = true,
-    buffer = true,
-    calc = true,
-    nvim_lsp = true,
-    nvim_lua = true,
-    spell = true,
-    treesitter = true
-  }
-}
-
-require('nvim-lastplace').setup()
+local cmp = require'cmp'
+cmp.setup({
+  snippet = {
+    expand = function(args) return args; end,
+  },
+  mapping = {
+    ["<Down>"] = cmp.mapping.select_next_item(),
+    ["<Up>"] = cmp.mapping.select_prev_item(),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-u>"] = cmp.mapping.scroll_docs(4),
+    ["<CR>"] = cmp.mapping.confirm(),
+    ["<C-e>"] = cmp.mapping.close(),
+  },
+  sources = {
+    {name = 'buffer'},
+    {name = 'nvim_lsp'},
+    {name = "spell"},
+  },
+  preselect = cmp.PreselectMode.None,
+})
 
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]
 
@@ -172,7 +169,9 @@ local on_attach = function(_, _)
   require('lsp_signature').on_attach()
 end
 local lspconfig = require('lspconfig')
-lspconfig.gopls.setup{on_attach = on_attach}
+lspconfig.gopls.setup{
+  on_attach = on_attach,
+}
 lspconfig.clangd.setup{
   cmd = {require("lspinstall.util").install_path('cpp') .. '/clangd/bin/clangd', '--background-index'},
   on_attach = on_attach,
@@ -218,3 +217,4 @@ whichkey.register({
 whichkey.register({
   ["<leader>c"] = { "<Plug>kommentary_visual_default", "comment" }
 }, {mode = "v"})
+
