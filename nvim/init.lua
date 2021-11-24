@@ -70,8 +70,13 @@ vim.opt.shiftwidth = 2
 vim.cmd("set list listchars=space:·,tab:\\➜\\ ")
 
 
-local function map(m, k, a)
-  vim.api.nvim_set_keymap(m, k, a, { noremap = true, silent = true })
+local function map(mods, k, a)
+  if type(mods) == "string" then
+    mods = {mods}
+  end
+  for _, m in ipairs(mods) do
+    vim.api.nvim_set_keymap(m, k, a, { noremap = true, silent = true })
+  end
 end
 
 vim.cmd('inoremap <expr> <Tab> pumvisible() ? "\\<C-n>" : "\\<Tab>"')
@@ -82,6 +87,7 @@ map('n', '<C-m>', '%')
 map('n', '<C-s>', ':w<CR>')
 map('i', '<C-s>', '<esc>:w<CR>')
 map('n', '<C-o>', ':SymbolsOutline<CR>')
+map({'i','n'}, '<S-Insert>', '<MiddleMouse>')
 
 
 require'base16-colorscheme'.setup('seti')
