@@ -10,6 +10,6 @@ case $1 in
   "brightness")
     notify-send -i video-display -h int:value:$(brillo -G) $(brillo -L) ;;
   "playerctl")
-    notify-send -i multimedia-player $(playerctl -l) $(playerctl status) ;;
+    notify-send -i multimedia-player $(playerctl -l) $(sleep 0.2 && playerctl status) ;;
   *) echo "usage: $0 <type>"; exit 1;;
 esac
