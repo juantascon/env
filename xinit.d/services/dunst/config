@@ -11,7 +11,8 @@
   font = Input Mono 18
   icon_path = /usr/share/icons/Adwaita/48x48/status/:/usr/share/icons/Adwaita/48x48/devices/:/usr/share/icons/Adwaita/48x48/legacy/
   max_icon_size = 48
-  geometry = "1000x10-30+20"
+  width = (0, 800)
+  height = 300
   shrink = yes
   padding = 10
   horizontal_padding = 10
