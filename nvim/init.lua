@@ -1,9 +1,4 @@
-disabled_builtin = {
-  "netrw", "netrwPlugin", "netrwSettings", "netrwFileHandlers",
-  "gzip", "zip", "zipPlugin", "tar", "tarPlugin",
-  "getscript", "getscriptPlugin", "vimball", "vimballPlugin", "2html_plugin",
-  "logipat", "matchit", "matchparen", "rrhelper"
-}
+local disabled_builtin = {"netrw", "netrwSettings", "netrwFileHandlers", "gzip", "zip", "tar", "shada_autoload", "msgpack_autoload"}
 for _, plugin in pairs(disabled_builtin) do
   vim.g["loaded_" .. plugin] = 1
 end
@@ -217,4 +212,3 @@ whichkey.register({
 whichkey.register({
   ["<leader>c"] = { "<Plug>kommentary_visual_default", "comment" }
 }, {mode = "v"})
-
