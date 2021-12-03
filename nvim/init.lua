@@ -17,7 +17,8 @@ require "paq" {
   'nvim-lua/plenary.nvim';
   'kyazdani42/nvim-web-devicons';
   'nvim-lua/popup.nvim';
-  'RRethy/nvim-base16';
+  -- 'RRethy/nvim-base16';
+  'marko-cerovac/material.nvim';
   'nvim-treesitter/nvim-treesitter';
   'p00f/nvim-ts-rainbow';
   'nvim-telescope/telescope.nvim';
@@ -80,8 +81,10 @@ map('i', '<C-s>', '<esc>:w<CR>')
 map('n', '<C-o>', ':SymbolsOutline<CR>')
 map({'i','n'}, '<S-Insert>', '<MiddleMouse>')
 
+-- require'base16-colorscheme'.setup('seti')
+vim.g.material_style = "darker"
+vim.cmd("colorscheme material")
 
-require'base16-colorscheme'.setup('seti')
 
 local telescope = require('telescope')
 local telescope_builtin = require('telescope.builtin')
