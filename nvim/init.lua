@@ -12,6 +12,8 @@ end
 require "paq" {
   'savq/paq-nvim';
   'editorconfig/editorconfig-vim';
+  'neovim/nvim-lspconfig';
+  'folke/which-key.nvim';
   'nvim-lua/plenary.nvim';
   'kyazdani42/nvim-web-devicons';
   'nvim-lua/popup.nvim';
@@ -31,9 +33,7 @@ require "paq" {
   'hrsh7th/cmp-buffer';
   'hrsh7th/nvim-cmp';
   'ray-x/lsp_signature.nvim';
-  'kabouzeid/nvim-lspinstall';
-  'neovim/nvim-lspconfig';
-  'folke/which-key.nvim';
+  'williamboman/nvim-lsp-installer';
 }
 vim.schedule(function() vim.cmd('PaqInstall') end)
 vim.schedule(function() vim.cmd('PaqUpdate') end)
@@ -154,27 +154,24 @@ cmp.setup({
 })
 
 
-local on_attach = function(_, _)
-  require('lsp_signature').on_attach()
-end
-local lspconfig = require('lspconfig')
-lspconfig.gopls.setup{
-  on_attach = on_attach,
-}
-lspconfig.clangd.setup{
-  cmd = {require("lspinstall.util").install_path('cpp') .. '/clangd/bin/clangd', '--background-index'},
-  on_attach = on_attach,
-}
-lspconfig.elixirls.setup({
-  cmd = {require("lspinstall.util").install_path('elixir') .. '/elixir-ls/language_server.sh'},
-  on_attach = on_attach,
+local lsp_opts = {
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  on_attach = require'lsp_signature'.on_attach,
   settings = {
     elixirLS = {
       dialyzerEnabled = false,
       fetchDeps = false
+    },
+    Lua = {
+      runtime = {version = 'LuaJIT'},
+      diagnostics = {globals = {'vim'}},
+      workspace = {library = vim.api.nvim_get_runtime_file("", true)},
+      telemetry = {enable = false},
+      completion = {autoRequire = false},
     }
   }
-})
+}
+require'nvim-lsp-installer'.on_server_ready(function(server) server:setup(lsp_opts) end)
 
 local whichkey = require("which-key")
 whichkey.setup()
