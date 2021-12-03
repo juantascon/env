@@ -24,7 +24,7 @@ require "paq" {
   'rmagatti/session-lens';
   'b3nj5m1n/kommentary';
   'akinsho/nvim-bufferline.lua';
-  'famiu/feline.nvim';
+  'nvim-lualine/lualine.nvim';
   'lewis6991/gitsigns.nvim';
   'karb94/neoscroll.nvim';
   'hrsh7th/cmp-nvim-lsp';
@@ -118,7 +118,9 @@ for i = 1, 5 do
   map('n', '<C-t>' .. i, ':BufferLineGoToBuffer ' .. i .. '<CR>')
 end
 
-require'feline'.setup()
+require('lualine').setup {
+  options = {theme = 'material-nvim'}
+}
 
 require'gitsigns'.setup {
   signs = {
