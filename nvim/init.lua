@@ -3,7 +3,6 @@ for _, plugin in pairs(disabled_builtin) do
   vim.g["loaded_" .. plugin] = 1
 end
 
-
 local install_path = vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
@@ -37,9 +36,8 @@ require "paq" {
   'ray-x/lsp_signature.nvim';
   'williamboman/nvim-lsp-installer';
 }
-vim.schedule(function() vim.cmd('PaqInstall') end)
-vim.schedule(function() vim.cmd('PaqUpdate') end)
-vim.schedule(function() vim.cmd('PaqClean') end)
+-- vim.schedule(function() vim.cmd('PaqSync') end)
+-- vim.schedule(function() vim.cmd('TSUpdateSync') end)
 
 
 vim.g.mapleader = ' '
@@ -58,6 +56,7 @@ vim.opt.updatetime = 250
 vim.opt.undofile = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
+vim.opt.scrolloff = 999
 
 vim.cmd("set list listchars=space:·,tab:\\➜\\ ")
 
@@ -156,7 +155,6 @@ cmp.setup({
   -- },
   -- preselect = cmp.PreselectMode.None,
 })
-
 
 local lsp_opts = {
   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
