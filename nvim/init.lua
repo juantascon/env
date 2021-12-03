@@ -18,24 +18,19 @@ require "paq" {
   'RRethy/nvim-base16';
   'nvim-treesitter/nvim-treesitter';
   'p00f/nvim-ts-rainbow';
-  'nvim-telescope/telescope-media-files.nvim';
   'nvim-telescope/telescope.nvim';
   'ethanholz/nvim-lastplace';
   'rmagatti/auto-session';
   'rmagatti/session-lens';
   'b3nj5m1n/kommentary';
   'akinsho/nvim-bufferline.lua';
-  'mbbill/undotree';
   'famiu/feline.nvim';
-  'simrat39/symbols-outline.nvim';
   'lewis6991/gitsigns.nvim';
   'karb94/neoscroll.nvim';
   'hrsh7th/cmp-nvim-lsp';
   'hrsh7th/cmp-buffer';
   'hrsh7th/nvim-cmp';
-  'kosayoda/nvim-lightbulb';
   'ray-x/lsp_signature.nvim';
-  'folke/trouble.nvim';
   'kabouzeid/nvim-lspinstall';
   'neovim/nvim-lspconfig';
   'folke/which-key.nvim';
@@ -156,9 +151,6 @@ cmp.setup({
   preselect = cmp.PreselectMode.None,
 })
 
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]
-
-require("trouble").setup()
 
 local on_attach = function(_, _)
   require('lsp_signature').on_attach()
@@ -191,17 +183,13 @@ whichkey.register({
   ["<leader>r"] = { ':SearchSession<CR>', 'sessions' },
   ["<leader>l"] = { ':noh<CR>', 'clear' },
   ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
-  ["<leader>u"] = { ":UndotreeToggle<CR>", "undotree" },
   ["<leader>F"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
-  -- ["<leader>F"] = { ":%s/<C-r><C-w>//gc<Left><Left><Left>", "find&replace" },
--- "sy:%s/<C-r>s//gc<Left>
 
   ["<leader>qs"] = { ":wq<CR>", "quit save" },
   ["<leader>qq"] = { ":q<CR>", "quit" },
   ["<leader>qf"] = { ":q!<CR>", "quit force" },
   ["<leader>s"] = { ":w<CR>", "save" },
 
-  ["<leader>t"] = { ":TroubleToggle<CR>", "toggle_trouble" },
   ["<leader>a"] = { function() telescope_builtin.lsp_code_actions() end, 'lsp_actions' },
   ["<leader><tab>"] = { function() vim.lsp.buf.formatting() end, "lsp_formatting" },
   ["<leader>d"] = { function() vim.lsp.buf.definition() end, "lsp_definition" },
