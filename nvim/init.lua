@@ -50,18 +50,16 @@ vim.opt.writebackup = false
 vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.showtabline = 0
 vim.opt.clipboard = "unnamedplus"
-vim.opt.inccommand = "nosplit"
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
-vim.opt.hidden = true
 vim.opt.updatetime = 250
 vim.opt.undofile = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-vim.cmd("set list listchars=space:·,tab:\\➜\\ ")
 
+vim.cmd("set list listchars=space:·,tab:\\➜\\ ")
 
 local function map(mods, k, a)
   if type(mods) == "string" then
