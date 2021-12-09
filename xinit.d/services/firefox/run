@@ -1,3 +1,0 @@
-#!/bin/sh
-cd ~
-NO_AT_BRIDGE=1 exec firefox 2>&1
