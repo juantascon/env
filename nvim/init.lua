@@ -3,41 +3,11 @@ for _, plugin in pairs(disabled_builtin) do
   vim.g["loaded_" .. plugin] = 1
 end
 
-local install_path = vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
+local dep_path = vim.fn.stdpath("data") .. "/site/pack/deps/opt/dep"
+if vim.fn.empty(vim.fn.glob(dep_path)) > 0 then
+  vim.fn.system({ "git", "clone", "--depth=1", "https://github.com/chiyadev/dep", dep_path })
 end
-
-require "paq" {
-  'savq/paq-nvim';
-  'editorconfig/editorconfig-vim';
-  'neovim/nvim-lspconfig';
-  'folke/which-key.nvim';
-  'nvim-lua/plenary.nvim';
-  'kyazdani42/nvim-web-devicons';
-  'nvim-lua/popup.nvim';
-  -- 'RRethy/nvim-base16';
-  'marko-cerovac/material.nvim';
-  'nvim-treesitter/nvim-treesitter';
-  'p00f/nvim-ts-rainbow';
-  'nvim-telescope/telescope.nvim';
-  'ethanholz/nvim-lastplace';
-  'rmagatti/auto-session';
-  'rmagatti/session-lens';
-  'b3nj5m1n/kommentary';
-  'akinsho/nvim-bufferline.lua';
-  'nvim-lualine/lualine.nvim';
-  'lewis6991/gitsigns.nvim';
-  'karb94/neoscroll.nvim';
-  'hrsh7th/cmp-nvim-lsp';
-  'hrsh7th/cmp-nvim-lua';
-  'hrsh7th/cmp-buffer';
-  'hrsh7th/nvim-cmp';
-  'ray-x/lsp_signature.nvim';
-  'williamboman/nvim-lsp-installer';
-}
--- vim.schedule(function() vim.cmd('PaqSync') end)
--- vim.schedule(function() vim.cmd('TSUpdateSync') end)
+vim.cmd("packadd dep")
 
 
 vim.g.mapleader = ' '
@@ -57,8 +27,10 @@ vim.opt.undofile = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.scrolloff = 999
+vim.opt.list = true
+vim.opt.listchars:append("space:·")
+vim.opt.listchars:append("tab:➜ ")
 
-vim.cmd("set list listchars=space:·,tab:\\➜\\ ")
 
 local function map(mods, k, a)
   if type(mods) == "string" then
@@ -74,132 +46,254 @@ map('n', 'L', 'g_')
 map('n', '<C-m>', '%')
 map('n', '<C-s>', ':w<cr>')
 map('i', '<C-s>', '<esc>:w<cr>')
-map('n', '<C-o>', ':SymbolsOutline<cr>')
 map({'i', 'c'}, '<S-Insert>', '<MiddleMouse>')
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+map("v", "<A-j>", ":m .+1<CR>==")
+map("v", "<A-k>", ":m .-2<CR>==")
+map("v", "p", '"_dP')
 
 
--- require'base16-colorscheme'.setup('seti')
-vim.g.material_style = "darker"
-vim.cmd("colorscheme material")
-
-
-local telescope = require('telescope')
-local telescope_builtin = require('telescope.builtin')
-telescope.setup()
-
-require('nvim-lastplace').setup()
-
-require'auto-session'.setup()
-
-local kommentary_config = require("kommentary.config")
-kommentary_config.configure_language("default", {prefer_single_line_comments = true})
-kommentary_config.configure_language("elixir", {single_line_comment_string = "#"})
-
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-  },
-  ensure_installed = 'all',
-  indent = {
-    enable = true
-  },
-  rainbow = {
-    enable = true,
-    extended_mode = true
-  }
-}
-
-require'bufferline'.setup()
-map('n', '<C-w>', ':bd<cr>')
-map('n', '<C-k>', ':BufferLineCyclePrev<cr>')
-map('n', '<C-j>', ':BufferLineCycleNext<cr>')
-map('n', '<C-down>', ':BufferLineMovePrev<cr>')
-map('n', '<C-up>', ':BufferLineMoveNext<cr>')
-for i = 1, 5 do
-  map('n', '<C-t>' .. i, ':BufferLineGoToBuffer ' .. i .. '<cr>')
-end
-
-require('lualine').setup {
-  options = {theme = 'material-nvim'}
-}
-
-require'gitsigns'.setup {
-  signs = {
-    add = {hl = "DiffAdded"},
-    change = {hl = "SignColumn"},
-    delete = {hl = "DiffRemoved"}
-  }
-}
-
-require'neoscroll'.setup()
-
-local cmp = require'cmp'
-cmp.setup({
-  snippet = {
-    expand = function(args) return args.body; end,
-  },
-  mapping = {
-    ["<down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-    ["<up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-    ["<cr>"] = cmp.mapping.confirm({ insert = true }),
-    ["<esc>"] = cmp.mapping.close(),
-  },
-  sources = {
-    {name = 'nvim_lsp'},
-    {name = 'nvim_lua'},
-    {name = 'buffer', keyword_length = 4},
-  },
-  -- completion = {
-  --   keyword_length = 2,
-  --   completeopt = "menu,noselect"
+require "dep" {
+  sync = "always",
+  'chiyadev/dep',
+  'editorconfig/editorconfig-vim',
+  'ggandor/lightspeed.nvim',
+  -- {
+  --   'RRethy/nvim-base16',
+  --   function()
+  --     require'base16-colorscheme'.setup('seti')
+  --   end,
   -- },
-  -- preselect = cmp.PreselectMode.None,
-})
+  {
+    'marko-cerovac/material.nvim',
+    function()
+      vim.g.material_style = "darker"
+      vim.cmd("colorscheme material")
+    end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    function()
+      require'nvim-treesitter.configs'.setup {
+        highlight = {
+          enable = true,
+        },
+        ensure_installed = 'all',
+        indent = {
+          enable = true
+        },
+        rainbow = {
+          enable = true,
+          extended_mode = true
+        }
+      }
+    end,
+    deps = {'p00f/nvim-ts-rainbow'},
+  },
+  {
+    'ethanholz/nvim-lastplace',
+    function()
+      require('nvim-lastplace').setup()
+    end,
+  },
+  {
+    'Shatur/neovim-session-manager',
+    function()
+      require('session_manager').setup{
+        autoload_mode = require('session_manager.config').AutoloadMode.CurrentDir,
+        autosave_only_in_session = true,
+      }
+    end,
+    deps = {'nvim-telescope/telescope.nvim'},
+    requires = {'nvim-lua/plenary.nvim'},
+  },
+  {
+    'b3nj5m1n/kommentary',
+    function()
+      local kommentary_config = require("kommentary.config")
+      kommentary_config.configure_language("default", {prefer_single_line_comments = true})
+      kommentary_config.configure_language("elixir", {single_line_comment_string = "#"})
+    end,
+  },
+  {
+    'akinsho/bufferline.nvim',
+    function()
+      require'bufferline'.setup()
+      map('n', '<C-w>', ':bd<cr>')
+      map('n', '<C-k>', ':BufferLineCyclePrev<cr>')
+      map('n', '<C-j>', ':BufferLineCycleNext<cr>')
+      map('n', '<C-down>', ':BufferLineMovePrev<cr>')
+      map('n', '<C-up>', ':BufferLineMoveNext<cr>')
+      for i = 1, 5 do
+        map('n', '<C-t>' .. i, ':BufferLineGoToBuffer ' .. i .. '<cr>')
+      end
+    end,
+    requires = "kyazdani42/nvim-web-devicons",
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    function()
+      require('lualine').setup {
+        options = {theme = 'material-nvim'},
+        sections = {lualine_c = {{'filename', path = 1}}},
+      }
+    end,
+  },
+  {
+    'lewis6991/gitsigns.nvim',
+    function()
+      require('gitsigns').setup {
+        signs = {
+          add = { hl = 'GitGutterAdd', text = '+' },
+          change = { hl = 'GitGutterChange', text = '~' },
+          delete = { hl = 'GitGutterDelete', text = '_' },
+          topdelete = { hl = 'GitGutterDelete', text = '‾' },
+          changedelete = { hl = 'GitGutterChange', text = '~' },
+        },
+      }
+      -- require'gitsigns'.setup {
+      --   signs = {
+      --     add = {hl = "DiffAdded"},
+      --     change = {hl = "SignColumn"},
+      --     delete = {hl = "DiffRemoved"}
+      --   }
+      -- }
+    end,
+    requires = {'nvim-lua/plenary.nvim'},
+  },
+  {
+    'karb94/neoscroll.nvim',
+    function()
+      require'neoscroll'.setup()
+    end,
+  },
+  {
+    'folke/which-key.nvim',
+    function()
+      local whichkey = require("which-key")
+      whichkey.setup()
+      whichkey.register({
+        ["<leader>p"] = { function() require('telescope.builtin').find_files{hidden = true, previewer = false} end, 'find_files' },
+        ["<leader>g"] = { function() require('telescope.builtin').live_grep{hidden = true} end, 'live_grep' },
+        ["<leader>f"] = { function() require('telescope.builtin').file_browser{hidden = true, previewer = false} end, 'file_browser' },
+        ["<leader>r"] = { ':Telescope sessions<cr>', 'sessions' },
+        ["<leader>l"] = { ':noh<cr>', 'clear' },
+        ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
+        ["<leader>F"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
 
-local lsp_opts = {
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-  on_attach = require'lsp_signature'.on_attach,
-  settings = {
-    elixirLS = {
-      dialyzerEnabled = false,
-      fetchDeps = false
-    },
-    Lua = {
-      runtime = {version = 'LuaJIT'},
-      diagnostics = {globals = {'vim'}},
-      workspace = {library = vim.api.nvim_get_runtime_file("", true)},
-      telemetry = {enable = false},
-      completion = {autoRequire = false},
-    }
-  }
+        ["<leader>qs"] = { ":wq<cr>", "quit save" },
+        ["<leader>qq"] = { ":q<cr>", "quit" },
+        ["<leader>qf"] = { ":q!<cr>", "quit force" },
+        ["<leader>s"] = { ":w<cr>", "save" },
+
+        ["<leader>a"] = { function() require('telescope.builtin').lsp_code_actions() end, 'lsp_actions' },
+        ["<leader><tab>"] = { function() vim.lsp.buf.formatting() end, "lsp_formatting" },
+        ["<leader>d"] = { function() vim.lsp.buf.definition() end, "lsp_definition" },
+        ["<leader>D"] = { function() vim.lsp.buf.declaration() end, "lsp_declaration" },
+        ["<leader>k"] = { function() vim.lsp.buf.hover() end, "lsp_hover" },
+        ["<leader>h"] = { function() vim.lsp.buf.signature_help() end, "lsp_signature" },
+        ["<leader>i"] = { function() vim.lsp.buf.implementation() end, "lsp_implementation" },
+        -- buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+        -- buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+      })
+      whichkey.register({
+        ["<leader>c"] = { "<Plug>kommentary_visual_default", "comment" },
+      }, {mode = "v"})
+
+    end,
+  },
+  -- 'nvim-lua/popup.nvim',
+  {
+    'nvim-telescope/telescope.nvim',
+    function()
+      local telescope = require('telescope')
+      telescope.setup {
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            -- case_mode = "smart_case"
+          }
+        }
+      }
+      telescope.load_extension('fzf')
+      telescope.load_extension('sessions')
+    end,
+    requires = {'nvim-lua/plenary.nvim'},
+  },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    config = function()
+      os.execute("make")
+    end,
+    deps = {'nvim-telescope/telescope.nvim'},
+  },
+  {
+    'hrsh7th/nvim-cmp',
+    function()
+      local cmp = require'cmp'
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            require('snippy').expand_snippet(args.body)
+          end,
+        },
+        mapping = {
+          -- ["<down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          -- ["<up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          -- ["<cr>"] = cmp.mapping.confirm({ insert = true, replace = true, select = false }),
+          -- ["<esc>"] = cmp.mapping.close(),
+          -- ["<c-e>"] = cmp.mapping.close(),
+
+          -- ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+          -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<esc>"] = cmp.mapping.close(),
+          ["<cr>"] = cmp.mapping(
+            cmp.mapping.confirm {
+              behavior = cmp.ConfirmBehavior.Insert,
+              select = true,
+            },
+            { "i", "c" }
+          ),
+          -- ["<cr>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.insert, select = true }),
+        },
+        sources = {
+          {name = 'nvim_lsp'},
+          {name = 'nvim_lua'},
+          {name = 'buffer', keyword_length = 4},
+        },
+        experimental = {
+          native_menu = false,
+        },
+        -- preselect = cmp.PreselectMode.None,
+      })
+    end,
+    deps = {'dcampos/nvim-snippy'},
+    requires = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-nvim-lua', 'hrsh7th/cmp-buffer', 'dcampos/cmp-snippy'},
+  },
+  {
+    'neovim/nvim-lspconfig',
+    function()
+      local opts = {
+        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        on_attach = require('lsp_signature').on_attach,
+        settings = {
+          elixirLS = {
+            dialyzerEnabled = false,
+          },
+          Lua = {
+            runtime = {version = 'LuaJIT'},
+            diagnostics = {globals = {'vim'}},
+            workspace = {library = vim.api.nvim_get_runtime_file("", true)},
+            telemetry = {enable = false},
+            completion = {autoRequire = false},
+          }
+        }
+      }
+      require('nvim-lsp-installer').on_server_ready(function(server) server:setup(opts) end)
+    end,
+    requires = {'ray-x/lsp_signature.nvim', 'williamboman/nvim-lsp-installer'},
+  },
 }
-require'nvim-lsp-installer'.on_server_ready(function(server) server:setup(lsp_opts) end)
-
-local whichkey = require("which-key")
-whichkey.setup()
-whichkey.register({
-  ["<leader>p"] = { function() telescope_builtin.find_files{hidden = true, previewer = false} end, 'find_files' },
-  ["<leader>g"] = { function() telescope_builtin.live_grep{hidden = true} end, 'live_grep' },
-  ["<leader>f"] = { function() telescope_builtin.file_browser{hidden = true, previewer = false} end, 'file_browser' },
-  ["<leader>r"] = { ':SearchSession<cr>', 'sessions' },
-  ["<leader>l"] = { ':noh<cr>', 'clear' },
-  ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
-  ["<leader>F"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
-
-  ["<leader>qs"] = { ":wq<cr>", "quit save" },
-  ["<leader>qq"] = { ":q<cr>", "quit" },
-  ["<leader>qf"] = { ":q!<cr>", "quit force" },
-  ["<leader>s"] = { ":w<cr>", "save" },
-
-  ["<leader>a"] = { function() telescope_builtin.lsp_code_actions() end, 'lsp_actions' },
-  ["<leader><tab>"] = { function() vim.lsp.buf.formatting() end, "lsp_formatting" },
-  ["<leader>d"] = { function() vim.lsp.buf.definition() end, "lsp_definition" },
-  ["<leader>D"] = { function() vim.lsp.buf.declaration() end, "lsp_declaration" },
-  ["<leader>k"] = { function() vim.lsp.buf.hover() end, "lsp_hover" },
-  ["<leader>h"] = { function() vim.lsp.buf.signature_help() end, "lsp_signature" },
-
-  ["<leader>i"] = { function() vim.lsp.buf.implementation() end, "lsp_implementation" },
-})
-whichkey.register({
-  ["<leader>c"] = { "<Plug>kommentary_visual_default", "comment" }
-}, {mode = "v"})
