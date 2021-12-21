@@ -31,6 +31,13 @@ vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
 
+vim.diagnostic.config({
+  underline = false,
+  virtual_text = false,
+  signs = true,
+  severity_sort = true,
+})
+vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float()')
 
 local function map(mods, k, a)
   if type(mods) == "string" then
@@ -104,7 +111,7 @@ require "dep" {
     end,
   },
   {
-    'Shatur/neovim-session-manager',
+    'shatur/neovim-session-manager',
     function()
       require('session_manager').setup{
         autoload_mode = require('session_manager.config').AutoloadMode.CurrentDir,
