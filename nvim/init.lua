@@ -123,8 +123,8 @@ require "dep" {
       map('n', '<C-w>', ':bd<cr>')
       map('n', '<C-k>', ':BufferLineCyclePrev<cr>')
       map('n', '<C-j>', ':BufferLineCycleNext<cr>')
-      map('n', '<C-down>', ':BufferLineMovePrev<cr>')
-      map('n', '<C-up>', ':BufferLineMoveNext<cr>')
+      map('n', '<C-S-k>', '<cmd>BufferLineMovePrev<cr>')
+      map('n', '<C-S-j>', '<cmd>BufferLineMoveNext<cr>')
       for i = 1, 5 do
         map('n', '<C-t>' .. i, ':BufferLineGoToBuffer ' .. i .. '<cr>')
       end
