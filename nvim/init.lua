@@ -86,10 +86,16 @@ require "dep" {
         rainbow = {
           enable = true,
           extended_mode = true
-        }
+        },
+        textsubjects = {
+          enable = true,
+          keymaps = {
+            ['<cr>'] = 'textsubjects-smart',
+          }
+        },
       }
     end,
-    deps = {'p00f/nvim-ts-rainbow'},
+    deps = {'p00f/nvim-ts-rainbow', 'RRethy/nvim-treesitter-textsubjects'},
   },
   {
     'ethanholz/nvim-lastplace',
