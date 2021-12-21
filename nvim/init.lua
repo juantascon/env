@@ -44,13 +44,13 @@ end
 map('n', 'H', '^')
 map('n', 'L', 'g_')
 map('n', '<C-m>', '%')
-map('n', '<C-s>', ':w<cr>')
-map('i', '<C-s>', '<esc>:w<cr>')
+map({'n', 'i'}, '<C-s>', '<cmd>w<cr>')
 map({'i', 'c'}, '<S-Insert>', '<MiddleMouse>')
+-- does not lose selection
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-map("v", "<A-j>", ":m .+1<CR>==")
-map("v", "<A-k>", ":m .-2<CR>==")
+map("v", "<c-down>", "<cmd>m .+1<CR>==")
+map("v", "<c-up>", "<cmd>m .-2<CR>==")
 map("v", "p", '"_dP')
 
 
@@ -120,13 +120,13 @@ require "dep" {
     'akinsho/bufferline.nvim',
     function()
       require'bufferline'.setup()
-      map('n', '<C-w>', ':bd<cr>')
-      map('n', '<C-k>', ':BufferLineCyclePrev<cr>')
-      map('n', '<C-j>', ':BufferLineCycleNext<cr>')
+      map('n', '<C-w>', '<cmd>bdelete<cr>')
+      map('n', '<C-k>', '<cmd>BufferLineCyclePrev<cr>')
+      map('n', '<C-j>', '<cmd>BufferLineCycleNext<cr>')
       map('n', '<C-S-k>', '<cmd>BufferLineMovePrev<cr>')
       map('n', '<C-S-j>', '<cmd>BufferLineMoveNext<cr>')
       for i = 1, 5 do
-        map('n', '<C-t>' .. i, ':BufferLineGoToBuffer ' .. i .. '<cr>')
+        map('n', '<C-t>' .. i, '<cmd>BufferLineGoToBuffer ' .. i .. '<cr>')
       end
     end,
     requires = "kyazdani42/nvim-web-devicons",
@@ -177,15 +177,15 @@ require "dep" {
         ["<leader>p"] = { function() require('telescope.builtin').find_files{hidden = true, previewer = false} end, 'find_files' },
         ["<leader>g"] = { function() require('telescope.builtin').live_grep{hidden = true} end, 'live_grep' },
         ["<leader>f"] = { function() require('telescope.builtin').file_browser{hidden = true, previewer = false} end, 'file_browser' },
-        ["<leader>r"] = { ':Telescope sessions<cr>', 'sessions' },
-        ["<leader>l"] = { ':noh<cr>', 'clear' },
+        ["<leader>r"] = { '<cmd>:SaveSession <cr><cmd>Telescope sessions<cr>', 'sessions' },
+        ["<leader>l"] = { '<cmd>noh<cr>', 'clear' },
         ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
         ["<leader>F"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
 
-        ["<leader>qs"] = { ":wq<cr>", "quit save" },
-        ["<leader>qq"] = { ":q<cr>", "quit" },
-        ["<leader>qf"] = { ":q!<cr>", "quit force" },
-        ["<leader>s"] = { ":w<cr>", "save" },
+        ["<leader>qs"] = { "<cmd>wq<cr>", "quit save" },
+        ["<leader>qq"] = { "<cmd>q<cr>", "quit" },
+        ["<leader>qf"] = { "<cmd>q!<cr>", "quit force" },
+        ["<leader>s"] = { "<cmd>w<cr>", "save" },
 
         ["<leader>a"] = { function() require('telescope.builtin').lsp_code_actions() end, 'lsp_actions' },
         ["<leader><tab>"] = { function() vim.lsp.buf.formatting() end, "lsp_formatting" },
