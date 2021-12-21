@@ -1,4 +1,6 @@
 #!/bin/sh
 vx check dunst >/dev/null || exit 1
+online || exit 1
 cd ~
-exec qutebrowser 2>&1
+exec qutebrowser --qt-flag ignore-gpu-blacklist --qt-flag enable-gpu-rasterization --qt-flag enable-accelerated-video-decode 2>&1
+# exec qutebrowser 2>&1

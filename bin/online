@@ -1,0 +1,13 @@
+#! /bin/bash
+
+function check() {
+  default=$(ip r | grep default | cut -d ' ' -f 3)
+  [ ! -z "$default" ] && ping -q -w 1 -c 1 $default > /dev/null
+}
+
+case "$1" in
+  "-b") while $(! check); do sleep 1; done ;;
+  "") check ;;
+  *) echo "usage: $0 [-b]"; exit 2 ;;
+esac
+
