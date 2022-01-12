@@ -31,26 +31,15 @@ vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
 
-local function map(mods, k, a)
-  if type(mods) == "string" then
-    mods = {mods}
-  end
-  for _, m in ipairs(mods) do
-    vim.api.nvim_set_keymap(m, k, a, { noremap = true, silent = true })
-  end
-end
-
-map('n', 'H', '^')
-map('n', 'L', 'g_')
-map('n', '<C-m>', '%')
-map({'n', 'i'}, '<C-s>', '<cmd>w<cr>')
-map({'i', 'c'}, '<S-Insert>', '<MiddleMouse>')
--- does not lose selection
-map("v", "<", "<gv")
-map("v", ">", ">gv")
-map("v", "<c-down>", "<cmd>m .+1<CR>==")
-map("v", "<c-up>", "<cmd>m .-2<CR>==")
-map("v", "p", '"_dP')
+vim.keymap.set({'n', 'v'}, '<Home>', '^')
+vim.keymap.set('i', '<Home>', '<Esc>^i')
+vim.keymap.set({'n', 'i'}, '<C-s>', '<cmd>w<cr>')
+vim.keymap.set({'i', 'c'}, '<S-Insert>', '<MiddleMouse>')
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set('n', 'dw', 'diw')
+vim.keymap.set('n', 'cw', 'ciw')
+vim.keymap.set('n', 'yw', 'yiw')
 
 
 require "dep" {
@@ -125,13 +114,13 @@ require "dep" {
     'akinsho/bufferline.nvim',
     function()
       require'bufferline'.setup()
-      map('n', '<C-w>', '<cmd>bdelete<cr>')
-      map('n', '<C-k>', '<cmd>BufferLineCyclePrev<cr>')
-      map('n', '<C-j>', '<cmd>BufferLineCycleNext<cr>')
-      map('n', '<C-S-k>', '<cmd>BufferLineMovePrev<cr>')
-      map('n', '<C-S-j>', '<cmd>BufferLineMoveNext<cr>')
+      vim.keymap.set('n', '<C-w>', '<cmd>bdelete<cr>')
+      vim.keymap.set('n', '<C-k>', '<cmd>BufferLineCyclePrev<cr>')
+      vim.keymap.set('n', '<C-j>', '<cmd>BufferLineCycleNext<cr>')
+      vim.keymap.set('n', '<C-S-k>', '<cmd>BufferLineMovePrev<cr>')
+      vim.keymap.set('n', '<C-S-j>', '<cmd>BufferLineMoveNext<cr>')
       for i = 1, 5 do
-        map('n', '<C-t>' .. i, '<cmd>BufferLineGoToBuffer ' .. i .. '<cr>')
+        vim.keymap.set('n', '<C-t>' .. i, '<cmd>BufferLineGoToBuffer ' .. i .. '<cr>')
       end
     end,
     requires = "kyazdani42/nvim-web-devicons",
@@ -183,13 +172,11 @@ require "dep" {
         ["<leader>g"] = { function() require('telescope.builtin').live_grep{hidden = true} end, 'live_grep' },
         ["<leader>f"] = { function() require('telescope.builtin').file_browser{hidden = true, previewer = false} end, 'file_browser' },
         ["<leader>r"] = { '<cmd>:SaveSession <cr><cmd>Telescope sessions<cr>', 'sessions' },
-        ["<leader>l"] = { '<cmd>noh<cr>', 'clear' },
+        ["<leader>l"] = { '<cmd>nohlsearch<cr>', 'clear' },
         ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
         ["<leader>F"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
 
-        ["<leader>qs"] = { "<cmd>wq<cr>", "quit save" },
-        ["<leader>qq"] = { "<cmd>q<cr>", "quit" },
-        ["<leader>qf"] = { "<cmd>q!<cr>", "quit force" },
+        ["<leader>q"] = { "<cmd>qa<cr>", "quit" },
         ["<leader>s"] = { "<cmd>w<cr>", "save" },
 
         ["<leader>a"] = { function() require('telescope.builtin').lsp_code_actions() end, 'lsp_actions' },
@@ -246,15 +233,6 @@ require "dep" {
           end,
         },
         mapping = {
-          -- ["<down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-          -- ["<up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-          -- ["<cr>"] = cmp.mapping.confirm({ insert = true, replace = true, select = false }),
-          -- ["<esc>"] = cmp.mapping.close(),
-          -- ["<c-e>"] = cmp.mapping.close(),
-
-          -- ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-          -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<esc>"] = cmp.mapping.close(),
           ["<cr>"] = cmp.mapping(
             cmp.mapping.confirm {
               behavior = cmp.ConfirmBehavior.Insert,
@@ -262,7 +240,6 @@ require "dep" {
             },
             { "i", "c" }
           ),
-          -- ["<cr>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.insert, select = true }),
         },
         sources = {
           {name = 'nvim_lsp'},
