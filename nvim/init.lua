@@ -213,15 +213,12 @@ require "dep" {
       local cmp = require'cmp'
       cmp.setup({
         snippet = {
-          expand = function(args)
-            require('snippy').expand_snippet(args.body)
-          end,
+          expand = function(args) return args.body; end,
         },
         mapping = {
           ["<cr>"] = cmp.mapping(
             cmp.mapping.confirm {
-              behavior = cmp.ConfirmBehavior.Insert,
-              select = true,
+              behavior = cmp.ConfirmBehavior.Replace,
             },
             { "i", "c" }
           ),
@@ -233,14 +230,12 @@ require "dep" {
         },
       })
     end,
-    deps = {'dcampos/nvim-snippy'},
-    requires = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-nvim-lua', 'hrsh7th/cmp-buffer', 'dcampos/cmp-snippy'},
+    requires = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-nvim-lua', 'hrsh7th/cmp-buffer'},
   },
   {
     'neovim/nvim-lspconfig',
     function()
       local opts = {
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
         on_attach = require('lsp_signature').on_attach,
         settings = {
           elixirLS = {
