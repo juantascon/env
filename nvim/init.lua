@@ -31,14 +31,6 @@ vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
 
-vim.diagnostic.config({
-  underline = false,
-  virtual_text = false,
-  signs = true,
-  severity_sort = true,
-})
-vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float()')
-
 local function map(mods, k, a)
   if type(mods) == "string" then
     mods = {mods}
