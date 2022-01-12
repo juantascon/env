@@ -158,7 +158,7 @@ require "dep" {
         ["<leader>p"] = { function() require('telescope.builtin').find_files{hidden = true, previewer = false} end, 'find_files' },
         ["<leader>g"] = { function() require('telescope.builtin').live_grep{hidden = true} end, 'live_grep' },
         ["<leader>f"] = { function() require('telescope.builtin').file_browser{hidden = true, previewer = false} end, 'file_browser' },
-        ["<leader>r"] = { '<cmd>:SaveSession <cr><cmd>Telescope sessions<cr>', 'sessions' },
+        ["<leader>r"] = { '<cmd>SessionManager load_session<cr>', 'sessions' },
         ["<leader>l"] = { '<cmd>nohlsearch<cr>', 'clear' },
         ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
         ["<leader>F"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
@@ -166,7 +166,7 @@ require "dep" {
         ["<leader>q"] = { "<cmd>qa<cr>", "quit" },
         ["<leader>s"] = { "<cmd>w<cr>", "save" },
 
-        ["<leader>a"] = { function() require('telescope.builtin').lsp_code_actions() end, 'lsp_actions' },
+        ["<leader>a"] = { function() vim.lsp.buf.code_action() end, 'lsp_actions' },
         ["<leader><tab>"] = { function() vim.lsp.buf.formatting() end, "lsp_formatting" },
         ["<leader>d"] = { function() vim.lsp.buf.definition() end, "lsp_definition" },
         ["<leader>D"] = { function() vim.lsp.buf.declaration() end, "lsp_declaration" },
@@ -196,9 +196,9 @@ require "dep" {
         }
       }
       telescope.load_extension('fzf')
-      telescope.load_extension('sessions')
+      telescope.load_extension("ui-select")
     end,
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = {'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-ui-select.nvim'},
   },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
