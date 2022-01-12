@@ -47,12 +47,6 @@ require "dep" {
   'chiyadev/dep',
   'editorconfig/editorconfig-vim',
   'ggandor/lightspeed.nvim',
-  -- {
-  --   'RRethy/nvim-base16',
-  --   function()
-  --     require'base16-colorscheme'.setup('seti')
-  --   end,
-  -- },
   {
     'marko-cerovac/material.nvim',
     function()
@@ -146,13 +140,6 @@ require "dep" {
           changedelete = { hl = 'GitGutterChange', text = '~' },
         },
       }
-      -- require'gitsigns'.setup {
-      --   signs = {
-      --     add = {hl = "DiffAdded"},
-      --     change = {hl = "SignColumn"},
-      --     delete = {hl = "DiffRemoved"}
-      --   }
-      -- }
     end,
     requires = {'nvim-lua/plenary.nvim'},
   },
@@ -195,7 +182,6 @@ require "dep" {
 
     end,
   },
-  -- 'nvim-lua/popup.nvim',
   {
     'nvim-telescope/telescope.nvim',
     function()
@@ -206,7 +192,6 @@ require "dep" {
             fuzzy = true,
             override_generic_sorter = true,
             override_file_sorter = true,
-            -- case_mode = "smart_case"
           }
         }
       }
@@ -246,10 +231,6 @@ require "dep" {
           {name = 'nvim_lua'},
           {name = 'buffer', keyword_length = 4},
         },
-        experimental = {
-          native_menu = false,
-        },
-        -- preselect = cmp.PreselectMode.None,
       })
     end,
     deps = {'dcampos/nvim-snippy'},
