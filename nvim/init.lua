@@ -10,7 +10,7 @@ end
 vim.cmd("packadd dep")
 
 
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.writebackup = false
@@ -31,37 +31,37 @@ vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
 
-vim.keymap.set({'n', 'v'}, '<Home>', '^')
-vim.keymap.set('i', '<Home>', '<Esc>^i')
-vim.keymap.set({'n', 'i'}, '<C-s>', '<cmd>w<cr>')
-vim.keymap.set({'i', 'c'}, '<S-Insert>', '<MiddleMouse>')
+vim.keymap.set({"n", "v"}, "<Home>", "^")
+vim.keymap.set("i", "<Home>", "<Esc>^i")
+vim.keymap.set({"n", "i"}, "<C-s>", "<cmd>w<cr>")
+vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
-vim.keymap.set('n', 'dw', 'diw')
-vim.keymap.set('n', 'cw', 'ciw')
-vim.keymap.set('n', 'yw', 'yiw')
+vim.keymap.set("n", "dw", "diw")
+vim.keymap.set("n", "cw", "ciw")
+vim.keymap.set("n", "yw", "yiw")
 
 
 require "dep" {
   sync = "always",
-  'chiyadev/dep',
-  'editorconfig/editorconfig-vim',
-  'ggandor/lightspeed.nvim',
+  "chiyadev/dep",
+  "editorconfig/editorconfig-vim",
+  "ggandor/lightspeed.nvim",
   {
-    'marko-cerovac/material.nvim',
+    "marko-cerovac/material.nvim",
     function()
       vim.g.material_style = "darker"
       vim.cmd("colorscheme material")
     end,
   },
   {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     function()
-      require'nvim-treesitter.configs'.setup {
+      require"nvim-treesitter.configs".setup {
         highlight = {
           enable = true,
         },
-        ensure_installed = 'all',
+        ensure_installed = "all",
         indent = {
           enable = true
         },
@@ -72,97 +72,97 @@ require "dep" {
         textsubjects = {
           enable = true,
           keymaps = {
-            ['<cr>'] = 'textsubjects-smart',
+            ["<cr>"] = "textsubjects-smart",
           }
         },
       }
     end,
-    deps = {'p00f/nvim-ts-rainbow', 'RRethy/nvim-treesitter-textsubjects'},
+    deps = {"p00f/nvim-ts-rainbow", "RRethy/nvim-treesitter-textsubjects"},
   },
   {
-    'ethanholz/nvim-lastplace',
+    "ethanholz/nvim-lastplace",
     function()
-      require('nvim-lastplace').setup()
+      require("nvim-lastplace").setup()
     end,
   },
   {
-    'shatur/neovim-session-manager',
+    "shatur/neovim-session-manager",
     function()
-      require('session_manager').setup{
-        autoload_mode = require('session_manager.config').AutoloadMode.CurrentDir,
+      require("session_manager").setup{
+        autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
         autosave_only_in_session = true,
       }
     end,
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = {"nvim-lua/plenary.nvim"},
   },
   {
-    'b3nj5m1n/kommentary',
+    "b3nj5m1n/kommentary",
     function()
       require("kommentary.config").configure_language("default", {prefer_single_line_comments = true})
     end,
   },
   {
-    'akinsho/bufferline.nvim',
+    "akinsho/bufferline.nvim",
     function()
-      require'bufferline'.setup()
-      vim.keymap.set('n', '<C-w>', '<cmd>bdelete<cr>')
-      vim.keymap.set('n', '<C-k>', '<cmd>BufferLineCyclePrev<cr>')
-      vim.keymap.set('n', '<C-j>', '<cmd>BufferLineCycleNext<cr>')
-      vim.keymap.set('n', '<C-S-k>', '<cmd>BufferLineMovePrev<cr>')
-      vim.keymap.set('n', '<C-S-j>', '<cmd>BufferLineMoveNext<cr>')
+      require"bufferline".setup()
+      vim.keymap.set("n", "<C-w>", "<cmd>bdelete<cr>")
+      vim.keymap.set("n", "<C-k>", "<cmd>BufferLineCyclePrev<cr>")
+      vim.keymap.set("n", "<C-j>", "<cmd>BufferLineCycleNext<cr>")
+      vim.keymap.set("n", "<C-S-k>", "<cmd>BufferLineMovePrev<cr>")
+      vim.keymap.set("n", "<C-S-j>", "<cmd>BufferLineMoveNext<cr>")
       for i = 1, 5 do
-        vim.keymap.set('n', '<C-t>' .. i, '<cmd>BufferLineGoToBuffer ' .. i .. '<cr>')
+        vim.keymap.set("n", "<C-t>" .. i, "<cmd>BufferLineGoToBuffer " .. i .. "<cr>")
       end
     end,
     requires = "kyazdani42/nvim-web-devicons",
   },
   {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     function()
-      require('lualine').setup {
-        options = {theme = 'material-nvim'},
-        sections = {lualine_c = {{'filename', path = 1}}},
+      require("lualine").setup {
+        options = {theme = "material-nvim"},
+        sections = {lualine_c = {{"filename", path = 1}}},
       }
     end,
   },
   {
-    'lewis6991/gitsigns.nvim',
+    "lewis6991/gitsigns.nvim",
     function()
-      require('gitsigns').setup {
+      require("gitsigns").setup {
         signs = {
-          add = { hl = 'GitGutterAdd', text = '+' },
-          change = { hl = 'GitGutterChange', text = '~' },
-          delete = { hl = 'GitGutterDelete', text = '_' },
-          topdelete = { hl = 'GitGutterDelete', text = '‾' },
-          changedelete = { hl = 'GitGutterChange', text = '~' },
+          add = { hl = "GitGutterAdd", text = "+" },
+          change = { hl = "GitGutterChange", text = "~" },
+          delete = { hl = "GitGutterDelete", text = "_" },
+          topdelete = { hl = "GitGutterDelete", text = "‾" },
+          changedelete = { hl = "GitGutterChange", text = "~" },
         },
       }
     end,
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = {"nvim-lua/plenary.nvim"},
   },
   {
-    'karb94/neoscroll.nvim',
+    "karb94/neoscroll.nvim",
     function()
-      require'neoscroll'.setup()
+      require"neoscroll".setup()
     end,
   },
   {
-    'folke/which-key.nvim',
+    "folke/which-key.nvim",
     function()
       local whichkey = require("which-key")
       whichkey.setup()
       whichkey.register({
-        ["<leader>p"] = { function() require('fzf-lua').files() end, 'find_files' },
-        ["<leader>g"] = { function() require('fzf-lua').live_grep_native() end, 'live_grep' },
-        ["<leader>r"] = { '<cmd>SessionManager load_session<cr>', 'sessions' },
-        ["<leader>l"] = { '<cmd>nohlsearch<cr>', 'clear' },
+        ["<leader>p"] = { function() require("fzf-lua").files() end, "find_files" },
+        ["<leader>g"] = { function() require("fzf-lua").live_grep_native() end, "live_grep" },
+        ["<leader>r"] = { "<cmd>SessionManager load_session<cr>", "sessions" },
+        ["<leader>l"] = { "<cmd>nohlsearch<cr>", "clear" },
         ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
         ["<leader>F"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
 
         ["<leader>q"] = { "<cmd>qa<cr>", "quit" },
         ["<leader>s"] = { "<cmd>w<cr>", "save" },
 
-        ["<leader>a"] = { function() vim.lsp.buf.code_action() end, 'lsp_actions' },
+        ["<leader>a"] = { function() vim.lsp.buf.code_action() end, "lsp_actions" },
         ["<leader><tab>"] = { function() vim.lsp.buf.formatting() end, "lsp_formatting" },
         ["<leader>d"] = { function() vim.lsp.buf.definition() end, "lsp_definition" },
         ["<leader>D"] = { function() vim.lsp.buf.declaration() end, "lsp_declaration" },
@@ -178,9 +178,9 @@ require "dep" {
     end,
   },
   {
-    'ibhagwan/fzf-lua',
+    "ibhagwan/fzf-lua",
     function()
-      require'fzf-lua'.setup({
+      require"fzf-lua".setup({
         files = {
           fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git"
         }
@@ -188,15 +188,15 @@ require "dep" {
     end,
   },
   {
-    'stevearc/dressing.nvim',
+    "stevearc/dressing.nvim",
     function()
-      require('dressing').setup({ select = { backend = { "fzf" }}})
+      require("dressing").setup({ select = { backend = { "fzf" }}})
     end,
   },
   {
-    'hrsh7th/nvim-cmp',
+    "hrsh7th/nvim-cmp",
     function()
-      local cmp = require'cmp'
+      local cmp = require"cmp"
       cmp.setup({
         snippet = {
           expand = function(args) return args.body; end,
@@ -210,34 +210,34 @@ require "dep" {
           ),
         },
         sources = {
-          {name = 'nvim_lsp'},
-          {name = 'nvim_lua'},
-          {name = 'buffer', keyword_length = 4},
+          {name = "nvim_lsp"},
+          {name = "nvim_lua"},
+          {name = "buffer", keyword_length = 4},
         },
       })
     end,
-    requires = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-nvim-lua', 'hrsh7th/cmp-buffer'},
+    requires = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-buffer"},
   },
   {
-    'neovim/nvim-lspconfig',
+    "neovim/nvim-lspconfig",
     function()
       local opts = {
-        on_attach = require('lsp_signature').on_attach,
+        on_attach = require("lsp_signature").on_attach,
         settings = {
           elixirLS = {
             dialyzerEnabled = false,
           },
           Lua = {
-            runtime = {version = 'LuaJIT'},
-            diagnostics = {globals = {'vim'}},
+            runtime = {version = "LuaJIT"},
+            diagnostics = {globals = {"vim"}},
             workspace = {library = vim.api.nvim_get_runtime_file("", true)},
             telemetry = {enable = false},
             completion = {autoRequire = false},
           }
         }
       }
-      require('nvim-lsp-installer').on_server_ready(function(server) server:setup(opts) end)
+      require("nvim-lsp-installer").on_server_ready(function(server) server:setup(opts) end)
     end,
-    requires = {'ray-x/lsp_signature.nvim', 'williamboman/nvim-lsp-installer'},
+    requires = {"ray-x/lsp_signature.nvim", "williamboman/nvim-lsp-installer"},
   },
 }
