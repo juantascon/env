@@ -11,7 +11,6 @@ vim.cmd("packadd dep")
 
 
 vim.g.mapleader = ' '
-vim.opt.timeoutlen = 250
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.writebackup = false
@@ -23,10 +22,11 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.updatetime = 250
+vim.opt.timeoutlen = 250
 vim.opt.undofile = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-vim.opt.scrolloff = 999
+vim.opt.scrolloff = 10
 vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
@@ -98,9 +98,7 @@ require "dep" {
   {
     'b3nj5m1n/kommentary',
     function()
-      local kommentary_config = require("kommentary.config")
-      kommentary_config.configure_language("default", {prefer_single_line_comments = true})
-      kommentary_config.configure_language("elixir", {single_line_comment_string = "#"})
+      require("kommentary.config").configure_language("default", {prefer_single_line_comments = true})
     end,
   },
   {
@@ -171,13 +169,12 @@ require "dep" {
         ["<leader>k"] = { function() vim.lsp.buf.hover() end, "lsp_hover" },
         ["<leader>h"] = { function() vim.lsp.buf.signature_help() end, "lsp_signature" },
         ["<leader>i"] = { function() vim.lsp.buf.implementation() end, "lsp_implementation" },
-        -- buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-        -- buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+        ["<leader>n"] = { function() vim.lsp.buf.rename() end, "lsp_rename" },
+        ["<leader>e"] = { function() vim.lsp.buf.references() end, "lsp_references" },
       })
       whichkey.register({
         ["<leader>c"] = { "<Plug>kommentary_visual_default", "comment" },
       }, {mode = "v"})
-
     end,
   },
   {
@@ -207,7 +204,7 @@ require "dep" {
         mapping = {
           ["<cr>"] = cmp.mapping(
             cmp.mapping.confirm {
-              behavior = cmp.ConfirmBehavior.Replace,
+              behavior = cmp.ConfirmBehavior.Insert,
             },
             { "i", "c" }
           ),
