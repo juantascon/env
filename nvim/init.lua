@@ -93,7 +93,6 @@ require "dep" {
         autosave_only_in_session = true,
       }
     end,
-    deps = {'nvim-telescope/telescope.nvim'},
     requires = {'nvim-lua/plenary.nvim'},
   },
   {
@@ -155,9 +154,8 @@ require "dep" {
       local whichkey = require("which-key")
       whichkey.setup()
       whichkey.register({
-        ["<leader>p"] = { function() require('telescope.builtin').find_files{hidden = true, previewer = false} end, 'find_files' },
-        ["<leader>g"] = { function() require('telescope.builtin').live_grep{hidden = true} end, 'live_grep' },
-        ["<leader>f"] = { function() require('telescope.builtin').file_browser{hidden = true, previewer = false} end, 'file_browser' },
+        ["<leader>p"] = { function() require('fzf-lua').files() end, 'find_files' },
+        ["<leader>g"] = { function() require('fzf-lua').live_grep_native() end, 'live_grep' },
         ["<leader>r"] = { '<cmd>SessionManager load_session<cr>', 'sessions' },
         ["<leader>l"] = { '<cmd>nohlsearch<cr>', 'clear' },
         ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
@@ -183,29 +181,20 @@ require "dep" {
     end,
   },
   {
-    'nvim-telescope/telescope.nvim',
+    'ibhagwan/fzf-lua',
     function()
-      local telescope = require('telescope')
-      telescope.setup {
-        extensions = {
-          fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-          }
+      require'fzf-lua'.setup({
+        files = {
+          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git"
         }
-      }
-      telescope.load_extension('fzf')
-      telescope.load_extension("ui-select")
+      })
     end,
-    requires = {'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-ui-select.nvim'},
   },
   {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    config = function()
-      os.execute("make")
+    'stevearc/dressing.nvim',
+    function()
+      require('dressing').setup({ select = { backend = { "fzf" }}})
     end,
-    deps = {'nvim-telescope/telescope.nvim'},
   },
   {
     'hrsh7th/nvim-cmp',
