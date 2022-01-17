@@ -46,7 +46,13 @@ require "dep" {
   sync = "always",
   "chiyadev/dep",
   "editorconfig/editorconfig-vim",
-  "ggandor/lightspeed.nvim",
+  {
+    "rlane/pounce.nvim",
+    function()
+      require"pounce".setup { accept_keys = "12345" }
+      vim.keymap.set({"n", "v"}, "s", "<cmd>Pounce<cr>")
+    end,
+  },
   {
     "marko-cerovac/material.nvim",
     function()
