@@ -13,3 +13,4 @@ export BROWSER=b
 export PAGER=bat
 
 xdg-mkdirs
+[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
