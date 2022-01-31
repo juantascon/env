@@ -8,7 +8,7 @@
   # %n  progress value if set without any extra characters
   # %%  Literal %
   format = "%s %p \n%b"
-  font = Input Mono 18
+  font = JetBrainsMono Nerd Font Mono 18
   icon_path = /usr/share/icons/Adwaita/48x48/status/:/usr/share/icons/Adwaita/48x48/devices/:/usr/share/icons/Adwaita/48x48/legacy/
   max_icon_size = 48
   width = (0, 800)
