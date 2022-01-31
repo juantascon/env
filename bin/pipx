@@ -1,0 +1,2 @@
+#!/bin/bash
+PIPX_HOME=$HOME/.data/pipx PIPX_BIN_DIR=$PIPX_HOME/bin exec /usr/bin/pipx "$@"

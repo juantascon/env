@@ -1,4 +1,4 @@
-set -x PATH ~/env/bin ~/.local/bin /usr/bin
+set -x PATH ~/env/bin /usr/bin
 set -x LANG en_US.UTF-8
 set -x TERM xterm-256color
 
