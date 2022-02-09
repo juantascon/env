@@ -217,18 +217,18 @@ require "dep" {
         },
         sources = {
           {name = "nvim_lsp"},
+          {name = "nvim_lsp_signature_help"},
           {name = "nvim_lua"},
           {name = "buffer", keyword_length = 4},
         },
       })
     end,
-    requires = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-buffer"},
+    requires = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp-signature-help"},
   },
   {
     "neovim/nvim-lspconfig",
     function()
       local opts = {
-        on_attach = require("lsp_signature").on_attach,
         settings = {
           elixirLS = {
             dialyzerEnabled = false,
@@ -244,6 +244,6 @@ require "dep" {
       }
       require("nvim-lsp-installer").on_server_ready(function(server) server:setup(opts) end)
     end,
-    requires = {"ray-x/lsp_signature.nvim", "williamboman/nvim-lsp-installer"},
+    requires = {"williamboman/nvim-lsp-installer"},
   },
 }
