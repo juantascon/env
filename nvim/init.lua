@@ -128,7 +128,6 @@ require "dep" {
     "nvim-lualine/lualine.nvim",
     function()
       require("lualine").setup {
-        options = {theme = "material-nvim"},
         sections = {lualine_c = {{"filename", path = 1}}},
       }
     end,
@@ -193,12 +192,7 @@ require "dep" {
           fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git"
         }
       })
-    end,
-  },
-  {
-    "stevearc/dressing.nvim",
-    function()
-      require("dressing").setup({ select = { backend = { "fzf" }}})
+      require"fzf-lua".register_ui_select()
     end,
   },
   {
