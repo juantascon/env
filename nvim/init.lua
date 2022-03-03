@@ -47,7 +47,7 @@ vim.keymap.set("n", "yw", "yiw")
 require "dep" {
   sync = "always",
   "chiyadev/dep",
-  "editorconfig/editorconfig-vim",
+  "gpanders/editorconfig.nvim",
   {
     "rlane/pounce.nvim",
     function()
