@@ -248,4 +248,11 @@ require "dep" {
     end,
     requires = {"williamboman/nvim-lsp-installer"},
   },
+  {
+    "folke/trouble.nvim",
+    function()
+      require("trouble").setup {}
+    end,
+    requires = { "kyazdani42/nvim-web-devicons"},
+  },
 }
