@@ -13,6 +13,7 @@ set -x EDITOR vi
 set -x BROWSER b
 set -x PAGER bat
 
+set -x FREETYPE_PROPERTIES "truetype:interpreter-version=38"
 set -u fish_greeting #makes fish silent
 
 xdg-mkdirs
