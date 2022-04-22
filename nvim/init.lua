@@ -20,6 +20,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.laststatus = 3
 vim.opt.cursorline = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 250
@@ -128,6 +129,7 @@ require "dep" {
     "nvim-lualine/lualine.nvim",
     function()
       require("lualine").setup {
+        options = {globalstatus = true},
         sections = {lualine_c = {{"filename", path = 1}}},
       }
     end,
