@@ -81,7 +81,8 @@ require "dep" {
         textsubjects = {
           enable = true,
           keymaps = {
-            ["<cr>"] = "textsubjects-smart",
+            ["s"] = "textsubjects-smart",
+            ["o"] = "textsubjects-container-outer",
           }
         },
       }
@@ -115,8 +116,8 @@ require "dep" {
     function()
       require"bufferline".setup()
       vim.keymap.set("n", "<C-w>", "<cmd>bdelete<cr>")
-      vim.keymap.set("n", "<C-k>", "<cmd>BufferLineCyclePrev<cr>")
-      vim.keymap.set("n", "<C-j>", "<cmd>BufferLineCycleNext<cr>")
+      vim.keymap.set("n", "<C-k>", "<cmd>bprevious<cr>")
+      vim.keymap.set("n", "<C-j>", "<cmd>bnext<cr>")
       vim.keymap.set("n", "<C-S-k>", "<cmd>BufferLineMovePrev<cr>")
       vim.keymap.set("n", "<C-S-j>", "<cmd>BufferLineMoveNext<cr>")
       for i = 1, 5 do
@@ -167,6 +168,11 @@ require "dep" {
         ["<leader>f"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
         ["<leader>l"] = { "<cmd>nohlsearch<cr>", "clear" },
         ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
+        ["<leader>n"] = { "<cmd>cnext<cr>", "quickfix_next" },
+        ["<leader>N"] = { "<cmd>cprev<cr>", "quickfix_prev" },
+        ["<leader>gg"] = { "<cmd>Gitsigns preview_hunk<cr>", "git_preview" },
+        ["<leader>gn"] = { "<cmd>Gitsigns next_hunk<cr>", "git_next" },
+        ["<leader>gp"] = { "<cmd>Gitsigns prev_hunk<cr>", "git_prev" },
         ["<leader>xx"] = { "<cmd>TroubleToggle<cr>", "trouble_toggle" },
         ["<leader>xd"] = { "<cmd>Trouble workspace_diagnostics<cr>", "workspace_diagnostics" },
         ["<leader>xq"] = { "<cmd>Trouble quickfix<cr>", "quickfix" },
@@ -212,12 +218,9 @@ require "dep" {
           expand = function(args) return args.body; end,
         },
         mapping = {
-          ["<cr>"] = cmp.mapping(
-            cmp.mapping.confirm {
-              behavior = cmp.ConfirmBehavior.Insert,
-            },
-            { "i", "c" }
-          ),
+          ["<cr>"] = cmp.mapping(cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Insert}), { "i", "c" }),
+          ["<down>"] = cmp.mapping(cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}), {"i", "c"}),
+          ["<up>"] = cmp.mapping(cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}), {"i", "c"}),
         },
         sources = {
           {name = "nvim_lsp"},
