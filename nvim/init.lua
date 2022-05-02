@@ -235,11 +235,10 @@ require "dep" {
   {
     "neovim/nvim-lspconfig",
     function()
-      local opts = {
+      require("nvim-lsp-installer").setup({})
+      local lspconfig = require("lspconfig")
+      lspconfig.sumneko_lua.setup({
         settings = {
-          elixirLS = {
-            dialyzerEnabled = false,
-          },
           Lua = {
             runtime = {version = "LuaJIT"},
             diagnostics = {globals = {"vim"}},
@@ -248,8 +247,17 @@ require "dep" {
             completion = {autoRequire = false},
           }
         }
-      }
-      require("nvim-lsp-installer").on_server_ready(function(server) server:setup(opts) end)
+      })
+      lspconfig.elixirls.setup({
+        settings = {
+          elixirLS = {
+            dialyzerEnabled = false,
+          }
+        }
+      })
+      lspconfig.erlangls.setup {}
+      lspconfig.bashls.setup {}
+      lspconfig.jsonls.setup {}
     end,
     requires = {"williamboman/nvim-lsp-installer"},
   },
