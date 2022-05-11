@@ -45,6 +45,7 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "dw", "diw")
 vim.keymap.set("n", "cw", "ciw")
 vim.keymap.set("n", "yw", "yiw")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 
 require "dep" {
@@ -116,12 +117,12 @@ require "dep" {
   {
     "akinsho/bufferline.nvim",
     function()
-      require"bufferline".setup()
-      vim.keymap.set("n", "<C-w>", "<cmd>bdelete<cr>")
-      vim.keymap.set("n", "<C-k>", "<cmd>bprevious<cr>")
-      vim.keymap.set("n", "<C-j>", "<cmd>bnext<cr>")
-      vim.keymap.set("n", "<C-S-k>", "<cmd>BufferLineMovePrev<cr>")
-      vim.keymap.set("n", "<C-S-j>", "<cmd>BufferLineMoveNext<cr>")
+      require"bufferline".setup({})
+      vim.keymap.set({"n", "t"}, "<C-w>", "<cmd>bdelete<cr>")
+      vim.keymap.set({"n", "t"}, "<C-k>", "<cmd>bprevious<cr>")
+      vim.keymap.set({"n", "t"}, "<C-j>", "<cmd>bnext<cr>")
+      vim.keymap.set({"n", "t"}, "<C-S-k>", "<cmd>BufferLineMovePrev<cr>")
+      vim.keymap.set({"n", "t"}, "<C-S-j>", "<cmd>BufferLineMoveNext<cr>")
       for i = 1, 5 do
         vim.keymap.set("n", "<C-t>" .. i, "<cmd>BufferLineGoToBuffer " .. i .. "<cr>")
       end
