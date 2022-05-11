@@ -36,6 +36,8 @@ vim.opt.listchars:append("tab:➜ ")
 
 vim.keymap.set({"n", "v"}, "<Home>", "^")
 vim.keymap.set("i", "<Home>", "<Esc>^i")
+vim.keymap.set("n", "cn", "*``cgn")
+vim.keymap.set("x", "cn", [["y/\\V\<C-r>=escape(@\", '/')\<CR>\<CR>" . "``cgn"]], { expr = true })
 vim.keymap.set({"n", "i"}, "<C-s>", "<cmd>w<cr>")
 vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set("v", "<", "<gv")
