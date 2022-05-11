@@ -267,4 +267,10 @@ require "dep" {
     end,
     requires = { "kyazdani42/nvim-web-devicons"},
   },
+  {
+    "j-hui/fidget.nvim",
+    function()
+      require("fidget").setup {}
+    end,
+  },
 }
