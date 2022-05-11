@@ -124,7 +124,7 @@ require "dep" {
       vim.keymap.set({"n", "t"}, "<C-S-k>", "<cmd>BufferLineMovePrev<cr>")
       vim.keymap.set({"n", "t"}, "<C-S-j>", "<cmd>BufferLineMoveNext<cr>")
       for i = 1, 5 do
-        vim.keymap.set("n", "<C-t>" .. i, "<cmd>BufferLineGoToBuffer " .. i .. "<cr>")
+        vim.keymap.set({"n", "t"}, "<C-" .. i .. ">", "<cmd>BufferLineGoToBuffer " .. i .. "<cr>")
       end
     end,
     requires = "kyazdani42/nvim-web-devicons",
