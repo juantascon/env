@@ -154,9 +154,9 @@ require "dep" {
     requires = {"nvim-lua/plenary.nvim"},
   },
   {
-    "karb94/neoscroll.nvim",
+    "declancm/cinnamon.nvim",
     function()
-      require"neoscroll".setup()
+      require"cinnamon".setup()
     end,
   },
   {
