@@ -108,9 +108,9 @@ require "dep" {
     requires = {"nvim-lua/plenary.nvim"},
   },
   {
-    "b3nj5m1n/kommentary",
+    "numToStr/Comment.nvim",
     function()
-      require("kommentary.config").configure_language("default", {prefer_single_line_comments = true})
+      require("Comment").setup()
     end,
   },
   {
@@ -169,7 +169,6 @@ require "dep" {
         ["<leader>r"] = { "<cmd>SessionManager load_session<cr>", "sessions" },
         ["<leader>f"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
         ["<leader>l"] = { "<cmd>nohlsearch<cr>", "clear" },
-        ["<leader>c"] = { "<Plug>kommentary_line_default", "comment" },
         ["<leader>n"] = { "<cmd>cnext<cr>", "quickfix_next" },
         ["<leader>N"] = { "<cmd>cprev<cr>", "quickfix_prev" },
         ["<leader>gg"] = { "<cmd>Gitsigns preview_hunk<cr>", "git_preview" },
@@ -195,9 +194,6 @@ require "dep" {
         ["<leader>dn"] = { function() vim.lsp.buf.rename() end, "lsp_rename" },
         ["<leader>de"] = { function() vim.lsp.buf.references() end, "lsp_references" },
       })
-      whichkey.register({
-        ["<leader>c"] = { "<Plug>kommentary_visual_default", "comment" },
-      }, {mode = "v"})
     end,
   },
   {
