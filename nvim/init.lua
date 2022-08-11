@@ -43,7 +43,7 @@ vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "dw", "diw")
-vim.keymap.set("n", "cw", "ciw")
+vim.keymap.set("n", "cw", [["_ciw]])
 vim.keymap.set("n", "yw", "yiw")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
