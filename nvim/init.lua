@@ -225,8 +225,18 @@ require "dep" {
           {name = "buffer", keyword_length = 4},
         },
       })
+      cmp.setup.cmdline(':', {
+        sources = {
+          { name = 'cmdline' }
+        }
+      })
+      cmp.setup.cmdline('/', {
+        sources = {
+          { name = 'buffer' }
+        }
+      })
     end,
-    requires = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp-signature-help"},
+    requires = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-buffer", "hrsh7th/cmp-cmdline", "hrsh7th/cmp-nvim-lsp-signature-help"},
   },
   {
     "neovim/nvim-lspconfig",
