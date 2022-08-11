@@ -130,12 +130,9 @@ require "dep" {
     requires = "kyazdani42/nvim-web-devicons",
   },
   {
-    "nvim-lualine/lualine.nvim",
+    "ojroques/nvim-hardline",
     function()
-      require("lualine").setup {
-        options = {globalstatus = true},
-        sections = {lualine_c = {{"filename", path = 1}}},
-      }
+      require("hardline").setup()
     end,
   },
   {
