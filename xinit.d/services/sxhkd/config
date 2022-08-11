@@ -5,10 +5,7 @@ XF86AudioPlay
   playerctl -a play-pause; noti.sh playerctl
 
 XF86Audio{RaiseVolume,LowerVolume,Mute}
-  ponymix {increase 3,decrease 3,toggle}; noti.sh volume
-
-super + {Up,Down,0}
-  ponymix {increase 3,decrease 3,toggle}; noti.sh volume
+  pulsemixer {--change-volume +2,--change-volume -2,--toggle-mute}; noti.sh volume
 
 XF86KbdBrightness{Down,Up}
   brillo -{U,A} 2; noti.sh brightness
