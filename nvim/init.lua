@@ -231,7 +231,8 @@ require "dep" {
   {
     "neovim/nvim-lspconfig",
     function()
-      require("nvim-lsp-installer").setup({})
+      require("mason").setup({})
+      require("mason-lspconfig").setup()
       local lspconfig = require("lspconfig")
       lspconfig.sumneko_lua.setup({
         settings = {
@@ -255,7 +256,7 @@ require "dep" {
       lspconfig.bashls.setup {}
       lspconfig.jsonls.setup {}
     end,
-    requires = {"williamboman/nvim-lsp-installer"},
+    requires = {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"},
   },
   {
     "folke/trouble.nvim",
