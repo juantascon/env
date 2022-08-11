@@ -199,7 +199,7 @@ require "dep" {
     function()
       require"fzf-lua".setup({
         files = {
-          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git"
+          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude _build --exclude .elixir_ls --exclude __pycache__"
         }
       })
       require"fzf-lua".register_ui_select()
