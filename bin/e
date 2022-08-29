@@ -1,2 +1,2 @@
-#! /bin/bash
-exec gnvim "$@"
+#! /bin/sh
+exec env -C "$1" kitty -c ~/env/nvim/kitty.conf --class nvim vi
