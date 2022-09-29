@@ -128,7 +128,6 @@ require "dep" {
         vim.keymap.set({"n", "t"}, "<C-" .. i .. ">", "<cmd>BufferLineGoToBuffer " .. i .. "<cr>")
       end
     end,
-    requires = "kyazdani42/nvim-web-devicons",
   },
   {
     "ojroques/nvim-hardline",
@@ -285,7 +284,6 @@ require "dep" {
     function()
       require("trouble").setup {}
     end,
-    requires = { "kyazdani42/nvim-web-devicons"},
   },
   {
     "j-hui/fidget.nvim",
