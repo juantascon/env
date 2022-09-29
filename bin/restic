@@ -1,0 +1,25 @@
+#! /bin/bash
+
+set -e
+
+repo="$1"
+shift
+
+case "$repo" in
+  "juan"|"data")
+    export B2_ACCOUNT_ID=$(pfs get backblaze.com key.name)
+    export B2_ACCOUNT_KEY=$(pfs get backblaze.com key)
+    export RESTIC_REPOSITORY=$(pfs get restic.$repo repo)
+    export RESTIC_PASSWORD=$(pfs get restic.$repo pass)
+    source_dir=$(pfs get restic.$repo source)
+
+    if [[ "$@" == "" ]]; then
+      exec /usr/bin/restic -v backup --exclude-file ${source_dir}/.ignore -x ${source_dir}
+    else
+      exec /usr/bin/restic "$@"
+    fi
+    ;;
+  "") echo "usage: $0 <juan|data> [restic_opts]" && exit 1;;
+  *) echo "repo not found: $repo" && exit 1;;
+esac
+
