@@ -153,7 +153,10 @@ require "dep" {
   {
     "declancm/cinnamon.nvim",
     function()
-      require"cinnamon".setup()
+      require"cinnamon".setup({
+        scroll_limit = 40,
+        default_delay = 2,
+      })
     end,
   },
   {
