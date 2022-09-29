@@ -1,0 +1,2 @@
+#!/bin/sh
+exec earlyoom -p 2>&1
