@@ -1,13 +1,13 @@
 #! /bin/bash
 
 function check() {
-  default=$(ip r | grep default | cut -d ' ' -f 3)
+  default=$(ip r | grep default | cut -d ' ' -f 3 | head -n 1)
   [ ! -z "$default" ] && ping -q -w 1 -c 1 $default > /dev/null
 }
 
 case "$1" in
-  "-b") while $(! check); do sleep 1; done ;;
+  "-w"|"--wait") while $(! check); do sleep 1; done ;;
   "") check ;;
-  *) echo "usage: $0 [-b]"; exit 2 ;;
+  *) echo "usage: $0 [-w|--wait]"; exit 2 ;;
 esac
 
