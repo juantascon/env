@@ -11,6 +11,7 @@ vim.cmd("packadd dep")
 
 
 vim.g.mapleader = " "
+vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h17"
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.writebackup = false
