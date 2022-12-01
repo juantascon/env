@@ -16,11 +16,9 @@
   b = branch -vv
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --date=short
   f = fetch
-[includeIf "gitdir:~/ath/"]
-  path = ~/env/git/ath
-[includeIf "gitdir:~/dev/"]
+[includeIf "gitdir:~/q/"]
+  path = ~/env/git/q
+[includeIf "gitdir:~/env/"]
   path = ~/env/git/hx
 [includeIf "gitdir:~/my/"]
-  path = ~/env/git/hx
-[includeIf "gitdir:~/infra/"]
   path = ~/env/git/hx
