@@ -151,6 +151,13 @@ require "dep" {
     requires = {"nvim-lua/plenary.nvim"},
   },
   {
+    "ruifm/gitlinker.nvim",
+    function()
+      require"gitlinker".setup()
+    end,
+    requires = {"nvim-lua/plenary.nvim"},
+  },
+  {
     "declancm/cinnamon.nvim",
     function()
       require"cinnamon".setup({
