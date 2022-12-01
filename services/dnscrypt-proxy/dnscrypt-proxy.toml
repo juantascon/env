@@ -7,7 +7,6 @@ block_ipv6 = true
 ignore_system_dns = true
 bootstrap_resolvers = ['9.9.9.9:53', '8.8.8.8:53', '1.1.1.1:53']
 server_names = ['quad9-dnscrypt-ip4-nofilter-pri', 'scaleway-fr', 'google', 'cloudflare', 'hdns', 'libredns', 'bcn-doh', 'dnscrypt.be', 'meganerd']
-forwarding_rules = '/juan/ath/tools/dns-fwd-rules.cfg'
 
 [sources]
   [sources.'public-resolvers']
