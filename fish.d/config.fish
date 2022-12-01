@@ -1,4 +1,4 @@
-set -x PATH ~/env/bin /usr/bin
+set -x PATH ~/env/bin /usr/bin ~/.asdf/bin
 set -x LANG en_US.UTF-8
 set -x TERM xterm-256color
 
@@ -17,5 +17,5 @@ set -x FREETYPE_PROPERTIES "truetype:interpreter-version=38"
 set -u fish_greeting #makes fish silent
 
 xdg-mkdirs
-[ -f ~/.asdf/asdf.fish ] && source ~/.asdf/asdf.fish
+direnv hook fish | source
 [ -f ~/env/fish.d/$USER@$hostname.fish ] && source ~/env/fish.d/$USER@$hostname.fish
