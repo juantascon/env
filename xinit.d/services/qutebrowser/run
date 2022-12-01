@@ -1,5 +1,4 @@
 #!/bin/sh
 vx check dunst >/dev/null || exit 1
 online || exit 1
-OPTS="--qt-flag enable-gpu-rasterization --qt-flag enable-oop-rasterization --qt-flag enable-accelerated-video-decode"
-exec env -C ~ qutebrowser $OPTS 2>&1
+exec env -C ~ qutebrowser 2>&1
