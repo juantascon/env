@@ -7,7 +7,7 @@ local dep_path = vim.fn.stdpath("data") .. "/site/pack/deps/opt/dep"
 if vim.fn.empty(vim.fn.glob(dep_path)) > 0 then
   vim.fn.system({ "git", "clone", "--depth=1", "https://github.com/chiyadev/dep", dep_path })
 end
-vim.cmd("packadd dep")
+vim.cmd.packadd("dep")
 
 
 vim.g.mapleader = " "
@@ -64,7 +64,7 @@ require "dep" {
     "marko-cerovac/material.nvim",
     function()
       vim.g.material_style = "darker"
-      vim.cmd("colorscheme material")
+      vim.cmd.colorscheme("material")
     end,
   },
   {
@@ -211,7 +211,7 @@ require "dep" {
   {
     "hrsh7th/nvim-cmp",
     function()
-      local cmp = require"cmp"
+      local cmp = require("cmp")
       cmp.setup({
         snippet = {
           expand = function(args) return args.body; end,
