@@ -1,4 +1,4 @@
-export PATH=~/env/bin:/usr/bin
+export PATH=~/env/bin:/usr/bin:~/.asdf/bin
 export LANG=en_US.UTF-8
 export TERM=xterm-256color
 
@@ -14,4 +14,4 @@ export BROWSER=b
 export PAGER=bat
 
 xdg-mkdirs
-[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
+eval "$(direnv hook bash)"
