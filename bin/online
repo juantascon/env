@@ -1,13 +1,17 @@
 #! /bin/bash
 
-function check() {
+function check_router() {
   default=$(ip r | grep default | cut -d ' ' -f 3 | head -n 1)
   [ ! -z "$default" ] && ping -q -w 1 -c 1 $default > /dev/null
 }
 
+function check_internet() {
+  ping -q -w 1 -c 1 8.8.8.8 > /dev/null
+}
+
 case "$1" in
-  "-w"|"--wait") while $(! check); do sleep 1; done ;;
-  "") check ;;
+  "-w"|"--wait") while $(! check_internet); do sleep 1; done ;;
+  "") check_internet ;;
   *) echo "usage: $0 [-w|--wait]"; exit 2 ;;
 esac
 
