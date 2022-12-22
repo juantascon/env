@@ -7,10 +7,10 @@ set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
 set -x XDG_DATA_HOME $HOME/.data
 set -x XDG_STATE_HOME $HOME/.state
-set -x XDG_RUNTIME_DIR /tmp/run-(id -u)
+set -x XDG_RUNTIME_DIR /tmp/run-$USER
 
 set -x EDITOR vi
-set -x BROWSER b
+set -x BROWSER qutebrowser
 set -x PAGER bat
 
 set -x FREETYPE_PROPERTIES "truetype:interpreter-version=38"
@@ -18,4 +18,4 @@ set -u fish_greeting #makes fish silent
 
 xdg-mkdirs
 direnv hook fish | source
-[ -f ~/env/fish.d/$USER@$hostname.fish ] && source ~/env/fish.d/$USER@$hostname.fish
+[ "$USER" = "juan" ] && [ (tty) = "/dev/tty1" ] && [ -z "$DISPLAY" ] && exec xinit

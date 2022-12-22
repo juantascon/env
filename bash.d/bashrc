@@ -7,11 +7,12 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.data
 export XDG_STATE_HOME=$HOME/.state
-export XDG_RUNTIME_DIR=/tmp/run-$(id -u)
+export XDG_RUNTIME_DIR=/tmp/run-$USER
 
 export EDITOR=vi
-export BROWSER=b
+export BROWSER=qutebrowser
 export PAGER=bat
 
 xdg-mkdirs
 eval "$(direnv hook bash)"
+
