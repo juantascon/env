@@ -11,7 +11,7 @@ XF86KbdBrightness{Down,Up}
   brillo -{U,A} 2; noti.sh brightness
 
 XF86MonBrightness{Down,Up}
-  brillo -{U,A} 2; noti.sh brightness
+  brillo -{U,A} 1; noti.sh brightness
 
 super + {t,l,p,v,s,x}
   {xterm,i3lock,tabpass.sh,clipmenu,maim -s ~/shot.png,autorandr -c}
