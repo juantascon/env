@@ -172,6 +172,7 @@ require "dep" {
       whichkey.register({
         ["<leader>p"] = { function() require("fzf-lua").files() end, "find_files" },
         ["<leader>F"] = { function() require("fzf-lua").live_grep_resume() end, "live_grep" },
+        ["<leader>t"] = { function() require("fzf-lua").git_status() end, "git_status" },
         ["<leader>r"] = { "<cmd>SessionManager load_session<cr>", "sessions" },
         ["<leader>f"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
         ["<leader>l"] = { "<cmd>nohlsearch<cr>", "clear" },
