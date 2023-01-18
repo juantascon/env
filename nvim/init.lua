@@ -55,13 +55,13 @@ require("lazy").setup {
   "gpanders/editorconfig.nvim",
   {
     "rlane/pounce.nvim",
-    config = function()
-      require"pounce".setup { accept_keys = "12345" }
-      vim.keymap.set({"n", "v"}, "s", "<cmd>Pounce<cr>")
-    end,
+    keys = { {"s", "<cmd>Pounce<cr>"} },
+    opts = { accept_keys = "12345" },
   },
   {
     "marko-cerovac/material.nvim",
+    lazy = false,
+    priority = 1000,
     config = function()
       vim.g.material_style = "darker"
       vim.cmd.colorscheme("material")
@@ -95,7 +95,7 @@ require("lazy").setup {
   },
   {
     "ethanholz/nvim-lastplace",
-    config = true,
+    opts = {},
   },
   {
     "shatur/neovim-session-manager",
@@ -109,49 +109,50 @@ require("lazy").setup {
   },
   {
     "numToStr/Comment.nvim",
-    config = true,
+    opts = {},
   },
   {
     "akinsho/bufferline.nvim",
-    config = function()
-      require"bufferline".setup({})
-      vim.keymap.set({"n", "t"}, "<C-w>", "<cmd>bdelete<cr>")
-      vim.keymap.set({"n", "t"}, "<C-k>", "<cmd>bprevious<cr>")
-      vim.keymap.set({"n", "t"}, "<C-j>", "<cmd>bnext<cr>")
-      vim.keymap.set({"n", "t"}, "<C-S-k>", "<cmd>BufferLineMovePrev<cr>")
-      vim.keymap.set({"n", "t"}, "<C-S-j>", "<cmd>BufferLineMoveNext<cr>")
-      for i = 1, 5 do
-        vim.keymap.set({"n", "t"}, "<C-" .. i .. ">", "<cmd>BufferLineGoToBuffer " .. i .. "<cr>")
-      end
-    end,
+    opts = {},
+    lazy = false,
+    keys = {
+      { "<C-w>", "<cmd>bdelete<cr>", mode = {"n", "t"}},
+      { "<C-k>", "<cmd>bprevious<cr>", mode = {"n", "t"}},
+      { "<C-j>", "<cmd>bnext<cr>", mode = {"n", "t"}},
+      { "<C-S-k>", "<cmd>BufferLineMovePrev<cr>", mode = {"n", "t"}},
+      { "<C-S-j>", "<cmd>BufferLineMoveNext<cr>", mode = {"n", "t"}},
+      { "<C-1>", "<cmd>BufferLineGoToBuffer 1<cr>", mode = {"n", "t"}},
+      { "<C-2>", "<cmd>BufferLineGoToBuffer 2<cr>", mode = {"n", "t"}},
+      { "<C-3>", "<cmd>BufferLineGoToBuffer 3<cr>", mode = {"n", "t"}},
+      { "<C-4>", "<cmd>BufferLineGoToBuffer 4<cr>", mode = {"n", "t"}},
+      { "<C-5>", "<cmd>BufferLineGoToBuffer 5<cr>", mode = {"n", "t"}},
+    },
   },
   {
     "ojroques/nvim-hardline",
-    config = true,
+    opts = {},
   },
   {
     "lewis6991/gitsigns.nvim",
-    config = function()
-      require("gitsigns").setup {
-        signs = {
-          add = { hl = "GitGutterAdd", text = "+" },
-          change = { hl = "GitGutterChange", text = "~" },
-          delete = { hl = "GitGutterDelete", text = "_" },
-          topdelete = { hl = "GitGutterDelete", text = "‾" },
-          changedelete = { hl = "GitGutterChange", text = "~" },
-        },
-      }
-    end,
+    opts = {
+      signs = {
+        add = { hl = "GitGutterAdd", text = "+" },
+        change = { hl = "GitGutterChange", text = "~" },
+        delete = { hl = "GitGutterDelete", text = "_" },
+        topdelete = { hl = "GitGutterDelete", text = "‾" },
+        changedelete = { hl = "GitGutterChange", text = "~" },
+      },
+    },
     dependencies = {"nvim-lua/plenary.nvim"},
   },
   {
     "ruifm/gitlinker.nvim",
-    config = true,
+    opts = {},
     dependencies = {"nvim-lua/plenary.nvim"},
   },
   {
     "gen740/SmoothCursor.nvim",
-    config = true,
+    opts = {},
   },
   {
     "folke/which-key.nvim",
@@ -248,12 +249,7 @@ require("lazy").setup {
       lspconfig.pylsp.setup{
         settings = {
           pylsp = {
-            plugins = {
-              pycodestyle = {
-                -- ignore = {'W391'},
-                maxLineLength = 120,
-              }
-            }
+            plugins = { pycodestyle = { maxLineLength = 120 } }
           }
         }
       }
