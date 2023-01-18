@@ -22,6 +22,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.laststatus = 3
+vim.opt.cmdheight = 0
 vim.opt.cursorline = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 250
