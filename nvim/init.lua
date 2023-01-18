@@ -46,6 +46,7 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "dw", "diw")
 vim.keymap.set("n", "cw", [["_ciw]])
 vim.keymap.set("n", "yw", "yiw")
+vim.keymap.set("n", "yf", [[:let @+ = expand("%")<cr>]])
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 
