@@ -253,6 +253,18 @@ require "dep" {
       require("mason").setup({})
       require("mason-lspconfig").setup()
       local lspconfig = require("lspconfig")
+      lspconfig.pylsp.setup{
+        settings = {
+          pylsp = {
+            plugins = {
+              pycodestyle = {
+                -- ignore = {'W391'},
+                maxLineLength = 120,
+              }
+            }
+          }
+        }
+      }
       lspconfig.sumneko_lua.setup({
         settings = {
           Lua = {
