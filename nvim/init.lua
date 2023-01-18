@@ -3,11 +3,11 @@ for _, plugin in pairs(disabled_builtin) do
   vim.g["loaded_" .. plugin] = 1
 end
 
-local dep_path = vim.fn.stdpath("data") .. "/site/pack/deps/opt/dep"
-if vim.fn.empty(vim.fn.glob(dep_path)) > 0 then
-  vim.fn.system({ "git", "clone", "--depth=1", "https://github.com/chiyadev/dep", dep_path })
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({"git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath})
 end
-vim.cmd.packadd("dep")
+vim.opt.rtp:prepend(lazypath)
 
 
 vim.g.mapleader = " "
@@ -51,27 +51,25 @@ vim.keymap.set("n", "yf", [[:let @+ = expand("%")<cr>]])
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 
-require "dep" {
-  sync = "always",
-  "chiyadev/dep",
+require("lazy").setup {
   "gpanders/editorconfig.nvim",
   {
     "rlane/pounce.nvim",
-    function()
+    config = function()
       require"pounce".setup { accept_keys = "12345" }
       vim.keymap.set({"n", "v"}, "s", "<cmd>Pounce<cr>")
     end,
   },
   {
     "marko-cerovac/material.nvim",
-    function()
+    config = function()
       vim.g.material_style = "darker"
       vim.cmd.colorscheme("material")
     end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    function()
+    config = function()
       require"nvim-treesitter.configs".setup {
         highlight = {
           enable = true,
@@ -93,33 +91,33 @@ require "dep" {
         },
       }
     end,
-    deps = {"p00f/nvim-ts-rainbow", "RRethy/nvim-treesitter-textsubjects"},
+    dependencies = {"p00f/nvim-ts-rainbow", "RRethy/nvim-treesitter-textsubjects"},
   },
   {
     "ethanholz/nvim-lastplace",
-    function()
+    config = function()
       require("nvim-lastplace").setup()
     end,
   },
   {
     "shatur/neovim-session-manager",
-    function()
+    config = function()
       require("session_manager").setup{
         autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
         autosave_only_in_session = true,
       }
     end,
-    requires = {"nvim-lua/plenary.nvim"},
+    dependencies = {"nvim-lua/plenary.nvim"},
   },
   {
     "numToStr/Comment.nvim",
-    function()
+    config = function()
       require("Comment").setup()
     end,
   },
   {
     "akinsho/bufferline.nvim",
-    function()
+    config = function()
       require"bufferline".setup({})
       vim.keymap.set({"n", "t"}, "<C-w>", "<cmd>bdelete<cr>")
       vim.keymap.set({"n", "t"}, "<C-k>", "<cmd>bprevious<cr>")
@@ -133,13 +131,13 @@ require "dep" {
   },
   {
     "ojroques/nvim-hardline",
-    function()
+    config = function()
       require("hardline").setup()
     end,
   },
   {
     "lewis6991/gitsigns.nvim",
-    function()
+    config = function()
       require("gitsigns").setup {
         signs = {
           add = { hl = "GitGutterAdd", text = "+" },
@@ -150,24 +148,24 @@ require "dep" {
         },
       }
     end,
-    requires = {"nvim-lua/plenary.nvim"},
+    dependencies = {"nvim-lua/plenary.nvim"},
   },
   {
     "ruifm/gitlinker.nvim",
-    function()
+    config = function()
       require"gitlinker".setup()
     end,
-    requires = {"nvim-lua/plenary.nvim"},
+    dependencies = {"nvim-lua/plenary.nvim"},
   },
   {
     "gen740/SmoothCursor.nvim",
-    function()
+    config = function()
       require("smoothcursor").setup()
     end
   },
   {
     "folke/which-key.nvim",
-    function()
+    config = function()
       local whichkey = require("which-key")
       whichkey.setup()
       whichkey.register({
@@ -206,7 +204,7 @@ require "dep" {
   },
   {
     "ibhagwan/fzf-lua",
-    function()
+    config = function()
       require"fzf-lua".setup({
         files = {
           fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude _build --exclude .elixir_ls --exclude __pycache__ --exclude node_modules"
@@ -220,7 +218,7 @@ require "dep" {
   },
   {
     "hrsh7th/nvim-cmp",
-    function()
+    config = function()
       local cmp = require("cmp")
       cmp.setup({
         snippet = {
@@ -249,11 +247,11 @@ require "dep" {
         }
       })
     end,
-    requires = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-buffer", "hrsh7th/cmp-cmdline", "hrsh7th/cmp-nvim-lsp-signature-help"},
+    dependencies = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-buffer", "hrsh7th/cmp-cmdline", "hrsh7th/cmp-nvim-lsp-signature-help"},
   },
   {
     "neovim/nvim-lspconfig",
-    function()
+    config = function()
       require("mason").setup({})
       require("mason-lspconfig").setup()
       local lspconfig = require("lspconfig")
@@ -291,11 +289,11 @@ require "dep" {
       lspconfig.bashls.setup {}
       lspconfig.jsonls.setup {}
     end,
-    requires = {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"},
+    dependencies = {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"},
   },
   {
     "whynothugo/lsp_lines.nvim",
-    function()
+    config = function()
       require("lsp_lines").setup()
       vim.diagnostic.config({virtual_text = false,})
     end,
