@@ -95,9 +95,7 @@ require("lazy").setup {
   },
   {
     "ethanholz/nvim-lastplace",
-    config = function()
-      require("nvim-lastplace").setup()
-    end,
+    config = true,
   },
   {
     "shatur/neovim-session-manager",
@@ -111,9 +109,7 @@ require("lazy").setup {
   },
   {
     "numToStr/Comment.nvim",
-    config = function()
-      require("Comment").setup()
-    end,
+    config = true,
   },
   {
     "akinsho/bufferline.nvim",
@@ -131,9 +127,7 @@ require("lazy").setup {
   },
   {
     "ojroques/nvim-hardline",
-    config = function()
-      require("hardline").setup()
-    end,
+    config = true,
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -152,16 +146,12 @@ require("lazy").setup {
   },
   {
     "ruifm/gitlinker.nvim",
-    config = function()
-      require"gitlinker".setup()
-    end,
+    config = true,
     dependencies = {"nvim-lua/plenary.nvim"},
   },
   {
     "gen740/SmoothCursor.nvim",
-    config = function()
-      require("smoothcursor").setup()
-    end
+    config = true,
   },
   {
     "folke/which-key.nvim",
