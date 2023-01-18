@@ -158,13 +158,10 @@ require "dep" {
     requires = {"nvim-lua/plenary.nvim"},
   },
   {
-    "declancm/cinnamon.nvim",
+    "gen740/SmoothCursor.nvim",
     function()
-      require"cinnamon".setup({
-        scroll_limit = 40,
-        default_delay = 2,
-      })
-    end,
+      require("smoothcursor").setup()
+    end
   },
   {
     "folke/which-key.nvim",
