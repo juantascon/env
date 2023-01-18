@@ -283,24 +283,4 @@ require "dep" {
     end,
     url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
   },
-  {
-    "folke/trouble.nvim",
-    function()
-      require("trouble").setup {}
-    end,
-  },
-  {
-    "j-hui/fidget.nvim",
-    function()
-      require("fidget").setup {}
-    end,
-  },
-  {
-    "akinsho/toggleterm.nvim",
-    function()
-      require("toggleterm").setup()
-      local gitui = require('toggleterm.terminal').Terminal:new({ cmd = "gitui", hidden = true, direction = "float" })
-      vim.keymap.set("n", "<leader>tg", function() gitui:toggle() end)
-    end,
-  },
 }
