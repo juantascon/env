@@ -55,7 +55,9 @@ require("lazy").setup {
   "gpanders/editorconfig.nvim",
   {
     "rlane/pounce.nvim",
-    keys = { {"s", "<cmd>Pounce<cr>"} },
+    keys = {
+      {"s", "<cmd>Pounce<cr>"},
+    },
     opts = { accept_keys = "12345" },
   },
   {
@@ -99,8 +101,11 @@ require("lazy").setup {
   },
   {
     "shatur/neovim-session-manager",
+    keys = {
+      { "<leader>r", "<cmd>SessionManager load_session<cr>", desc = "sessions" },
+    },
     config = function()
-      require("session_manager").setup{
+      require("session_manager").setup {
         autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
         autosave_only_in_session = true,
       }
@@ -134,6 +139,11 @@ require("lazy").setup {
   },
   {
     "lewis6991/gitsigns.nvim",
+    keys = {
+      {"<leader>gg", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview" },
+      {"<leader>gn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next" },
+      {"<leader>gp", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev" },
+    },
     opts = {
       signs = {
         add = { hl = "GitGutterAdd", text = "+" },
@@ -160,23 +170,10 @@ require("lazy").setup {
       local whichkey = require("which-key")
       whichkey.setup()
       whichkey.register({
-        ["<leader>p"] = { function() require("fzf-lua").files() end, "find_files" },
-        ["<leader>F"] = { function() require("fzf-lua").live_grep_resume() end, "live_grep" },
-        ["<leader>t"] = { function() require("fzf-lua").git_status() end, "git_status" },
-        ["<leader>r"] = { "<cmd>SessionManager load_session<cr>", "sessions" },
         ["<leader>f"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
         ["<leader>l"] = { "<cmd>nohlsearch<cr>", "clear" },
         ["<leader>n"] = { "<cmd>cnext<cr>", "quickfix_next" },
         ["<leader>N"] = { "<cmd>cprev<cr>", "quickfix_prev" },
-        ["<leader>gg"] = { "<cmd>Gitsigns preview_hunk<cr>", "git_preview" },
-        ["<leader>gn"] = { "<cmd>Gitsigns next_hunk<cr>", "git_next" },
-        ["<leader>gp"] = { "<cmd>Gitsigns prev_hunk<cr>", "git_prev" },
-        ["<leader>xx"] = { "<cmd>TroubleToggle<cr>", "trouble_toggle" },
-        ["<leader>xd"] = { "<cmd>Trouble workspace_diagnostics<cr>", "workspace_diagnostics" },
-        ["<leader>xq"] = { "<cmd>Trouble quickfix<cr>", "quickfix" },
-        ["<leader>xr"] = { "<cmd>Trouble lsp_references<cr>", "lsp_references" },
-        ["<leader>xn"] = { function() require("trouble").next({skip_groups = true, jump = true}) end, "trouble_next" },
-        ["<leader>xN"] = { function() require("trouble").previous({skip_groups = true, jump = true}) end, "trouble_prev" },
 
         ["<leader>q"] = { "<cmd>qa<cr>", "quit" },
         ["<leader>s"] = { "<cmd>w<cr>", "save" },
@@ -195,6 +192,11 @@ require("lazy").setup {
   },
   {
     "ibhagwan/fzf-lua",
+    keys = {
+      {"<leader>p", function() require("fzf-lua").files() end, desc = "find_files" },
+      {"<leader>F", function() require("fzf-lua").live_grep_resume() end, desc = "live_grep" },
+      {"<leader>t", function() require("fzf-lua").git_status() end, desc = "git_status" },
+    },
     config = function()
       require"fzf-lua".setup({
         files = {
