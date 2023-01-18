@@ -93,7 +93,7 @@ require("lazy").setup {
         },
       }
     end,
-    dependencies = {"p00f/nvim-ts-rainbow", "RRethy/nvim-treesitter-textsubjects"},
+    dependencies = {"HiPhish/nvim-ts-rainbow2", "RRethy/nvim-treesitter-textsubjects"},
   },
   {
     "ethanholz/nvim-lastplace",
