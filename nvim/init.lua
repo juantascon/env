@@ -208,8 +208,11 @@ require "dep" {
     function()
       require"fzf-lua".setup({
         files = {
-          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude _build --exclude .elixir_ls --exclude __pycache__"
-        }
+          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude _build --exclude .elixir_ls --exclude __pycache__ --exclude node_modules"
+        },
+        grep = {
+          rg_opts = "--sort=path --column --line-number --no-heading --color=always --smart-case --max-columns=512",
+        },
       })
       require"fzf-lua".register_ui_select()
     end,
