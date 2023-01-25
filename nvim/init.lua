@@ -105,6 +105,7 @@ require("lazy").setup {
   },
   {
     "shatur/neovim-session-manager",
+    lazy = false,
     keys = {
       { "<leader>r", "<cmd>SessionManager load_session<cr>", desc = "sessions" },
     },
@@ -143,6 +144,7 @@ require("lazy").setup {
   },
   {
     "lewis6991/gitsigns.nvim",
+    lazy = false,
     keys = {
       {"<leader>gg", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview" },
       {"<leader>gn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next" },
