@@ -148,15 +148,7 @@ require("lazy").setup {
       {"<leader>gn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next" },
       {"<leader>gp", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev" },
     },
-    opts = {
-      signs = {
-        add = { hl = "GitGutterAdd", text = "+" },
-        change = { hl = "GitGutterChange", text = "~" },
-        delete = { hl = "GitGutterDelete", text = "_" },
-        topdelete = { hl = "GitGutterDelete", text = "‾" },
-        changedelete = { hl = "GitGutterChange", text = "~" },
-      },
-    },
+    opts = {numhl = true, signcolumn = false },
     dependencies = {"nvim-lua/plenary.nvim"},
   },
   {
