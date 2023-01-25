@@ -9,6 +9,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local autocmd = vim.api.nvim_create_autocmd
+local ntg = vim.api.nvim_create_augroup("numbertoggle", {clear = true})
+autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end, group = ntg})
+autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end, group = ntg})
+
 
 vim.g.mapleader = " "
 vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h17"
@@ -20,7 +25,6 @@ vim.opt.showtabline = 0
 vim.opt.clipboard = "unnamedplus"
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.laststatus = 3
 vim.opt.cmdheight = 0
 vim.opt.cursorline = true
