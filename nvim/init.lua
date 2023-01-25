@@ -209,74 +209,29 @@ require("lazy").setup {
     end,
   },
   {
-    "hrsh7th/nvim-cmp",
+    "VonHeikemen/lsp-zero.nvim",
+    dependencies = {
+      {"neovim/nvim-lspconfig"},
+      {"williamboman/mason.nvim"},
+      {"williamboman/mason-lspconfig.nvim"},
+      {"hrsh7th/nvim-cmp"},
+      {"hrsh7th/cmp-nvim-lsp"},
+      {"hrsh7th/cmp-buffer"},
+      {"hrsh7th/cmp-nvim-lua"},
+      {"hrsh7th/cmp-cmdline"},
+      {"hrsh7th/cmp-nvim-lsp-signature-help"},
+    },
     config = function()
+      local lsp = require("lsp-zero")
+      lsp.preset("recommended")
+      lsp.nvim_workspace()
+      lsp.ensure_installed({"pylsp", "sumneko_lua", "bashls", "jsonls"})
+      lsp.setup()
+
       local cmp = require("cmp")
-      cmp.setup({
-        snippet = {
-          expand = function(args) return args.body; end,
-        },
-        mapping = {
-          ["<cr>"] = cmp.mapping(cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Insert}), { "i", "c" }),
-          ["<down>"] = cmp.mapping(cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}), {"i", "c"}),
-          ["<up>"] = cmp.mapping(cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}), {"i", "c"}),
-        },
-        sources = {
-          {name = "nvim_lsp"},
-          {name = "nvim_lsp_signature_help"},
-          {name = "nvim_lua"},
-          {name = "buffer", keyword_length = 4},
-        },
-      })
-      cmp.setup.cmdline(':', {
-        sources = {
-          { name = 'cmdline' }
-        }
-      })
-      cmp.setup.cmdline('/', {
-        sources = {
-          { name = 'buffer' }
-        }
-      })
+      cmp.setup.cmdline(":", {sources = {{name = "cmdline"}}})
+      cmp.setup.cmdline("/", {sources = {{name = "buffer"}}})
     end,
-    dependencies = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-buffer", "hrsh7th/cmp-cmdline", "hrsh7th/cmp-nvim-lsp-signature-help"},
-  },
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require("mason").setup({})
-      require("mason-lspconfig").setup()
-      local lspconfig = require("lspconfig")
-      lspconfig.pylsp.setup{
-        settings = {
-          pylsp = {
-            plugins = { pycodestyle = { maxLineLength = 120 } }
-          }
-        }
-      }
-      lspconfig.sumneko_lua.setup({
-        settings = {
-          Lua = {
-            runtime = {version = "LuaJIT"},
-            diagnostics = {globals = {"vim"}},
-            workspace = {library = vim.api.nvim_get_runtime_file("", true)},
-            telemetry = {enable = false},
-            completion = {autoRequire = false},
-          }
-        }
-      })
-      lspconfig.elixirls.setup({
-        settings = {
-          elixirLS = {
-            dialyzerEnabled = false,
-          }
-        }
-      })
-      lspconfig.erlangls.setup {}
-      lspconfig.bashls.setup {}
-      lspconfig.jsonls.setup {}
-    end,
-    dependencies = {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"},
   },
   {
     "whynothugo/lsp_lines.nvim",
