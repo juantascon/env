@@ -3,6 +3,7 @@
 import yaml
 import os
 import argparse
+import fnmatch
 
 
 def get_db():
@@ -30,10 +31,21 @@ def do_get(args):
         exit(2)
 
 
-def do_list(args):
+def do_find(args):
     db = get_db()
     for key, value in db.items():
-        print(key)
+        if not args.pattern:
+            print(key)
+        else:
+            if args.mode == "exact":
+                if key == args.pattern:
+                    print(key)
+            elif args.mode == "fnmatch":
+                if fnmatch.fnmatch(key, args.pattern):
+                    print(key)
+            elif args.mode == "prefix":
+                if fnmatch.fnmatch(args.pattern, f"*{key}"):
+                    print(key)
 
 
 def do_select(args):
@@ -48,12 +60,12 @@ parser = argparse.ArgumentParser(prog="pfs")
 subparsers = parser.add_subparsers(dest="subcommand", required=True)
 parser_get = subparsers.add_parser("get", help="gets a single id")
 parser_get.add_argument("id")
-parser_get.add_argument(
-    "field", metavar="field", nargs="?", help="empty to list all fields for id"
-)
+parser_get.add_argument("field", metavar="field", nargs="?", help="default: list fields")
 parser_get.set_defaults(func=do_get)
-parser_list = subparsers.add_parser("list", help="lists all ids")
-parser_list.set_defaults(func=do_list)
+parser_find = subparsers.add_parser("find", help="finds ids")
+parser_find.add_argument("-m", "--mode", default="exact", choices=["exact", "fnmatch", "prefix"])
+parser_find.add_argument("pattern", metavar="pattern", nargs="?", help="find pattern, default: list all")
+parser_find.set_defaults(func=do_find)
 parser_select = subparsers.add_parser("select", help="selects the given ids")
 parser_select.add_argument("ids", metavar="id", nargs="+")
 parser_select.set_defaults(func=do_select)
