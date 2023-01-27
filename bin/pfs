@@ -3,48 +3,54 @@
 import yaml
 import os
 import argparse
-import itertools
+
 
 def get_db():
-  main = os.path.expanduser("~/my/pfs/main.yml")
-  with open(main) as file:
-    return yaml.load(file, Loader=yaml.FullLoader)
+    main = os.path.expanduser("~/my/pfs/main.yml")
+    with open(main) as file:
+        return yaml.load(file, Loader=yaml.FullLoader)
+
 
 def do_get(args):
-  db = get_db()
-  try:
-    entry = db[args.id]
-    if args.field:
-      try:
-        print(entry[args.field])
-      except KeyError:
-        print(f"field not found")
+    db = get_db()
+    try:
+        entry = db[args.id]
+        if args.field:
+            try:
+                print(entry[args.field])
+            except KeyError:
+                print("field not found")
+                exit(2)
+        else:
+            for key, value in entry.items():
+                print(key)
+                # print(yaml.dump(entry), end="")
+    except KeyError:
+        print("id not found")
         exit(2)
-    else:
-      for key, value in entry.items():
-        print(key)
-      #print(yaml.dump(entry), end="")
-  except KeyError:
-    print(f"id not found")
-    exit(2)
+
 
 def do_list(args):
-  db = get_db()
-  for key, value in db.items():
-    print(key)
+    db = get_db()
+    for key, value in db.items():
+        print(key)
+
 
 def do_select(args):
-  db = get_db()
-  for id in args.ids:
-    entry = db.get(id, {})
-    for k, v in entry.items():
-      print(f"{id} {k} {v}")
+    db = get_db()
+    for id in args.ids:
+        entry = db.get(id, {})
+        for k, v in entry.items():
+            print(f"{id} {k} {v}")
+
 
 parser = argparse.ArgumentParser(prog="pfs")
 subparsers = parser.add_subparsers(dest="subcommand", required=True)
 parser_get = subparsers.add_parser("get", help="gets a single id")
 parser_get.add_argument("id")
-parser_get.add_argument("field", metavar="field", nargs="?", help="empty to list all fields for id")
+parser_get.add_argument(
+    "field", metavar="field", nargs="?", help="empty to list all fields for id"
+)
 parser_get.set_defaults(func=do_get)
 parser_list = subparsers.add_parser("list", help="lists all ids")
 parser_list.set_defaults(func=do_list)
