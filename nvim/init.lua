@@ -171,18 +171,19 @@ require("lazy").setup {
     keys = {
       {"<leader>p", function() require("fzf-lua").files() end, desc = "find_files" },
       {"<leader>F", function() require("fzf-lua").live_grep_resume() end, desc = "live_grep" },
-      {"<leader>t", function() require("fzf-lua").git_status() end, desc = "git_status" },
+      {"<leader>h", function() require("fzf-lua").git_status() end, desc = "git_status" },
     },
     config = function()
-      require"fzf-lua".setup({
+      local fzf = require("fzf-lua")
+      fzf.setup({
         files = {
-          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude _build --exclude .elixir_ls --exclude __pycache__ --exclude node_modules"
+          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude __pycache__ --exclude node_modules"
         },
         grep = {
           rg_opts = "--sort=path --column --line-number --no-heading --color=always --smart-case --max-columns=512",
         },
       })
-      require"fzf-lua".register_ui_select()
+      fzf.register_ui_select()
     end,
   },
   {
