@@ -164,16 +164,6 @@ require("lazy").setup {
 
         ["<leader>q"] = { "<cmd>qa<cr>", "quit" },
         ["<leader>s"] = { "<cmd>w<cr>", "save" },
-
-        ["<leader>da"] = { function() vim.lsp.buf.code_action() end, "lsp_actions" },
-        ["<leader>df"] = { function() vim.lsp.buf.formatting() end, "lsp_formatting" },
-        ["<leader>dd"] = { function() vim.lsp.buf.definition() end, "lsp_definition" },
-        ["<leader>dD"] = { function() vim.lsp.buf.declaration() end, "lsp_declaration" },
-        ["<leader>dk"] = { function() vim.lsp.buf.hover() end, "lsp_hover" },
-        ["<leader>dh"] = { function() vim.lsp.buf.signature_help() end, "lsp_signature" },
-        ["<leader>di"] = { function() vim.lsp.buf.implementation() end, "lsp_implementation" },
-        ["<leader>dn"] = { function() vim.lsp.buf.rename() end, "lsp_rename" },
-        ["<leader>de"] = { function() vim.lsp.buf.references() end, "lsp_references" },
       })
     end,
   },
