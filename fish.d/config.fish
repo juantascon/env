@@ -1,4 +1,4 @@
-set -x PATH ~/env/bin /usr/bin ~/.asdf/bin
+set -x PATH ~/env/bin /usr/bin ~/.asdf/bin ~/.pipx/bin
 set -x LANG en_US.UTF-8
 set -x TERM xterm-256color
 
