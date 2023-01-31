@@ -204,6 +204,7 @@ require("lazy").setup {
       lsp.preset("recommended")
       lsp.nvim_workspace()
       lsp.ensure_installed({"pylsp", "sumneko_lua", "bashls", "jsonls"})
+      lsp.configure("pylsp", {settings = {pylsp = {plugins = {pycodestyle = {maxLineLength = 120}}}}})
       lsp.setup()
 
       local cmp = require("cmp")
