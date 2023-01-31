@@ -54,6 +54,7 @@ vim.keymap.set("n", "yw", "yiw")
 vim.keymap.set("n", "yf", [[:let @+ = expand("%")<cr>]])
 vim.keymap.set("n", "gf", "gF")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr><cmd>cclose<cr>")
 
 
 require("lazy").setup {
@@ -158,10 +159,8 @@ require("lazy").setup {
       whichkey.setup()
       whichkey.register({
         ["<leader>f"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
-        ["<leader>l"] = { "<cmd>nohlsearch<cr>", "clear" },
         ["<leader>n"] = { "<cmd>cnext<cr>", "quickfix_next" },
         ["<leader>N"] = { "<cmd>cprev<cr>", "quickfix_prev" },
-
         ["<leader>q"] = { "<cmd>qa<cr>", "quit" },
         ["<leader>s"] = { "<cmd>w<cr>", "save" },
       })
