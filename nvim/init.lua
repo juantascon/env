@@ -85,20 +85,8 @@ require("lazy").setup {
         indent = {
           enable = true
         },
-        rainbow = {
-          enable = true,
-          extended_mode = true
-        },
-        textsubjects = {
-          enable = true,
-          keymaps = {
-            ["s"] = "textsubjects-smart",
-            ["o"] = "textsubjects-container-outer",
-          }
-        },
       }
     end,
-    dependencies = {"HiPhish/nvim-ts-rainbow2", "RRethy/nvim-treesitter-textsubjects"},
   },
   {
     "ethanholz/nvim-lastplace",
@@ -232,13 +220,5 @@ require("lazy").setup {
       cmp.setup.cmdline(":", {sources = {{name = "cmdline"}}})
       cmp.setup.cmdline("/", {sources = {{name = "buffer"}}})
     end,
-  },
-  {
-    "whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-      vim.diagnostic.config({virtual_text = false,})
-    end,
-    url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
   },
 }
