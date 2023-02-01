@@ -203,6 +203,7 @@ require("lazy").setup {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
+      "nvim-telescope/telescope-fzf-native.nvim",
     },
     keys = {
       {"<leader>p", function() require("telescope.builtin").find_files() end, desc = "find_files" },
@@ -211,7 +212,8 @@ require("lazy").setup {
       {"<leader>l", function() require("telescope.builtin").quickfix() end, desc = "quickfix" },
     },
     config = function()
-      require("telescope").setup({
+      local telescope = require("telescope")
+      telescope.setup({
         defaults = {
           mappings = {
             i = {
@@ -228,7 +230,12 @@ require("lazy").setup {
           },
         },
       })
-      require("telescope").load_extension("ui-select")
+      telescope.load_extension("ui-select")
+      telescope.load_extension("fzf")
     end,
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
   },
 }
