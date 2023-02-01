@@ -148,9 +148,9 @@ require("lazy").setup {
     "lewis6991/gitsigns.nvim",
     lazy = false,
     keys = {
-      {"<leader>gg", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview" },
-      {"<leader>gn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next" },
-      {"<leader>gp", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev" },
+      {"hg", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview" },
+      {"hn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next" },
+      {"hp", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev" },
     },
     opts = {numhl = true, signcolumn = false },
     dependencies = {"nvim-lua/plenary.nvim"},
