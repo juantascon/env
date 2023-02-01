@@ -173,26 +173,6 @@ require("lazy").setup {
     opts = {},
   },
   {
-    "ibhagwan/fzf-lua",
-    keys = {
-      {"<leader>p", function() require("fzf-lua").files() end, desc = "find_files" },
-      {"<leader>F", function() require("fzf-lua").live_grep_resume() end, desc = "live_grep" },
-      {"<leader>h", function() require("fzf-lua").git_status() end, desc = "git_status" },
-    },
-    config = function()
-      local fzf = require("fzf-lua")
-      fzf.setup({
-        files = {
-          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude __pycache__ --exclude node_modules"
-        },
-        grep = {
-          rg_opts = "--sort=path --column --line-number --no-heading --color=always --smart-case --max-columns=512",
-        },
-      })
-      fzf.register_ui_select()
-    end,
-  },
-  {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = {
       {"neovim/nvim-lspconfig"},
@@ -216,6 +196,39 @@ require("lazy").setup {
       local cmp = require("cmp")
       cmp.setup.cmdline(":", {sources = {{name = "cmdline"}}})
       cmp.setup.cmdline("/", {sources = {{name = "buffer"}}})
+    end,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
+    },
+    keys = {
+      {"<leader>p", function() require("telescope.builtin").find_files() end, desc = "find_files" },
+      {"<leader>F", function() require("telescope.builtin").live_grep() end, desc = "live_grep" },
+      {"<leader>h", function() require("telescope.builtin").git_status() end, desc = "git_status" },
+      {"<leader>l", function() require("telescope.builtin").quickfix() end, desc = "quickfix" },
+    },
+    config = function()
+      require("telescope").setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<cr>"] = function(bufnr)
+                local picker = require("telescope.actions.state").get_current_picker(bufnr)
+                if #picker:get_multi_selection() > 0 then
+                  require("telescope.actions").send_selected_to_qflist(bufnr)
+                  require("telescope.builtin").quickfix()
+                else
+                  require("telescope.actions").select_default(bufnr)
+                end
+              end,
+            },
+          },
+        },
+      })
+      require("telescope").load_extension("ui-select")
     end,
   },
 }
