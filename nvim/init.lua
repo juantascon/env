@@ -81,15 +81,12 @@ require("lazy").setup {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     config = function()
       require"nvim-treesitter.configs".setup {
-        highlight = {
-          enable = true,
-        },
+        highlight = {enable = true},
+        indent = {enable = true},
         ensure_installed = "all",
-        indent = {
-          enable = true
-        },
       }
     end,
   },
