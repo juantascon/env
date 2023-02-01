@@ -96,6 +96,7 @@ require("lazy").setup {
   },
   {
     "shatur/neovim-session-manager",
+    dependencies = {"nvim-lua/plenary.nvim"},
     lazy = false,
     keys = {
       { "<leader>r", "<cmd>SessionManager load_session<cr>", desc = "sessions" },
@@ -106,7 +107,6 @@ require("lazy").setup {
         autosave_only_in_session = true,
       }
     end,
-    dependencies = {"nvim-lua/plenary.nvim"},
   },
   {
     "numToStr/Comment.nvim",
@@ -114,7 +114,6 @@ require("lazy").setup {
   },
   {
     "akinsho/bufferline.nvim",
-    opts = {},
     lazy = false,
     keys = {
       { "<C-w>", "<cmd>bdelete<cr>"},
@@ -139,6 +138,7 @@ require("lazy").setup {
       { "<leader>4", "<cmd>BufferLineGoToBuffer 4<cr>"},
       { "<leader>5", "<cmd>BufferLineGoToBuffer 5<cr>"},
     },
+    opts = {},
   },
   {
     "ojroques/nvim-hardline",
@@ -146,6 +146,7 @@ require("lazy").setup {
   },
   {
     "lewis6991/gitsigns.nvim",
+    dependencies = {"nvim-lua/plenary.nvim"},
     lazy = false,
     keys = {
       {"hg", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview" },
@@ -153,12 +154,11 @@ require("lazy").setup {
       {"hp", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev" },
     },
     opts = {numhl = true, signcolumn = false },
-    dependencies = {"nvim-lua/plenary.nvim"},
   },
   {
     "ruifm/gitlinker.nvim",
-    opts = {},
     dependencies = {"nvim-lua/plenary.nvim"},
+    opts = {},
   },
   {
     "gen740/SmoothCursor.nvim",
