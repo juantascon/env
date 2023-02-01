@@ -40,22 +40,26 @@ vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
 
+vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set({"n", "v"}, "<Home>", "^")
 vim.keymap.set("i", "<Home>", "<Esc>^i")
 vim.keymap.set("n", "cn", "*``cgn")
 vim.keymap.set("x", "cn", [["y/\\V\<C-r>=escape(@\", '/')\<CR>\<CR>" . "``cgn"]], { expr = true })
-vim.keymap.set({"n", "i"}, "<C-s>", "<cmd>w<cr>")
-vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "dw", "diw")
-vim.keymap.set("n", "cw", [["_ciw]])
 vim.keymap.set("n", "yw", "yiw")
+vim.keymap.set("n", "cw", [["_ciw]])
 vim.keymap.set("n", "yf", [[:let @+ = expand("%")<cr>]])
 vim.keymap.set("n", "gf", "gF")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr><cmd>cclose<cr>")
-
+vim.keymap.set({"n", "i"}, "<C-s>", "<cmd>w<cr>")
+vim.keymap.set("n", "<leader>s", "<cmd>w<cr>")
+vim.keymap.set("n", "<leader>f", "<cmd>%s///gc<Left><Left><Left><Left>")
+vim.keymap.set("n", "<leader>n", "<cmd>cnext<cr>")
+vim.keymap.set("n", "<leader>N", "<cmd>cprev<cr>")
+vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
 
 require("lazy").setup {
   "gpanders/editorconfig.nvim",
@@ -116,16 +120,27 @@ require("lazy").setup {
     opts = {},
     lazy = false,
     keys = {
-      { "<C-w>", "<cmd>bdelete<cr>", mode = {"n", "t"}},
-      { "<C-k>", "<cmd>bprevious<cr>", mode = {"n", "t"}},
-      { "<C-j>", "<cmd>bnext<cr>", mode = {"n", "t"}},
-      { "<C-S-k>", "<cmd>BufferLineMovePrev<cr>", mode = {"n", "t"}},
-      { "<C-S-j>", "<cmd>BufferLineMoveNext<cr>", mode = {"n", "t"}},
-      { "<C-1>", "<cmd>BufferLineGoToBuffer 1<cr>", mode = {"n", "t"}},
-      { "<C-2>", "<cmd>BufferLineGoToBuffer 2<cr>", mode = {"n", "t"}},
-      { "<C-3>", "<cmd>BufferLineGoToBuffer 3<cr>", mode = {"n", "t"}},
-      { "<C-4>", "<cmd>BufferLineGoToBuffer 4<cr>", mode = {"n", "t"}},
-      { "<C-5>", "<cmd>BufferLineGoToBuffer 5<cr>", mode = {"n", "t"}},
+      { "<C-w>", "<cmd>bdelete<cr>"},
+      { "<C-k>", "<cmd>bprevious<cr>"},
+      { "<C-j>", "<cmd>bnext<cr>"},
+      { "<C-S-k>", "<cmd>BufferLineMovePrev<cr>"},
+      { "<C-S-j>", "<cmd>BufferLineMoveNext<cr>"},
+      { "<C-1>", "<cmd>BufferLineGoToBuffer 1<cr>"},
+      { "<C-2>", "<cmd>BufferLineGoToBuffer 2<cr>"},
+      { "<C-3>", "<cmd>BufferLineGoToBuffer 3<cr>"},
+      { "<C-4>", "<cmd>BufferLineGoToBuffer 4<cr>"},
+      { "<C-5>", "<cmd>BufferLineGoToBuffer 5<cr>"},
+
+      { "<leader>w", "<cmd>bdelete<cr>"},
+      { "<leader>k", "<cmd>bprevious<cr>"},
+      { "<leader>j", "<cmd>bnext<cr>"},
+      { "<leader>S-k", "<cmd>BufferLineMovePrev<cr>"},
+      { "<leader>S-j", "<cmd>BufferLineMoveNext<cr>"},
+      { "<leader>1", "<cmd>BufferLineGoToBuffer 1<cr>"},
+      { "<leader>2", "<cmd>BufferLineGoToBuffer 2<cr>"},
+      { "<leader>3", "<cmd>BufferLineGoToBuffer 3<cr>"},
+      { "<leader>4", "<cmd>BufferLineGoToBuffer 4<cr>"},
+      { "<leader>5", "<cmd>BufferLineGoToBuffer 5<cr>"},
     },
   },
   {
@@ -154,17 +169,8 @@ require("lazy").setup {
   },
   {
     "folke/which-key.nvim",
-    config = function()
-      local whichkey = require("which-key")
-      whichkey.setup()
-      whichkey.register({
-        ["<leader>f"] = { ":%s///gc<Left><Left><Left><Left>", "find&replace" },
-        ["<leader>n"] = { "<cmd>cnext<cr>", "quickfix_next" },
-        ["<leader>N"] = { "<cmd>cprev<cr>", "quickfix_prev" },
-        ["<leader>q"] = { "<cmd>qa<cr>", "quit" },
-        ["<leader>s"] = { "<cmd>w<cr>", "save" },
-      })
-    end,
+    lazy = false,
+    opts = {},
   },
   {
     "ibhagwan/fzf-lua",
