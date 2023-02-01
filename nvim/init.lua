@@ -215,8 +215,11 @@ require("lazy").setup {
       local telescope = require("telescope")
       telescope.setup({
         defaults = {
+          sorting_strategy = "ascending",
+          layout_config = {horizontal = {prompt_position = "top"}},
           mappings = {
             i = {
+              ["<esc>"] = require("telescope.actions").close,
               ["<cr>"] = function(bufnr)
                 local picker = require("telescope.actions.state").get_current_picker(bufnr)
                 if #picker:get_multi_selection() > 0 then
