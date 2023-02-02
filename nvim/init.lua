@@ -171,6 +171,7 @@ require("lazy").setup {
   },
   {
     "VonHeikemen/lsp-zero.nvim",
+    lazy = false,
     dependencies = {
       {"neovim/nvim-lspconfig"},
       {"williamboman/mason.nvim"},
@@ -181,6 +182,9 @@ require("lazy").setup {
       {"hrsh7th/cmp-nvim-lua"},
       {"hrsh7th/cmp-cmdline"},
       {"hrsh7th/cmp-nvim-lsp-signature-help"},
+      {"saadparwaiz1/cmp_luasnip"},
+      {"rafamadriz/friendly-snippets"},
+      {"L3MON4D3/LuaSnip"},
     },
     config = function()
       local lsp = require("lsp-zero")
