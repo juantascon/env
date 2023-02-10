@@ -1,4 +1,0 @@
-#!/bin/sh
-vx check dunst >/dev/null || exit 1
-online || exit 1
-exec env -C ~ qutebrowser 2>&1
