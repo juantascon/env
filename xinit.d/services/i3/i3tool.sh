@@ -5,7 +5,7 @@ cws() {
 }
 
 move_to() {
-  [[ "$1" -lt 1 || "$1" -gt 4 ]] && return
+  [[ "$1" -lt 1 || "$1" -gt 5 ]] && return
   i3-msg "move container to workspace number $1"
   i3-msg "workspace $1"
 }
