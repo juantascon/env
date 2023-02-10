@@ -15,6 +15,7 @@ set -x PAGER bat
 
 set -x FREETYPE_PROPERTIES "truetype:interpreter-version=38"
 set -u fish_greeting #makes fish silent
+bind \cH backward-kill-word
 
 xdg-mkdirs
 direnv hook fish | source
