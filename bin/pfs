@@ -4,71 +4,82 @@ import yaml
 import os
 import argparse
 import fnmatch
+from collections import UserList
+
+DB_PATH = "~/my/pfs/main.yml"
 
 
-def get_db():
-    main = os.path.expanduser("~/my/pfs/main.yml")
-    with open(main) as file:
-        return yaml.load(file, Loader=yaml.FullLoader)
+class Entry:
+    def __init__(self, line):
+        self.id = line.pop("id")
+        self.patterns = line.pop("patterns", [])
+        self.patterns.append(self.id)
+        self.label = line.pop("label", "default")
+        self.fields = line
 
+    def match(self, pattern):
+        pattern_id, pattern_label = self.split_id_label(pattern)
+        for p in self.patterns:
+            if fnmatch.fnmatch(pattern_id, p) or fnmatch.fnmatch(p, pattern_id):
+                if fnmatch.fnmatch(self.label, pattern_label):
+                    return True
+        return False
 
-def do_get(args):
-    db = get_db()
-    try:
-        entry = db[args.id]
-        if args.field:
-            try:
-                print(entry[args.field])
-            except KeyError:
-                print("field not found")
-                exit(2)
+    def id_label(self):
+        return f"{self.id}:{self.label}"
+
+    @classmethod
+    def split_id_label(cls, value):
+        splits = value.split(":", maxsplit=1)
+        if len(splits) == 2:
+            return (splits[0], splits[1])
         else:
-            for key, value in entry.items():
-                print(key)
-                # print(yaml.dump(entry), end="")
-    except KeyError:
-        print("id not found")
-        exit(2)
+            return (value, "*")
 
 
-def do_find(args):
-    db = get_db()
-    for key, value in db.items():
-        if not args.pattern:
-            print(key)
-        else:
-            if args.mode == "exact":
-                if key == args.pattern:
-                    print(key)
-            elif args.mode == "fnmatch":
-                if fnmatch.fnmatch(key, args.pattern):
-                    print(key)
-            elif args.mode == "prefix":
-                if fnmatch.fnmatch(args.pattern, f"*{key}"):
-                    print(key)
+class DB(UserList):
+    def all(self):
+        path = os.path.expanduser(DB_PATH)
+        with open(path) as file:
+            content = yaml.load(file, Loader=yaml.FullLoader)
+        self.data = [Entry(line) for line in content]
+        return self
 
+    def filter(self, fun):
+        self.data = list(filter(fun, self.data))
+        return self
 
-def do_select(args):
-    db = get_db()
-    for id in args.ids:
-        entry = db.get(id, {})
-        for k, v in entry.items():
-            print(f"{id} {k} {v}")
+    def match(self, pattern):
+        return self.filter(lambda e: e.match(pattern))
 
 
 parser = argparse.ArgumentParser(prog="pfs")
-subparsers = parser.add_subparsers(dest="subcommand", required=True)
-parser_get = subparsers.add_parser("get", help="gets a single id")
-parser_get.add_argument("id")
-parser_get.add_argument("field", metavar="field", nargs="?", help="default: list fields")
-parser_get.set_defaults(func=do_get)
-parser_find = subparsers.add_parser("find", help="finds ids")
-parser_find.add_argument("-m", "--mode", default="exact", choices=["exact", "fnmatch", "prefix"])
-parser_find.add_argument("pattern", metavar="pattern", nargs="?", help="find pattern, default: list all")
-parser_find.set_defaults(func=do_find)
-parser_select = subparsers.add_parser("select", help="selects the given ids")
-parser_select.add_argument("ids", metavar="id", nargs="+")
-parser_select.set_defaults(func=do_select)
-
+parser.add_argument("-m", "--multi", action="store_true", help="returns results from multiple ids")
+parser.add_argument("-i", "--ids-only", action="store_true", help="display ids only")
+parser.add_argument("pattern", metavar="pattern", default="*:*", nargs="?")
+parser.add_argument("key", metavar="key", nargs="?")
 args = parser.parse_args()
-args.func(args)
+
+matches = DB().all().match(args.pattern)
+if not matches:
+    print("no matches")
+    exit(2)
+
+if not args.multi:
+    if len(matches) > 1:
+        print("multiple matches found, toggle -m")
+        exit(2)
+
+for match in matches:
+    if args.ids_only:
+        print(match.id_label())
+    elif args.key:
+        value = match.fields.get(args.key)
+        if not value:
+            print("key not found")
+            exit(2)
+        print(value)
+    else:
+        for k in match.fields.keys():
+            print(f"{match.id_label()} {k}")
+
