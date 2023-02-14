@@ -71,12 +71,11 @@ require("lazy").setup {
     opts = { accept_keys = "12345" },
   },
   {
-    "marko-cerovac/material.nvim",
+    "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.g.material_style = "darker"
-      vim.cmd.colorscheme("material")
+      vim.cmd.colorscheme("kanagawa")
     end,
   },
   {
