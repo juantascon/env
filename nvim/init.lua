@@ -110,8 +110,8 @@ require("lazy").setup {
     lazy = false,
     keys = {
       { "<C-w>", "<cmd>bdelete<cr>"},
-      { "<C-k>", "<cmd>bprevious<cr>"},
-      { "<C-j>", "<cmd>bnext<cr>"},
+      { "<C-k>", "<cmd>BufferLineCyclePrev<cr>"},
+      { "<C-j>", "<cmd>BufferLineCycleNext<cr>"},
       { "<C-S-k>", "<cmd>BufferLineMovePrev<cr>"},
       { "<C-S-j>", "<cmd>BufferLineMoveNext<cr>"},
       { "<C-1>", "<cmd>BufferLineGoToBuffer 1<cr>"},
@@ -121,8 +121,8 @@ require("lazy").setup {
       { "<C-5>", "<cmd>BufferLineGoToBuffer 5<cr>"},
 
       { "<leader>w", "<cmd>bdelete<cr>"},
-      { "<leader>k", "<cmd>bprevious<cr>"},
-      { "<leader>j", "<cmd>bnext<cr>"},
+      { "<leader>k", "<cmd>BufferLineCyclePrev<cr>"},
+      { "<leader>j", "<cmd>BufferLineCycleNext<cr>"},
       { "<leader>S-k", "<cmd>BufferLineMovePrev<cr>"},
       { "<leader>S-j", "<cmd>BufferLineMoveNext<cr>"},
       { "<leader>1", "<cmd>BufferLineGoToBuffer 1<cr>"},
