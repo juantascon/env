@@ -1,2 +1,2 @@
 #!/bin/bash
-exec /usr/bin/bat -n "$@"
+exec /usr/bin/bat -p "$@"
