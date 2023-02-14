@@ -1,2 +1,3 @@
 #! /bin/sh
-exec env -C "$1" kitty -c ~/env/nvim/kitty.conf --class nvim vi
+exec env -C "$1" kitty -c ~/env/nvim/kitty.conf --class nvim nvim
+# exec env -C "$1" neovide --nofork --x11-wm-class nvim
