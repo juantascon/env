@@ -1,2 +1,4 @@
 #! /bin/bash
+vx stop edge
+sleep 0.5
 exec sudo /usr/bin/poweroff "$@"
