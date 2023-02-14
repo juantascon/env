@@ -146,7 +146,7 @@ require("lazy").setup {
       {"hn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next" },
       {"hN", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev" },
     },
-    opts = {numhl = true, signcolumn = false },
+    opts = {},
   },
   {
     "ruifm/gitlinker.nvim",
