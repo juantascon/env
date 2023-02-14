@@ -13,6 +13,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local ntg = vim.api.nvim_create_augroup("numbertoggle", {clear = true})
 autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end, group = ntg})
 autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end, group = ntg})
+autocmd("BufReadPost", {callback = function() if vim.fn.line "'\"" > 1 and vim.fn.line "'\"" <= vim.fn.line "$" then vim.cmd 'normal! g`"' end end, group = aug})
 
 
 vim.g.mapleader = " "
@@ -70,7 +71,6 @@ require("lazy").setup {
     },
     opts = { accept_keys = "12345" },
   },
-  {
     "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
@@ -90,9 +90,6 @@ require("lazy").setup {
     end,
   },
   {
-    "ethanholz/nvim-lastplace",
-    opts = {},
-  },
   {
     "shatur/neovim-session-manager",
     dependencies = {"nvim-lua/plenary.nvim"},
