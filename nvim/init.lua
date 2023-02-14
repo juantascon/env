@@ -142,9 +142,9 @@ require("lazy").setup {
     dependencies = {"nvim-lua/plenary.nvim"},
     lazy = false,
     keys = {
-      {"hg", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview" },
+      {"hh", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview" },
       {"hn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next" },
-      {"hp", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev" },
+      {"hN", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev" },
     },
     opts = {numhl = true, signcolumn = false },
   },
