@@ -69,12 +69,6 @@ vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
 require("lazy").setup {
   "gpanders/editorconfig.nvim",
   {
-    "rlane/pounce.nvim",
-    keys = {
-      {"s", "<cmd>Pounce<cr>"},
-    },
-    opts = { accept_keys = "12345" },
-  },
     "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
@@ -93,7 +87,6 @@ require("lazy").setup {
       }
     end,
   },
-  {
   {
     "shatur/neovim-session-manager",
     dependencies = {"nvim-lua/plenary.nvim"},
