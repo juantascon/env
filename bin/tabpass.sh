@@ -14,13 +14,14 @@ clean_url() {
   url=${url/#https://}
   url=${url/#www.}
   url=${url/#accounts.}
+  url=${url/#signin.}
   echo $url
 }
 
 url=$(get_url_edge)
 url=$(clean_url $url)
-choice=$(pfs --multi $url | rofi -dmenu -matching fuzzy -format d -no-custom -p "select:")
-read -r id field <<< $(echo $choices)
+choice=$(pfs --multi $url | rofi -dmenu -matching fuzzy -no-custom -p "select:")
+read -r id field <<< $(echo $choice)
 value=$(pfs $id $field)
 [ $? -ne 0 ] && exit 1
 [[ $field == totp ]] && value=$(oathtool --totp --base32 $value)
