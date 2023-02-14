@@ -9,6 +9,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 local autocmd = vim.api.nvim_create_autocmd
 local aug = vim.api.nvim_create_augroup("group", {clear = true})
 autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end, group = aug})
@@ -24,7 +25,7 @@ vim.opt.writebackup = false
 vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.showtabline = 0
 vim.opt.clipboard = "unnamedplus"
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes:2"
 vim.opt.number = true
 vim.opt.laststatus = 3
 vim.opt.cmdheight = 0
@@ -40,6 +41,8 @@ vim.opt.scrolloff = 10
 vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
+vim.opt.pumheight = 10
+
 
 vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set({"n", "v"}, "<Home>", "^")
