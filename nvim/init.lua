@@ -165,6 +165,7 @@ require("lazy").setup {
   {
     "VonHeikemen/lsp-zero.nvim",
     lazy = false,
+    priority = 1000,
     dependencies = {
       {"neovim/nvim-lspconfig"},
       {"williamboman/mason.nvim"},
@@ -181,9 +182,13 @@ require("lazy").setup {
     },
     config = function()
       local lsp = require("lsp-zero")
-      lsp.preset("recommended")
+      lsp.preset({
+        name = "recommended",
+        set_lsp_keymaps = {omit = {"<F2>"}, preserve_mappings=false},
+        suggest_lsp_servers = false,
+      })
       lsp.nvim_workspace()
-      lsp.ensure_installed({"pylsp", "sumneko_lua", "bashls", "jsonls"})
+      lsp.ensure_installed({"pylsp", "lua_ls", "bashls", "jsonls"})
       lsp.configure("pylsp", {settings = {pylsp = {plugins = {pycodestyle = {maxLineLength = 120}}}}})
       lsp.setup()
 
