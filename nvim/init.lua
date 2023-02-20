@@ -133,7 +133,12 @@ require("lazy").setup {
       { "<leader>4", "<cmd>BufferLineGoToBuffer 4<cr>"},
       { "<leader>5", "<cmd>BufferLineGoToBuffer 5<cr>"},
     },
-    opts = {},
+    opts = {
+      options = {
+        diagnostics = "nvim_lsp",
+        separator_style = "slant",
+      }
+    },
   },
   {
     "ojroques/nvim-hardline",
