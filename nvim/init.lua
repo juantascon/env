@@ -22,7 +22,6 @@ vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h17"
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.writebackup = false
-vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.showtabline = 0
 vim.opt.clipboard = "unnamedplus"
 vim.opt.signcolumn = "yes:2"
@@ -185,19 +184,24 @@ require("lazy").setup {
     },
     config = function()
       local lsp = require("lsp-zero")
+      local cmp = require("cmp")
       lsp.preset({
         name = "recommended",
-        set_lsp_keymaps = {omit = {"<F2>"}, preserve_mappings=false},
+        set_lsp_keymaps = {omit = {"<F2>", "<C-k>"}, preserve_mappings=false},
         suggest_lsp_servers = false,
+      })
+      lsp.setup_nvim_cmp({
+        preselect = cmp.PreselectMode.None,
+        completion = {completeopt = "menu,menuone,noinsert,noselect"},
       })
       lsp.nvim_workspace()
       lsp.ensure_installed({"pylsp", "lua_ls", "bashls", "jsonls"})
       lsp.configure("pylsp", {settings = {pylsp = {plugins = {pycodestyle = {maxLineLength = 120}}}}})
       lsp.setup()
 
-      local cmp = require("cmp")
       cmp.setup.cmdline(":", {sources = {{name = "cmdline"}}})
       cmp.setup.cmdline("/", {sources = {{name = "buffer"}}})
+
     end,
   },
   {
