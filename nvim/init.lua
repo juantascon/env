@@ -210,47 +210,25 @@ require("lazy").setup {
     end,
   },
   {
-    "nvim-telescope/telescope.nvim",
+    "ibhagwan/fzf-lua",
     lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-ui-select.nvim",
-      "nvim-telescope/telescope-fzf-native.nvim",
-    },
     keys = {
-      {"<leader>p", function() require("telescope.builtin").find_files() end, desc = "find_files" },
-      {"<leader>F", function() require("telescope.builtin").live_grep() end, desc = "live_grep" },
-      {"<leader>h", function() require("telescope.builtin").git_status() end, desc = "git_status" },
-      {"<leader>l", function() require("telescope.builtin").quickfix() end, desc = "quickfix" },
+      {"<leader>p", function() require("fzf-lua").files() end, desc = "find_files" },
+      {"<leader>F", function() require("fzf-lua").live_grep_resume() end, desc = "live_grep" },
+      {"<leader>h", function() require("fzf-lua").git_status() end, desc = "git_status" },
+      {"<leader>l", function() require("fzf-lua").quickfix() end, desc = "quickfix" },
     },
     config = function()
-      local telescope = require("telescope")
-      telescope.setup({
-        defaults = {
-          sorting_strategy = "ascending",
-          layout_config = {horizontal = {prompt_position = "top"}},
-          mappings = {
-            i = {
-              ["<esc>"] = require("telescope.actions").close,
-              ["<cr>"] = function(bufnr)
-                local picker = require("telescope.actions.state").get_current_picker(bufnr)
-                if #picker:get_multi_selection() > 0 then
-                  require("telescope.actions").send_selected_to_qflist(bufnr)
-                  require("telescope.builtin").quickfix()
-                else
-                  require("telescope.actions").select_default(bufnr)
-                end
-              end,
-            },
-          },
+      local fzf = require("fzf-lua")
+      fzf.setup({
+        files = {
+          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude __pycache__ --exclude node_modules"
+        },
+        grep = {
+          rg_opts = "--sort=path --column --line-number --no-heading --color=always --smart-case --max-columns=512",
         },
       })
-      telescope.load_extension("ui-select")
-      telescope.load_extension("fzf")
+      fzf.register_ui_select()
     end,
-  },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
   },
 }
