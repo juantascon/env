@@ -68,7 +68,6 @@ require("lazy").setup {
   "gpanders/editorconfig.nvim",
   {
     "rebelot/kanagawa.nvim",
-    lazy = false,
     priority = 1000,
     config = function()
       vim.cmd.colorscheme("kanagawa")
@@ -76,7 +75,6 @@ require("lazy").setup {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = false,
     config = function()
       require"nvim-treesitter.configs".setup {
         highlight = {enable = true},
@@ -88,7 +86,6 @@ require("lazy").setup {
   {
     "shatur/neovim-session-manager",
     dependencies = {"nvim-lua/plenary.nvim"},
-    lazy = false,
     keys = {
       { "<leader>r", "<cmd>SessionManager load_session<cr>", desc = "sessions" },
     },
@@ -105,7 +102,6 @@ require("lazy").setup {
   },
   {
     "akinsho/bufferline.nvim",
-    lazy = false,
     keys = {
       { "<C-w>", "<cmd>bdelete<cr>"},
       { "<C-k>", "<cmd>BufferLineCyclePrev<cr>"},
@@ -143,7 +139,6 @@ require("lazy").setup {
   {
     "lewis6991/gitsigns.nvim",
     dependencies = {"nvim-lua/plenary.nvim"},
-    lazy = false,
     keys = {
       {"hh", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview" },
       {"hn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next" },
@@ -162,12 +157,10 @@ require("lazy").setup {
   },
   {
     "folke/which-key.nvim",
-    lazy = false,
     opts = {},
   },
   {
     "VonHeikemen/lsp-zero.nvim",
-    lazy = false,
     priority = 1000,
     dependencies = {
       {"neovim/nvim-lspconfig"},
@@ -207,7 +200,6 @@ require("lazy").setup {
   },
   {
     "ibhagwan/fzf-lua",
-    lazy = false,
     keys = {
       {"<leader>p", function() require("fzf-lua").files() end, desc = "find_files" },
       {"<leader>F", function() require("fzf-lua").live_grep_resume() end, desc = "live_grep" },
@@ -227,6 +219,7 @@ require("lazy").setup {
       fzf.register_ui_select()
     end,
   },
+  defaults = { lazy = false, version = "*" },
   checker = { enabled = true },
   performance = {
     rtp = {
