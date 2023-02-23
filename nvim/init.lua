@@ -227,6 +227,7 @@ require("lazy").setup {
       fzf.register_ui_select()
     end,
   },
+  checker = { enabled = true },
   performance = {
     rtp = {
       disabled_plugins = {"netrw", "netrwSettings", "netrwFileHandlers", "gzip", "zip", "tar", "shada_autoload", "tutor", "tohtml", "msgpack_autoload"}
