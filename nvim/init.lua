@@ -1,8 +1,3 @@
-local disabled_builtin = {"netrw", "netrwSettings", "netrwFileHandlers", "gzip", "zip", "tar", "shada_autoload", "msgpack_autoload"}
-for _, plugin in pairs(disabled_builtin) do
-  vim.g["loaded_" .. plugin] = 1
-end
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({"git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath})
@@ -230,5 +225,10 @@ require("lazy").setup {
       })
       fzf.register_ui_select()
     end,
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {"netrw", "netrwSettings", "netrwFileHandlers", "gzip", "zip", "tar", "shada_autoload", "tutor", "tohtml", "msgpack_autoload"}
+    },
   },
 }
