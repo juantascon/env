@@ -152,7 +152,9 @@ require("lazy").setup ({
   {
     "ruifm/gitlinker.nvim",
     dependencies = {"nvim-lua/plenary.nvim"},
-    opts = {},
+    opts = {
+      mappings = "yh"
+    },
   },
   {
     "gen740/SmoothCursor.nvim",
