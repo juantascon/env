@@ -4,7 +4,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
 local autocmd = vim.api.nvim_create_autocmd
 local aug = vim.api.nvim_create_augroup("group", {clear = true})
 autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end, group = aug})
@@ -12,8 +11,8 @@ autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt
 autocmd("BufReadPost", {callback = function() if vim.fn.line "'\"" > 1 and vim.fn.line "'\"" <= vim.fn.line "$" then vim.cmd 'normal! g`"' end end, group = aug})
 autocmd("BufWritePost", {pattern = "*.py", command = "LspZeroFormat", group = aug})
 
-
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h17"
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
@@ -23,10 +22,12 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.signcolumn = "yes:2"
 vim.opt.number = true
 vim.opt.laststatus = 3
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.cursorline = true
+vim.opt.lazyredraw = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 250
+vim.opt.mat = 2
 vim.opt.undofile = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -37,7 +38,7 @@ vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
 vim.opt.pumheight = 10
-
+vim.opt.wildmode = "longest:full,full"
 
 vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set({"n", "v"}, "<Home>", "^")
@@ -63,8 +64,7 @@ vim.keymap.set("n", "<leader>f", ":%s///gc<Left><Left><Left><Left>", {silent = f
 vim.keymap.set("v", "<Leader>f", [[y:%s/<C-R>"//gc<Left><Left><Left>]], {silent = false, desc = "find & replace selection"})
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
 
-
-require("lazy").setup {
+require("lazy").setup ({
   "gpanders/editorconfig.nvim",
   {
     "rebelot/kanagawa.nvim",
@@ -85,6 +85,7 @@ require("lazy").setup {
   },
   {
     "shatur/neovim-session-manager",
+    lazy = false,
     dependencies = {"nvim-lua/plenary.nvim"},
     keys = {
       { "<leader>r", "<cmd>SessionManager load_session<cr>", desc = "sessions" },
@@ -102,6 +103,7 @@ require("lazy").setup {
   },
   {
     "akinsho/bufferline.nvim",
+    lazy = false,
     keys = {
       { "<C-w>", "<cmd>bdelete<cr>"},
       { "<C-k>", "<cmd>BufferLineCyclePrev<cr>"},
@@ -138,6 +140,7 @@ require("lazy").setup {
   },
   {
     "lewis6991/gitsigns.nvim",
+    lazy = false,
     dependencies = {"nvim-lua/plenary.nvim"},
     keys = {
       {"hh", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview" },
@@ -190,6 +193,7 @@ require("lazy").setup {
       })
       lsp.nvim_workspace()
       lsp.ensure_installed({"pylsp", "lua_ls", "bashls", "jsonls"})
+      -- :PylspInstall pyls-black pyls-isort
       lsp.configure("pylsp", {settings = {pylsp = {plugins = {pycodestyle = {maxLineLength = 120}}}}})
       lsp.setup()
 
@@ -200,6 +204,7 @@ require("lazy").setup {
   },
   {
     "ibhagwan/fzf-lua",
+    lazy = false,
     keys = {
       {"<leader>p", function() require("fzf-lua").files() end, desc = "find_files" },
       {"<leader>F", function() require("fzf-lua").live_grep_resume() end, desc = "live_grep" },
@@ -219,11 +224,12 @@ require("lazy").setup {
       fzf.register_ui_select()
     end,
   },
-  defaults = { lazy = false, version = "*" },
+},
+{
   checker = { enabled = true },
   performance = {
     rtp = {
       disabled_plugins = {"netrw", "netrwSettings", "netrwFileHandlers", "gzip", "zip", "tar", "shada_autoload", "tutor", "tohtml", "msgpack_autoload"}
     },
   },
-}
+})
