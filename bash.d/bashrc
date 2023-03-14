@@ -10,7 +10,7 @@ export XDG_STATE_HOME=$HOME/.state
 export XDG_RUNTIME_DIR=/tmp/run-$USER
 
 export EDITOR=vi
-export BROWSER=qutebrowser
+export BROWSER=edge
 export PAGER=bat
 
 xdg-mkdirs
