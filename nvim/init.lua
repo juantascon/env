@@ -84,7 +84,7 @@ require("lazy").setup ({
       require"nvim-treesitter.configs".setup {
         highlight = {enable = true},
         indent = {enable = true},
-        ensure_installed = "all",
+        auto_install = true,
       }
     end,
   },
