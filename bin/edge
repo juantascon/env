@@ -1,2 +1,2 @@
 #!/bin/sh
-exec ~/opt/microsoft-edge-*/usr/bin/microsoft-edge-stable "$@" 2>&1
+exec ~/opt/microsoft-edge-stable_*/opt/microsoft/msedge/microsoft-edge "$@" 2>&1
