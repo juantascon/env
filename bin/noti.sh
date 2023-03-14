@@ -9,6 +9,8 @@ case $1 in
     name=$(pulsemixer --list-sinks|grep Default|grep -oP "(?<=Name: ).*(?=, M)")
     value=$(pulsemixer --get-volume |cut -d" " -f 1)
     notify-send -i $icon -h int:value:$value "$name" ;;
+  "profile")
+    notify-send -i microphone-sensitivity-medium-symbolic $(bluetooth-profile.sh get) ;;
   "brightness")
     notify-send -i video-display -h int:value:$(brillo -G) $(brillo -L) ;;
   "playerctl")
