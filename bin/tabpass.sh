@@ -10,11 +10,16 @@ get_url_edge() {
 
 clean_url() {
   url="$1"
-  url=${url/#http://}
-  url=${url/#https://}
+  url="${url#http://}"
+  url="${url#https://}"
+  url=${url%%/*}
   url=${url/#www.}
+  url=${url/#my.}
+  url=${url/#app.}
+  url=${url/#account.}
   url=${url/#accounts.}
   url=${url/#signin.}
+  url=${url/#login.}
   echo $url
 }
 
