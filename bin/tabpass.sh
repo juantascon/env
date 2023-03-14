@@ -5,7 +5,7 @@ get_url_qutebrowser() {
 }
 
 get_url_edge() {
-  xdotool getactivewindow getwindowname | cut -d"-" -f 1
+  xdotool getactivewindow getwindowname |awk -F" - " '{print $1}'
 }
 
 clean_url() {
