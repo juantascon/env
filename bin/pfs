@@ -62,7 +62,7 @@ args = parser.parse_args()
 
 matches = DB().all().match(args.pattern)
 if not matches:
-    print("no matches")
+    print(f"no matches for {args.pattern}")
     exit(2)
 
 if not args.multi:
