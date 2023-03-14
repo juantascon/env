@@ -170,43 +170,87 @@ require("lazy").setup ({
     opts = {},
   },
   {
-    "VonHeikemen/lsp-zero.nvim",
+    "neovim/nvim-lspconfig",
     priority = 1000,
+    lazy = false,
     dependencies = {
-      {"neovim/nvim-lspconfig"},
       {"williamboman/mason.nvim"},
       {"williamboman/mason-lspconfig.nvim"},
+      {"folke/neodev.nvim"},
       {"hrsh7th/nvim-cmp"},
       {"hrsh7th/cmp-nvim-lsp"},
       {"hrsh7th/cmp-buffer"},
       {"hrsh7th/cmp-nvim-lua"},
-      {"hrsh7th/cmp-cmdline"},
       {"hrsh7th/cmp-nvim-lsp-signature-help"},
+      {"zbirenbaum/copilot-cmp"},
+      {"zbirenbaum/copilot.lua"},
       {"saadparwaiz1/cmp_luasnip"},
       {"rafamadriz/friendly-snippets"},
       {"L3MON4D3/LuaSnip"},
     },
+    keys = {
+      {"K", function() vim.lsp.buf.hover() end},
+      {"gd", function() vim.lsp.buf.definition() end},
+      {"gD", function() vim.lsp.buf.declaration() end},
+      {"gi", function() vim.lsp.buf.implementation() end},
+      {"gr", function() vim.lsp.buf.references() end},
+      {"gs", function() vim.lsp.buf.signature_help() end},
+      {"gl", function() vim.diagnostic.open_float() end},
+    },
     config = function()
-      local lsp = require("lsp-zero")
-      local cmp = require("cmp")
-      lsp.preset({
-        name = "recommended",
-        set_lsp_keymaps = {omit = {"<F2>", "<C-k>"}, preserve_mappings=false},
-        suggest_lsp_servers = false,
+      require("neodev").setup({
+        override = function(root_dir, library)
+          library.enabled = true
+          library.plugins = true
+        end,
       })
-      lsp.setup_nvim_cmp({
+
+      require("mason").setup({})
+      require("mason-lspconfig").setup()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+      require("copilot_cmp").setup()
+
+      local cmp = require("cmp")
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
         preselect = cmp.PreselectMode.None,
         completion = {completeopt = "menu,menuone,noinsert,noselect"},
+        mapping = {
+          ["<cr>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace}),
+          ["<down>"] = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
+          ["<up>"] = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}),
+          ["<c-u>"] = cmp.mapping.scroll_docs(-4),
+          ["<c-d>"] = cmp.mapping.scroll_docs(4),
+        },
+        sources = {
+          {name = "copilot"},
+          {name = "nvim_lsp"},
+          {name = "nvim_lsp_signature_help"},
+          {name = "luasnip"},
+          {name = "nvim_lua"},
+          {name = "buffer", keyword_length = 4},
+        },
       })
-      lsp.nvim_workspace()
-      lsp.ensure_installed({"pylsp", "lua_ls", "bashls", "jsonls"})
-      -- :PylspInstall pyls-black pyls-isort
-      lsp.configure("pylsp", {settings = {pylsp = {plugins = {pycodestyle = {maxLineLength = 120}}}}})
-      lsp.setup()
 
-      cmp.setup.cmdline(":", {sources = {{name = "cmdline"}}})
-      cmp.setup.cmdline("/", {sources = {{name = "buffer"}}})
-
+      local lspconfig = require("lspconfig")
+      local defaults = lspconfig.util.default_config
+      defaults.capabilities = vim.tbl_deep_extend("force", defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+      lspconfig.pylsp.setup({
+        cmd = {"poetry", "run", "pylsp"},
+        settings = {pylsp = {plugins = {pycodestyle = {maxLineLength = 120}}}}
+      })
+      lspconfig.lua_ls.setup({})
     end,
   },
   {
