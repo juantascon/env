@@ -13,6 +13,23 @@ XF86KbdBrightness{Down,Up}
 XF86MonBrightness{Down,Up}
   brillo -{U,A} 1; noti.sh brightness
 
-super + {t,l,p,v,s,x,m}
-  {xterm,i3lock,tabpass.sh,clipmenu,maim -s ~/shot.png,autorandr -c, bluetooth-profile.sh toggle; noti.sh profile}
+super + t
+  xterm
 
+super + l
+  i3lock
+
+super + p
+  tabpass.sh
+
+super + v
+  clipmenu
+
+super + s
+  flameshot gui
+
+super + x
+  autorandr -c
+
+super + m
+  bluetooth-profile.sh toggle; noti.sh profile
