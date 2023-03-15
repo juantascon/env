@@ -295,7 +295,7 @@ require("lazy").setup ({
   },
 },
 {
-  checker = { enabled = true },
+  -- checker = { enabled = true },
   performance = {
     rtp = {
       disabled_plugins = {"netrw", "netrwSettings", "netrwFileHandlers", "gzip", "zip", "tar", "shada_autoload", "tutor", "tohtml", "msgpack_autoload"}
