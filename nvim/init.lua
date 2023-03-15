@@ -37,6 +37,8 @@ vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
 vim.opt.pumheight = 10
+vim.opt.pumblend = 10
+vim.opt.winblend = 10
 vim.opt.wildmode = "longest:full,full"
 
 vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
