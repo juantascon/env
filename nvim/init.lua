@@ -112,6 +112,7 @@ require("lazy").setup ({
     "akinsho/bufferline.nvim",
     lazy = false,
     keys = {
+      { "<C-t>", "<cmd>enew<cr>"},
       { "<C-w>", "<cmd>bdelete<cr>"},
       { "<C-k>", "<cmd>BufferLineCyclePrev<cr>"},
       { "<C-j>", "<cmd>BufferLineCycleNext<cr>"},
@@ -123,6 +124,7 @@ require("lazy").setup ({
       { "<C-4>", "<cmd>BufferLineGoToBuffer 4<cr>"},
       { "<C-5>", "<cmd>BufferLineGoToBuffer 5<cr>"},
 
+      { "<leader>t", "<cmd>enew<cr>"},
       { "<leader>w", "<cmd>bdelete<cr>"},
       { "<leader>k", "<cmd>BufferLineCyclePrev<cr>"},
       { "<leader>j", "<cmd>BufferLineCycleNext<cr>"},
