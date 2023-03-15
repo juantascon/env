@@ -8,7 +8,7 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end})
 autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end})
 autocmd("BufReadPost", {callback = function() if vim.fn.line "'\"" > 1 and vim.fn.line "'\"" <= vim.fn.line "$" then vim.cmd 'normal! g`"' end end})
-autocmd("BufWritePost", {pattern = "*.py", command = "LspZeroFormat"})
+autocmd("BufWritePost", {pattern = "*.py", callback = function() vim.lsp.buf.format() end})
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
