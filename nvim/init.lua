@@ -23,7 +23,6 @@ vim.opt.number = true
 vim.opt.laststatus = 3
 vim.opt.cmdheight = 1
 vim.opt.cursorline = true
-vim.opt.lazyredraw = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 250
 vim.opt.mat = 2
