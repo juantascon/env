@@ -71,7 +71,6 @@ vim.keymap.set("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.keymap.set("", "<C-z>", "<Nop>", { noremap = true, silent = true })
 
 require("lazy").setup ({
-  "gpanders/editorconfig.nvim",
   {
     "rebelot/kanagawa.nvim",
     priority = 1000,
