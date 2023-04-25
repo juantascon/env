@@ -1,0 +1,3 @@
+#!/bin/sh
+_cfg=$(pwd)/wezterm.lua
+exec env -C ~ wezterm --config-file $_cfg start --class terminal 2>&1

@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-exec env -C "$1" direnv exec . kitty -c ~/env/nvim/kitty.conf --class nvim nvim
+exec direnv exec "$1" wezterm --config-file ~/env/nvim/wezterm.lua start --class nvim --cwd "$1" nvim

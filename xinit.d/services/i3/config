@@ -19,6 +19,6 @@ bindsym F12 workspace 5
 
 for_window [class=".*"] border pixel 0
 for_window [class="pop-up"] floating enable
-for_window [class="kitty"] move to workspace 5
+for_window [class="terminal"] move to workspace 5
 for_window [class="nvim"] move to workspace 3
 

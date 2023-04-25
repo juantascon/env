@@ -1,3 +1,0 @@
-#!/bin/sh
-_cfg=$(pwd)/kitty.conf
-exec env -C ~ kitty --config $_cfg 2>&1
