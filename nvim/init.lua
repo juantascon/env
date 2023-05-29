@@ -284,6 +284,11 @@ require("lazy").setup ({
     config = function()
       local fzf = require("fzf-lua")
       fzf.setup({
+        keymap = {
+          fzf = {
+            ["ctrl-a"] = "select-all+accept",
+          }
+        },
         files = {
           fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude __pycache__ --exclude node_modules"
         },
