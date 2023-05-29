@@ -269,6 +269,17 @@ require("lazy").setup ({
     end,
   },
   {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function()
+      local nls = require("null-ls")
+      return {
+        sources = {
+          nls.builtins.formatting.mix,
+        },
+      }
+    end,
+  },
+  {
     "ibhagwan/fzf-lua",
     lazy = false,
     keys = {
