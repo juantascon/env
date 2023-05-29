@@ -68,6 +68,8 @@ vim.keymap.set("n", "<leader>s", "<cmd>w<cr>")
 vim.keymap.set("n", "<leader>f", ":%s///gc<Left><Left><Left><Left>", {silent = false, desc = "find & replace"})
 vim.keymap.set("v", "<Leader>f", [[y:%s/<C-R>"//gc<Left><Left><Left>]], {silent = false, desc = "find & replace selection"})
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
+vim.keymap.set("n", "<C-[>", "<cmd>cnext<cr>")
+vim.keymap.set("n", "<C-]>", "<cmd>cprev<cr>")
 vim.keymap.set("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.keymap.set("", "<C-z>", "<Nop>", { noremap = true, silent = true })
 
