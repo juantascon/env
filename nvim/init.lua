@@ -168,10 +168,6 @@ require("lazy").setup ({
     opts = {},
   },
   {
-    "folke/which-key.nvim",
-    opts = {},
-  },
-  {
     "folke/noice.nvim",
     dependencies = {
       {"MunifTanjim/nui.nvim"},
