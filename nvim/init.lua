@@ -39,6 +39,7 @@ vim.opt.pumheight = 10
 vim.opt.pumblend = 10
 vim.opt.winblend = 10
 vim.opt.wildmode = "longest:full,full"
+vim.opt.smartcase = true
 
 vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set({"n", "v"}, "<Home>", "^")
