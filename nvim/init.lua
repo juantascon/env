@@ -265,10 +265,6 @@ require("lazy").setup ({
       local lspconfig = require("lspconfig")
       local defaults = lspconfig.util.default_config
       defaults.capabilities = vim.tbl_deep_extend("force", defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
-      lspconfig.pylsp.setup({
-        cmd = {"poetry", "run", "pylsp"},
-        settings = {pylsp = {plugins = {pycodestyle = {maxLineLength = 120}}}}
-      })
       lspconfig.lua_ls.setup({})
     end,
   },
