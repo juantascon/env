@@ -165,9 +165,12 @@ require("lazy").setup ({
   {
     "ruifm/gitlinker.nvim",
     dependencies = {"nvim-lua/plenary.nvim"},
-    opts = {
-      mappings = "yh"
-    },
+    config = function()
+      require("gitlinker").setup({
+        mappings = "yh",
+        callbacks = {["gitlab.lan.athonet.com"] = require("gitlinker.hosts").get_gitlab_type_url},
+      })
+    end
   },
   {
     "gen740/SmoothCursor.nvim",
