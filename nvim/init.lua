@@ -201,8 +201,6 @@ require("lazy").setup ({
       {"hrsh7th/cmp-buffer"},
       {"hrsh7th/cmp-nvim-lua"},
       {"hrsh7th/cmp-nvim-lsp-signature-help"},
-      {"zbirenbaum/copilot-cmp"},
-      {"zbirenbaum/copilot.lua"},
       {"saadparwaiz1/cmp_luasnip"},
       {"rafamadriz/friendly-snippets"},
       {"L3MON4D3/LuaSnip"},
@@ -226,11 +224,6 @@ require("lazy").setup ({
 
       require("mason").setup({})
       require("mason-lspconfig").setup()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-      require("copilot_cmp").setup()
 
       local cmp = require("cmp")
       cmp.setup({
@@ -253,7 +246,6 @@ require("lazy").setup ({
           ["<c-d>"] = cmp.mapping.scroll_docs(4),
         },
         sources = {
-          {name = "copilot"},
           {name = "nvim_lsp"},
           {name = "nvim_lsp_signature_help"},
           {name = "luasnip"},
