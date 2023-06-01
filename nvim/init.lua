@@ -264,6 +264,8 @@ require("lazy").setup ({
       local defaults = lspconfig.util.default_config
       defaults.capabilities = vim.tbl_deep_extend("force", defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
       lspconfig.lua_ls.setup({})
+      lspconfig.elixirls.setup({})
+      lspconfig.erlangls.setup({})
     end,
   },
   {
@@ -273,6 +275,7 @@ require("lazy").setup ({
       return {
         sources = {
           nls.builtins.formatting.mix,
+          nls.builtins.diagnostics.credo,
         },
       }
     end,
