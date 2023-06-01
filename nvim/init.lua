@@ -215,7 +215,6 @@ require("lazy").setup ({
       {"hrsh7th/cmp-nvim-lsp"},
       {"hrsh7th/cmp-buffer"},
       {"hrsh7th/cmp-nvim-lua"},
-      {"hrsh7th/cmp-nvim-lsp-signature-help"},
       {"saadparwaiz1/cmp_luasnip"},
       {"rafamadriz/friendly-snippets"},
       {"L3MON4D3/LuaSnip"},
@@ -236,7 +235,6 @@ require("lazy").setup ({
           library.plugins = true
         end,
       })
-
       require("mason").setup({})
       require("mason-lspconfig").setup()
 
@@ -262,7 +260,6 @@ require("lazy").setup ({
         },
         sources = {
           {name = "nvim_lsp"},
-          {name = "nvim_lsp_signature_help"},
           {name = "luasnip"},
           {name = "nvim_lua"},
           {name = "buffer", keyword_length = 4},
