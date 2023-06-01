@@ -4,11 +4,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local autocmd = vim.api.nvim_create_autocmd
-autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end})
-autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end})
-autocmd("BufReadPost", {callback = function() if vim.fn.line "'\"" > 1 and vim.fn.line "'\"" <= vim.fn.line "$" then vim.cmd 'normal! g`"' end end})
-autocmd("BufWritePost", {pattern = "*.py", callback = function() vim.lsp.buf.format() end})
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -41,6 +36,14 @@ vim.opt.winblend = 10
 vim.opt.wildmode = "longest:full,full"
 vim.opt.smartcase = true
 
+
+local autocmd = vim.api.nvim_create_autocmd
+autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end})
+autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end})
+autocmd("BufReadPost", {callback = function() if vim.fn.line "'\"" > 1 and vim.fn.line "'\"" <= vim.fn.line "$" then vim.cmd 'normal! g`"' end end})
+autocmd("BufWritePost", {pattern = {"*.ex", "*.exs"}, callback = function() vim.lsp.buf.format() end})
+
+
 vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set({"n", "v"}, "<Home>", "^")
 vim.keymap.set("i", "<Home>", "<Esc>^i")
@@ -72,6 +75,7 @@ vim.keymap.set("n", "<C-[>", "<cmd>cnext<cr>")
 vim.keymap.set("n", "<C-]>", "<cmd>cprev<cr>")
 vim.keymap.set("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.keymap.set("", "<C-z>", "<Nop>", { noremap = true, silent = true })
+
 
 require("lazy").setup ({
   {
@@ -109,6 +113,7 @@ require("lazy").setup ({
     "echasnovski/mini.indentscope",
     opts = {},
   },
+  {
     "numToStr/Comment.nvim",
     opts = {},
   },
