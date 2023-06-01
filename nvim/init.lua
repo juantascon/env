@@ -106,6 +106,9 @@ require("lazy").setup ({
     end,
   },
   {
+    "echasnovski/mini.indentscope",
+    opts = {},
+  },
     "numToStr/Comment.nvim",
     opts = {},
   },
