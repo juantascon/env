@@ -118,6 +118,10 @@ require("lazy").setup ({
     opts = {},
   },
   {
+    "VidocqH/lsp-lens.nvim",
+    opts = {},
+  },
+  {
     "akinsho/bufferline.nvim",
     lazy = false,
     keys = {
