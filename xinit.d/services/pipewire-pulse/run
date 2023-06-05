@@ -1,3 +1,0 @@
-#!/bin/sh
-vx check pipewire >/dev/null || exit 1
-exec pipewire-pulse 2>&1
