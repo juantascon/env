@@ -40,7 +40,7 @@ vim.opt.smartcase = true
 local autocmd = vim.api.nvim_create_autocmd
 autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end})
 autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end})
-autocmd("BufReadPost", {callback = function() if vim.fn.line "'\"" > 1 and vim.fn.line "'\"" <= vim.fn.line "$" then vim.cmd 'normal! g`"' end end})
+autocmd("BufReadPost", {callback = function() vim.cmd.normal('g`"') end})
 autocmd("BufWritePost", {pattern = {"*.ex", "*.exs"}, callback = function() vim.lsp.buf.format() end})
 
 
