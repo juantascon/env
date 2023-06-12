@@ -48,7 +48,7 @@ vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set({"n", "v"}, "<Home>", "^")
 vim.keymap.set("i", "<Home>", "<Esc>^i")
 vim.keymap.set("n", "c", "*``cgn")
-vim.keymap.set("x", "c", [["y/\\V\<C-r>=escape(@\", '/')\<CR>\<CR>" . "``cgn"]], { expr = true })
+vim.keymap.set("x", "c", [["y/\\V\<C-r>=escape(@\", '/')\<CR>\<CR>" . "``cgn"]], {expr = true})
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set({"n", "x"}, "r", [["_d]])
@@ -73,8 +73,8 @@ vim.keymap.set("v", "<Leader>f", [[y:%s/<C-R>"//gc<Left><Left><Left>]], {silent 
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
 vim.keymap.set("n", "<C-[>", "<cmd>cnext<cr>")
 vim.keymap.set("n", "<C-]>", "<cmd>cprev<cr>")
-vim.keymap.set("", "<Space>", "<Nop>", { noremap = true, silent = true })
-vim.keymap.set("", "<C-z>", "<Nop>", { noremap = true, silent = true })
+vim.keymap.set("", "<Space>", "<Nop>", {noremap = true, silent = true})
+vim.keymap.set("", "<C-z>", "<Nop>", {noremap = true, silent = true})
 
 
 require("lazy").setup ({
@@ -100,7 +100,7 @@ require("lazy").setup ({
     lazy = false,
     dependencies = {"nvim-lua/plenary.nvim"},
     keys = {
-      { "<leader>r", "<cmd>SessionManager load_session<cr>", desc = "sessions" },
+      {"<leader>r", "<cmd>SessionManager load_session<cr>", desc = "sessions"},
     },
     config = function()
       require("session_manager").setup {
@@ -125,29 +125,29 @@ require("lazy").setup ({
     "akinsho/bufferline.nvim",
     lazy = false,
     keys = {
-      { "<C-t>", "<cmd>enew<cr>"},
-      { "<C-w>", "<cmd>bdelete<cr>"},
-      { "<C-k>", "<cmd>BufferLineCyclePrev<cr>"},
-      { "<C-j>", "<cmd>BufferLineCycleNext<cr>"},
-      { "<C-S-k>", "<cmd>BufferLineMovePrev<cr>"},
-      { "<C-S-j>", "<cmd>BufferLineMoveNext<cr>"},
-      { "<C-1>", "<cmd>BufferLineGoToBuffer 1<cr>"},
-      { "<C-2>", "<cmd>BufferLineGoToBuffer 2<cr>"},
-      { "<C-3>", "<cmd>BufferLineGoToBuffer 3<cr>"},
-      { "<C-4>", "<cmd>BufferLineGoToBuffer 4<cr>"},
-      { "<C-5>", "<cmd>BufferLineGoToBuffer 5<cr>"},
+      {"<C-t>", "<cmd>enew<cr>"},
+      {"<C-w>", "<cmd>bdelete<cr>"},
+      {"<C-k>", "<cmd>BufferLineCyclePrev<cr>"},
+      {"<C-j>", "<cmd>BufferLineCycleNext<cr>"},
+      {"<C-S-k>", "<cmd>BufferLineMovePrev<cr>"},
+      {"<C-S-j>", "<cmd>BufferLineMoveNext<cr>"},
+      {"<C-1>", "<cmd>BufferLineGoToBuffer 1<cr>"},
+      {"<C-2>", "<cmd>BufferLineGoToBuffer 2<cr>"},
+      {"<C-3>", "<cmd>BufferLineGoToBuffer 3<cr>"},
+      {"<C-4>", "<cmd>BufferLineGoToBuffer 4<cr>"},
+      {"<C-5>", "<cmd>BufferLineGoToBuffer 5<cr>"},
 
-      { "<leader>t", "<cmd>enew<cr>"},
-      { "<leader>w", "<cmd>bdelete<cr>"},
-      { "<leader>k", "<cmd>BufferLineCyclePrev<cr>"},
-      { "<leader>j", "<cmd>BufferLineCycleNext<cr>"},
-      { "<leader>S-k", "<cmd>BufferLineMovePrev<cr>"},
-      { "<leader>S-j", "<cmd>BufferLineMoveNext<cr>"},
-      { "<leader>1", "<cmd>BufferLineGoToBuffer 1<cr>"},
-      { "<leader>2", "<cmd>BufferLineGoToBuffer 2<cr>"},
-      { "<leader>3", "<cmd>BufferLineGoToBuffer 3<cr>"},
-      { "<leader>4", "<cmd>BufferLineGoToBuffer 4<cr>"},
-      { "<leader>5", "<cmd>BufferLineGoToBuffer 5<cr>"},
+      {"<leader>t", "<cmd>enew<cr>"},
+      {"<leader>w", "<cmd>bdelete<cr>"},
+      {"<leader>k", "<cmd>BufferLineCyclePrev<cr>"},
+      {"<leader>j", "<cmd>BufferLineCycleNext<cr>"},
+      {"<leader>S-k", "<cmd>BufferLineMovePrev<cr>"},
+      {"<leader>S-j", "<cmd>BufferLineMoveNext<cr>"},
+      {"<leader>1", "<cmd>BufferLineGoToBuffer 1<cr>"},
+      {"<leader>2", "<cmd>BufferLineGoToBuffer 2<cr>"},
+      {"<leader>3", "<cmd>BufferLineGoToBuffer 3<cr>"},
+      {"<leader>4", "<cmd>BufferLineGoToBuffer 4<cr>"},
+      {"<leader>5", "<cmd>BufferLineGoToBuffer 5<cr>"},
     },
     opts = {
       options = {
@@ -165,9 +165,9 @@ require("lazy").setup ({
     lazy = false,
     dependencies = {"nvim-lua/plenary.nvim"},
     keys = {
-      {"hh", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview" },
-      {"hn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next" },
-      {"hN", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev" },
+      {"hh", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview"},
+      {"hn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next"},
+      {"hN", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev"},
     },
     opts = {},
   },
@@ -290,10 +290,11 @@ require("lazy").setup ({
     "ibhagwan/fzf-lua",
     lazy = false,
     keys = {
-      {"<leader>p", function() require("fzf-lua").files() end, desc = "find_files" },
-      {"<leader>F", function() require("fzf-lua").live_grep_resume() end, desc = "live_grep" },
-      {"<leader>h", function() require("fzf-lua").git_status() end, desc = "git_status" },
-      {"<leader>l", function() require("fzf-lua").quickfix() end, desc = "quickfix" },
+      {"<leader>p", function() require("fzf-lua").files() end, desc = "find_files"},
+      {"<leader>F", function() require("fzf-lua").live_grep_resume() end, desc = "live_grep"},
+      {"<leader>h", function() require("fzf-lua").git_status() end, desc = "git_status"},
+      {"<leader>l", function() require("fzf-lua").quickfix() end, desc = "quickfix"},
+      {"<leader>e", function() require("fzf-lua").lsp_workspace_diagnostics() end, desc = "diagnostics"},
     },
     config = function()
       local fzf = require("fzf-lua")
@@ -315,7 +316,7 @@ require("lazy").setup ({
   },
 },
 {
-  -- checker = { enabled = true },
+  -- checker = {enabled = true},
   performance = {
     rtp = {
       disabled_plugins = {"netrw", "netrwSettings", "netrwFileHandlers", "gzip", "zip", "tar", "shada_autoload", "tutor", "tohtml", "msgpack_autoload"}
