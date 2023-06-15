@@ -1,2 +1,4 @@
 #! /usr/bin/env bash
-exec direnv exec "$1" wezterm --config-file ~/env/nvim/wezterm.lua start --class nvim --cwd "$1" nvim
+cd $1
+eval "$(direnv export bash)"
+exec wezterm --config-file ~/env/nvim/wezterm.lua start --class nvim --cwd . vi
