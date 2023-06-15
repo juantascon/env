@@ -305,7 +305,7 @@ require("lazy").setup ({
           }
         },
         files = {
-          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude __pycache__ --exclude node_modules"
+          fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude deps --exclude _build --exclude .elixir_ls --exclude node_modules"
         },
         grep = {
           rg_opts = "--sort=path --column --line-number --no-heading --color=always --smart-case --max-columns=512",
