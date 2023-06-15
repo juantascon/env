@@ -1,2 +1,0 @@
-#! /bin/bash
-LIBGUESTFS_PATH=/usr/lib/guestfs exec /usr/bin/guestfish "$@"
