@@ -32,4 +32,4 @@ super + x
   autorandr -c
 
 super + m
-  bluetooth-profile.sh toggle; noti.sh profile
+  btp.sh menu; noti.sh profile
