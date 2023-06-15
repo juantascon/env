@@ -1,0 +1,6 @@
+#! /bin/bash
+exec openfortivpn $(sudo -i -u juan pfs lan.athonet.com vpnhost) \
+  --trusted-cert $(sudo -i -u juan pfs lan.athonet.com vpncert) \
+  --username $(sudo -i -u juan pfs lan.athonet.com user) \
+  --password $(sudo -i -u juan pfs lan.athonet.com pass) \
+  2>&1
