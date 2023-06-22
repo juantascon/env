@@ -1,1 +1,1 @@
-services/sshd/sshd.conf filter=git-crypt diff=git-crypt
+sv/sshd/sshd.conf filter=git-crypt diff=git-crypt
