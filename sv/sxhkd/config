@@ -2,7 +2,7 @@ super + {Left,Right,space}
   playerctl -a {previous,next,play-pause}; noti.sh playerctl
 
 XF86AudioPlay
-  playerctl -a play-pause; noti.sh playerctl
+  playerctl -a play-pause; sleep 0.5; noti.sh playerctl
 
 XF86Audio{RaiseVolume,LowerVolume,Mute}
   pulsemixer {--change-volume +2,--change-volume -2,--toggle-mute}; noti.sh volume
