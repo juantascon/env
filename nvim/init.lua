@@ -96,29 +96,11 @@ require("lazy").setup ({
     end,
   },
   {
-    "shatur/neovim-session-manager",
-    lazy = false,
-    dependencies = {"nvim-lua/plenary.nvim"},
-    keys = {
-      {"<leader>r", "<cmd>SessionManager load_session<cr>", desc = "sessions"},
-    },
-    config = function()
-      require("session_manager").setup {
-        autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
-        autosave_only_in_session = true,
-      }
-    end,
-  },
-  {
     "echasnovski/mini.indentscope",
     opts = {},
   },
   {
     "numToStr/Comment.nvim",
-    opts = {},
-  },
-  {
-    "VidocqH/lsp-lens.nvim",
     opts = {},
   },
   {
@@ -216,7 +198,6 @@ require("lazy").setup ({
       {"hrsh7th/cmp-buffer"},
       {"hrsh7th/cmp-nvim-lua"},
       {"saadparwaiz1/cmp_luasnip"},
-      {"rafamadriz/friendly-snippets"},
       {"L3MON4D3/LuaSnip"},
     },
     keys = {
