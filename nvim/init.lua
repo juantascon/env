@@ -191,7 +191,6 @@ require("lazy").setup ({
     lazy = false,
     dependencies = {
       {"williamboman/mason.nvim"},
-      {"williamboman/mason-lspconfig.nvim"},
       {"folke/neodev.nvim"},
       {"hrsh7th/nvim-cmp"},
       {"hrsh7th/cmp-nvim-lsp"},
@@ -210,14 +209,13 @@ require("lazy").setup ({
       {"gl", function() vim.diagnostic.open_float() end},
     },
     config = function()
+      require("mason").setup({})
       require("neodev").setup({
         override = function(root_dir, library)
           library.enabled = true
           library.plugins = true
         end,
       })
-      require("mason").setup({})
-      require("mason-lspconfig").setup()
 
       local cmp = require("cmp")
       cmp.setup({
@@ -251,7 +249,7 @@ require("lazy").setup ({
       local defaults = lspconfig.util.default_config
       defaults.capabilities = vim.tbl_deep_extend("force", defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
       lspconfig.lua_ls.setup({})
-      lspconfig.elixirls.setup({})
+      lspconfig.elixirls.setup({cmd = { "elixir-ls" }})
       lspconfig.erlangls.setup({})
     end,
   },
