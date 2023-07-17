@@ -7,5 +7,5 @@ xsetroot -solid "#000000"
 xset b 0
 autorandr -c &
 
-exec dbus-run-session -- runsvdir -P $HOME/env/xinit.d/services
+exec runsvdir -P $HOME/env/xinit.d/services
 

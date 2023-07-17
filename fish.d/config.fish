@@ -19,4 +19,4 @@ bind \cH backward-kill-word
 
 xdg-mkdirs
 direnv hook fish | source
-[ "$USER" = "juan" ] && [ (tty) = "/dev/tty1" ] && [ -z "$DISPLAY" ] && exec xinit
+[ "$USER" = "juan" ] && [ (tty) = "/dev/tty1" ] && [ -z "$DISPLAY" ] && exec dbus-run-session xinit
