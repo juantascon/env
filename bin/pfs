@@ -12,15 +12,15 @@ DB_PATH = "~/my/pfs/main.yml"
 class Entry:
     def __init__(self, line):
         self.id = line.pop("id")
-        self.patterns = line.pop("patterns", [])
-        self.patterns.append(self.id)
+        self.alias = line.pop("alias", [])
+        self.alias.append(self.id)
         self.label = line.pop("label", "default")
         self.fields = line
 
     def match(self, pattern):
         pattern_id, pattern_label = self.split_id_label(pattern)
-        for p in self.patterns:
-            if fnmatch.fnmatch(pattern_id, p) or fnmatch.fnmatch(p, pattern_id):
+        for a in self.alias:
+            if fnmatch.fnmatch(pattern_id, a) or fnmatch.fnmatch(a, pattern_id):
                 if fnmatch.fnmatch(self.label, pattern_label):
                     return True
         return False
