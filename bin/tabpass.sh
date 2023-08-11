@@ -4,7 +4,7 @@ get_url_qutebrowser() {
   xdotool getactivewindow getwindowname | sd "qutebrowser: " ""
 }
 
-get_url_edge() {
+get_url_chrome() {
   xdotool getactivewindow getwindowname |awk -F" - " '{print $1}'
 }
 
@@ -23,7 +23,7 @@ clean_url() {
   echo $url
 }
 
-url=$(get_url_edge)
+url=$(get_url_chrome)
 url=$(clean_url $url)
 choice=$(pfs --multi $url | rofi -dmenu -matching fuzzy -no-custom -p "select:")
 read -r id field <<< $(echo $choice)

@@ -1,2 +1,2 @@
 #!/bin/sh
-exec ~/opt/microsoft-edge-dev_*/opt/microsoft/msedge-dev/microsoft-edge-dev "$@" 2>&1
+exec $(ls -d ~/opt/microsoft-edge-dev*|sort -n | tail -n 1)/opt/microsoft/msedge-dev/microsoft-edge-dev "$@" 2>&1
