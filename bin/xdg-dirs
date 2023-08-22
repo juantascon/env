@@ -1,0 +1,18 @@
+#!/bin/sh
+
+export XDG_DESKTOP_DIR=$HOME
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.data
+export XDG_STATE_HOME=$HOME/.state
+export XDG_RUNTIME_DIR=/tmp/run-$USER
+
+mkdir -p -m 700 "$XDG_DESKTOP_DIR" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$XDG_STATE_HOME" "$XDG_RUNTIME_DIR"
+
+echo "export XDG_DESKTOP_DIR=$XDG_DESKTOP_DIR"
+echo "export XDG_CONFIG_HOME=$XDG_CONFIG_HOME"
+echo "export XDG_CACHE_HOME=$XDG_CACHE_HOME"
+echo "export XDG_DATA_HOME=$XDG_DATA_HOME"
+echo "export XDG_STATE_HOME=$XDG_STATE_HOME"
+echo "export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR"
+

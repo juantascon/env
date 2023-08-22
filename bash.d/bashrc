@@ -2,17 +2,9 @@ export PATH=~/env/bin:/usr/bin:~/.asdf/bin
 export LANG=en_US.UTF-8
 export TERM=xterm-256color
 
-export XDG_DESKTOP_DIR=$HOME
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.data
-export XDG_STATE_HOME=$HOME/.state
-export XDG_RUNTIME_DIR=/tmp/run-$USER
-
 export EDITOR=vi
 export BROWSER=brave
 export PAGER=bat
 
-xdg-mkdirs
+eval "$(xdg-dirs)"
 eval "$(direnv hook bash)"
-
