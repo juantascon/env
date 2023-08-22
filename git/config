@@ -18,7 +18,7 @@
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --date=short
   f = fetch
   branch-cleanup = !git branch | grep -v \"\\*\" | awk \"{ print $1 }\" | xargs git branch -d
-  changelog = log --format=\"- %ae %ar %s\" origin..HEAD
+  changelog = log --format=\"- %ae %ar %s\"
 [includeIf "gitdir:~/ath/"]
   path = ~/env/git/ath
 [includeIf "gitdir:~/env/"]
