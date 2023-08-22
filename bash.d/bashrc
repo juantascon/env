@@ -8,3 +8,4 @@ export PAGER=bat
 
 eval "$(xdg-dirs)"
 eval "$(direnv hook bash)"
+eval "$(keychain --quiet --eval --agents ssh id_rsa)"

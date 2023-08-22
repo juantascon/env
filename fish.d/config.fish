@@ -12,4 +12,6 @@ bind \cH backward-kill-word
 
 xdg-dirs | source
 direnv hook fish | source
+keychain --quiet --eval --agents ssh id_rsa | source
+
 [ "$USER" = "juan" ] && [ (tty) = "/dev/tty1" ] && [ -z "$DISPLAY" ] && exec dbus-run-session xinit
