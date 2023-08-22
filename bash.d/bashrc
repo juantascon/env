@@ -3,9 +3,10 @@ export LANG=en_US.UTF-8
 export TERM=xterm-256color
 
 export EDITOR=vi
-export BROWSER=brave
+export BROWSER=browser
 export PAGER=bat
 
 eval "$(xdg-dirs)"
 eval "$(direnv hook bash)"
 eval "$(keychain --quiet --eval --agents ssh id_rsa)"
+

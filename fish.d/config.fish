@@ -3,7 +3,7 @@ set -x LANG en_US.UTF-8
 set -x TERM xterm-256color
 
 set -x EDITOR vi
-set -x BROWSER brave
+set -x BROWSER browser
 set -x PAGER bat
 
 set -x FREETYPE_PROPERTIES "truetype:interpreter-version=38"
