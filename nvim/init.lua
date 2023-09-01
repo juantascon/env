@@ -41,8 +41,8 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end})
 autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end})
 autocmd("BufReadPost", {callback = function() vim.cmd.normal('g`"') end})
-autocmd("BufWritePost", {pattern = {"*.ex", "*.exs"}, callback = function() vim.lsp.buf.format() end})
-
+local format = function() vim.lsp.buf.format({filter = function(client) return client.name ~= "elixirls" end }) end
+autocmd("BufWritePost", {pattern = {"*.ex", "*.exs"}, callback = format})
 
 vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set({"n", "v"}, "<Home>", "^")
@@ -244,34 +244,36 @@ require("lazy").setup ({
         },
       })
 
+      local mix_credo = {
+        lintCommand = "mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
+        lintStdin = true,
+        lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m" },
+        lintCategoryMap = { R = "N", D = "I", F = "E", W = "W" },
+      }
+      local mix_format = {formatCommand = "mix format -", formatStdin = true}
+      local languages = {
+        elixir = { mix_format, mix_credo }
+      }
+
+      local efmls_config = {
+        filetypes = vim.tbl_keys(languages),
+        settings = {
+          rootMarkers = { ".git/" },
+          languages = languages,
+        },
+        init_options = {
+          documentFormatting = true,
+          documentRangeFormatting = true,
+        },
+      }
+
       local lspconfig = require("lspconfig")
       local defaults = lspconfig.util.default_config
       defaults.capabilities = vim.tbl_deep_extend("force", defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+      lspconfig.efm.setup(efmls_config)
       lspconfig.lua_ls.setup({})
       lspconfig.elixirls.setup({cmd = { "elixir-ls" }})
       lspconfig.erlangls.setup({})
-  },
-  {
-    "mfussenegger/nvim-lint",
-    config = function()
-      local lint = require("lint")
-      lint.linters.athcredo = lint.linters.credo
-      lint.linters.athcredo.args[1] = "ci.credo"
-      lint.linters_by_ft = {
-        elixir = {"athcredo"},
-      }
-      autocmd("BufWritePost", {callback = function() lint.try_lint() end })
-    end,
-  },
-  {
-    "nvimdev/guard.nvim",
-    config = function()
-      local guard = require("guard")
-      local guard_filetype = require("guard.filetype")
-      guard_filetype("elixir"):fmt("mixformat")
-      guard.setup({
-          fmt_on_save = false,
-      })
     end,
   },
   {
