@@ -96,6 +96,18 @@ require("lazy").setup ({
     end,
   },
   {
+    "shatur/neovim-session-manager",
+    lazy = false,
+    dependencies = {"nvim-lua/plenary.nvim"},
+    keys = {
+      {"<leader>r", "<cmd>SessionManager load_session<cr>", desc = "sessions"},
+    },
+    config = function()
+      require("session_manager").setup {
+        autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
+        autosave_only_in_session = true,
+      }
+    end,
   },
   {
     "echasnovski/mini.nvim",
