@@ -254,15 +254,26 @@ require("lazy").setup ({
     end,
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        sources = {
-          nls.builtins.formatting.mix,
-          nls.builtins.diagnostics.credo,
-        },
+    "mfussenegger/nvim-lint",
+    config = function()
+      local lint = require("lint")
+      lint.linters.athcredo = lint.linters.credo
+      lint.linters.athcredo.args[1] = "ci.credo"
+      lint.linters_by_ft = {
+        elixir = {"athcredo"},
       }
+      autocmd("BufWritePost", {callback = function() lint.try_lint() end })
+    end,
+  },
+  {
+    "nvimdev/guard.nvim",
+    config = function()
+      local guard = require("guard")
+      local guard_filetype = require("guard.filetype")
+      guard_filetype("elixir"):fmt("mixformat")
+      guard.setup({
+          fmt_on_save = false,
+      })
     end,
   },
   {
