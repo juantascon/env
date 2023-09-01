@@ -96,12 +96,19 @@ require("lazy").setup ({
     end,
   },
   {
-    "echasnovski/mini.indentscope",
-    opts = {},
   },
   {
-    "numToStr/Comment.nvim",
-    opts = {},
+    "echasnovski/mini.nvim",
+    config = function()
+      require("mini.indentscope").setup({})
+      require("mini.comment").setup({})
+      require("mini.animate").setup({
+        scroll = {
+          timing = require("mini.animate").gen_timing.linear({ duration = 100, unit = "total" }),
+        }
+      })
+      require("mini.statusline").setup()
+    end
   },
   {
     "akinsho/bufferline.nvim",
@@ -139,10 +146,6 @@ require("lazy").setup ({
     },
   },
   {
-    "ojroques/nvim-hardline",
-    opts = {},
-  },
-  {
     "lewis6991/gitsigns.nvim",
     lazy = false,
     dependencies = {"nvim-lua/plenary.nvim"},
@@ -162,10 +165,6 @@ require("lazy").setup ({
         callbacks = {["gitlab.lan.athonet.com"] = require("gitlinker.hosts").get_gitlab_type_url},
       })
     end
-  },
-  {
-    "gen740/SmoothCursor.nvim",
-    opts = {},
   },
   {
     "folke/noice.nvim",
@@ -251,7 +250,6 @@ require("lazy").setup ({
       lspconfig.lua_ls.setup({})
       lspconfig.elixirls.setup({cmd = { "elixir-ls" }})
       lspconfig.erlangls.setup({})
-    end,
   },
   {
     "mfussenegger/nvim-lint",
