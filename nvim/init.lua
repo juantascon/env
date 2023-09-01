@@ -286,6 +286,7 @@ require("lazy").setup ({
       lspconfig.lua_ls.setup({})
       lspconfig.elixirls.setup({cmd = { "elixir-ls" }})
       lspconfig.erlangls.setup({})
+      lspconfig.jsonls.setup({})
     end,
   },
   {
