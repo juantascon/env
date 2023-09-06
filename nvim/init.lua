@@ -29,7 +29,6 @@ vim.opt.wildmode = "longest:full,full"
 local autocmd = vim.api.nvim_create_autocmd
 autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end})
 autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end})
-autocmd("BufReadPost", {callback = function() vim.cmd.normal('g`"') end})
 local format = function() vim.lsp.buf.format({filter = function(client) return client.name ~= "elixirls" end }) end
 autocmd("BufWritePost", {pattern = {"*.ex", "*.exs"}, callback = format})
 
@@ -82,6 +81,8 @@ require("lazy").setup ({
     "echasnovski/mini.nvim",
     config = function()
       require("mini.basics").setup({extra_ui = true, autocommands = {relnum_in_visual_mode = true}})
+      require("mini.misc").setup({})
+      MiniMisc.setup_restore_cursor()
       require("mini.indentscope").setup({})
       require("mini.comment").setup({})
       require("mini.animate").setup({
