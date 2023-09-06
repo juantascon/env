@@ -81,10 +81,6 @@ require("lazy").setup ({
       require("mini.bracketed").setup({})
       require("mini.indentscope").setup({})
       require("mini.comment").setup({})
-      require("mini.animate").setup({
-        scroll = {
-          timing = require("mini.animate").gen_timing.linear({ duration = 100, unit = "total" }),
-        }
       })
       require("mini.statusline").setup()
       require("mini.sessions").setup({autoread = false, autowrite = true, force = {read = true}})
