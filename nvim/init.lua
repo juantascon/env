@@ -88,6 +88,25 @@ require("lazy").setup ({
       vim.api.nvim_create_user_command("SessionWrite", function() MiniSessions.write(session()) end, {})
       vim.api.nvim_create_user_command("SessionRead", function() MiniSessions.read(session()) end, {})
       if vim.fn.argc() == 0 then return vim.cmd.SessionRead() end
+
+      local miniclue = require("mini.clue")
+      miniclue.setup({
+        triggers = {
+          { mode = 'i', keys = '<C-x>' },
+          { mode = "n", keys = "<Leader>" },
+          { mode = "x", keys = "<Leader>" },
+          { mode = "n", keys = "g" },
+          { mode = "x", keys = "g" },
+          { mode = "n", keys = "z" },
+          { mode = "x", keys = "z" },
+        },
+        clues = {
+          miniclue.gen_clues.builtin_completion(),
+          miniclue.gen_clues.g(),
+          miniclue.gen_clues.windows(),
+          miniclue.gen_clues.z(),
+        },
+      })
     end,
   },
   {
