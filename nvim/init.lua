@@ -4,7 +4,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
 vim.g.mapleader = " "
 vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h17"
 vim.opt.showtabline = 0
@@ -24,7 +23,6 @@ vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
 vim.opt.wildmode = "longest:full,full"
-
 
 local autocmd = vim.api.nvim_create_autocmd
 autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end})
@@ -54,10 +52,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr><cmd>cclose<cr>")
 vim.keymap.set("n", "<leader>f", ":%s///gc<Left><Left><Left><Left>", {silent = false, desc = "find_replace"})
 vim.keymap.set("v", "<Leader>f", [[y:%s/<C-R>"//gc<Left><Left><Left>]], {silent = false, desc = "find_replace"})
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
-vim.keymap.set("n", "<C-[>", "<cmd>cnext<cr>")
-vim.keymap.set("n", "<C-]>", "<cmd>cprev<cr>")
 vim.keymap.set("", "<Space>", "<Nop>", {noremap = true, silent = true})
-
 
 require("lazy").setup ({
   {
@@ -83,6 +78,7 @@ require("lazy").setup ({
       require("mini.basics").setup({extra_ui = true, autocommands = {relnum_in_visual_mode = true}})
       require("mini.misc").setup({})
       MiniMisc.setup_restore_cursor()
+      require("mini.bracketed").setup({})
       require("mini.indentscope").setup({})
       require("mini.comment").setup({})
       require("mini.animate").setup({
