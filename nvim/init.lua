@@ -6,22 +6,15 @@ vim.opt.rtp:prepend(lazypath)
 
 
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h17"
-vim.opt.termguicolors = true
-vim.opt.mouse = "a"
-vim.opt.writebackup = false
 vim.opt.showtabline = 0
 vim.opt.clipboard = "unnamedplus"
 vim.opt.signcolumn = "yes:2"
-vim.opt.number = true
 vim.opt.laststatus = 3
 vim.opt.cmdheight = 1
-vim.opt.cursorline = true
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 250
 vim.opt.mat = 2
-vim.opt.undofile = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 1
@@ -30,11 +23,7 @@ vim.opt.scrolloff = 10
 vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
-vim.opt.pumheight = 10
-vim.opt.pumblend = 10
-vim.opt.winblend = 10
 vim.opt.wildmode = "longest:full,full"
-vim.opt.smartcase = true
 
 
 local autocmd = vim.api.nvim_create_autocmd
@@ -59,22 +48,16 @@ vim.keymap.set("n", "rw", [["_diw]])
 vim.keymap.set("n", "dw", "diw")
 vim.keymap.set("n", "yw", "yiw")
 vim.keymap.set("n", "yf", [[:let @+ = expand("%")<cr>]], {desc = "yank_filename"})
-vim.keymap.set({"n", "x"}, "gy", [["+y]], {desc = "yank_to_clipboard"})
-vim.keymap.set("n", "gp", [["+p]], {desc = "paste_from_clipboard"})
-vim.keymap.set("x", "gp", [["+P]], {desc = "paste_from_clipboard"})
-vim.keymap.set("n", "gf", "gF")
+vim.keymap.set("n", "gf", "gF", {desc = "goto_filename"})
 vim.keymap.set({"n", "x"}, "gw", "*N")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr><cmd>cclose<cr>")
-vim.keymap.set({"n", "i"}, "<C-s>", "<cmd>w<cr>")
-vim.keymap.set("n", "<leader>s", "<cmd>w<cr>")
 vim.keymap.set("n", "<leader>f", ":%s///gc<Left><Left><Left><Left>", {silent = false, desc = "find_replace"})
 vim.keymap.set("v", "<Leader>f", [[y:%s/<C-R>"//gc<Left><Left><Left>]], {silent = false, desc = "find_replace"})
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
 vim.keymap.set("n", "<C-[>", "<cmd>cnext<cr>")
 vim.keymap.set("n", "<C-]>", "<cmd>cprev<cr>")
 vim.keymap.set("", "<Space>", "<Nop>", {noremap = true, silent = true})
-vim.keymap.set("", "<C-z>", "<Nop>", {noremap = true, silent = true})
 
 
 require("lazy").setup ({
@@ -112,6 +95,7 @@ require("lazy").setup ({
   {
     "echasnovski/mini.nvim",
     config = function()
+      require("mini.basics").setup({extra_ui = true, autocommands = {relnum_in_visual_mode = true}})
       require("mini.indentscope").setup({})
       require("mini.comment").setup({})
       require("mini.animate").setup({
