@@ -79,20 +79,6 @@ require("lazy").setup ({
     end,
   },
   {
-    "shatur/neovim-session-manager",
-    lazy = false,
-    dependencies = {"nvim-lua/plenary.nvim"},
-    keys = {
-      {"<leader>r", "<cmd>SessionManager load_session<cr>", desc = "sessions"},
-    },
-    config = function()
-      require("session_manager").setup {
-        autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
-        autosave_only_in_session = true,
-      }
-    end,
-  },
-  {
     "echasnovski/mini.nvim",
     config = function()
       require("mini.basics").setup({extra_ui = true, autocommands = {relnum_in_visual_mode = true}})
@@ -104,7 +90,12 @@ require("lazy").setup ({
         }
       })
       require("mini.statusline").setup()
-    end
+      require("mini.sessions").setup({autoread = false, autowrite = true, force = {read = true}})
+      local session = function() return ({vim.fn.getcwd():gsub("/", "__")})[1] end
+      vim.api.nvim_create_user_command("SessionWrite", function() MiniSessions.write(session()) end, {})
+      vim.api.nvim_create_user_command("SessionRead", function() MiniSessions.read(session()) end, {})
+      if vim.fn.argc() == 0 then return vim.cmd.SessionRead() end
+    end,
   },
   {
     "akinsho/bufferline.nvim",
