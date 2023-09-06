@@ -81,6 +81,8 @@ require("lazy").setup ({
       require("mini.bracketed").setup({})
       require("mini.indentscope").setup({})
       require("mini.comment").setup({})
+      require("mini.completion").setup({
+          delay = { completion = 0, info = 0, signature = 0 },
       })
       require("mini.statusline").setup()
       require("mini.sessions").setup({autoread = false, autowrite = true, force = {read = true}})
@@ -172,12 +174,6 @@ require("lazy").setup ({
     dependencies = {
       {"williamboman/mason.nvim"},
       {"folke/neodev.nvim"},
-      {"hrsh7th/nvim-cmp"},
-      {"hrsh7th/cmp-nvim-lsp"},
-      {"hrsh7th/cmp-buffer"},
-      {"hrsh7th/cmp-nvim-lua"},
-      {"saadparwaiz1/cmp_luasnip"},
-      {"L3MON4D3/LuaSnip"},
     },
     keys = {
       {"K", function() vim.lsp.buf.hover() end},
@@ -195,34 +191,6 @@ require("lazy").setup ({
           library.enabled = true
           library.plugins = true
         end,
-      })
-
-      local cmp = require("cmp")
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        preselect = cmp.PreselectMode.None,
-        completion = {completeopt = "menu,menuone,noinsert,noselect"},
-        mapping = {
-          ["<cr>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace}),
-          ["<down>"] = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}),
-          ["<up>"] = cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}),
-          ["<c-u>"] = cmp.mapping.scroll_docs(-4),
-          ["<c-d>"] = cmp.mapping.scroll_docs(4),
-        },
-        sources = {
-          {name = "nvim_lsp"},
-          {name = "luasnip"},
-          {name = "nvim_lua"},
-          {name = "buffer", keyword_length = 4},
-        },
       })
 
       local mix_credo = {
@@ -249,8 +217,6 @@ require("lazy").setup ({
       }
 
       local lspconfig = require("lspconfig")
-      local defaults = lspconfig.util.default_config
-      defaults.capabilities = vim.tbl_deep_extend("force", defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
       lspconfig.efm.setup(efmls_config)
       lspconfig.lua_ls.setup({})
       lspconfig.elixirls.setup({cmd = { "elixir-ls" }})
