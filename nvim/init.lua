@@ -47,12 +47,12 @@ vim.keymap.set("n", "yw", "yiw")
 vim.keymap.set("n", "yf", [[:let @+ = expand("%")<cr>]], {desc = "yank_filename"})
 vim.keymap.set("n", "gf", "gF", {desc = "goto_filename"})
 vim.keymap.set({"n", "x"}, "gw", "*N")
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr><cmd>cclose<cr>")
 vim.keymap.set("n", "<leader>f", ":%s///gc<Left><Left><Left><Left>", {silent = false, desc = "find_replace"})
 vim.keymap.set("v", "<Leader>f", [[y:%s/<C-R>"//gc<Left><Left><Left>]], {silent = false, desc = "find_replace"})
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
 vim.keymap.set("", "<Space>", "<Nop>", {noremap = true, silent = true})
+vim.keymap.set("n", "<Leader><Leader>h", "<cmd>terminal gitui<cr>", {silent = true, desc = "gitui"})
 
 require("lazy").setup ({
   {
