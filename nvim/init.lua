@@ -252,7 +252,16 @@ require("lazy").setup ({
         keymap = {
           fzf = {
             ["ctrl-a"] = "select-all+accept",
-          }
+          },
+        },
+        git = {
+          status = {
+            actions = {
+              ["right"] = "",
+              ["left"] = "",
+              ["ctrl-x"] = "",
+            },
+          },
         },
         files = {
           fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude deps --exclude _build --exclude .elixir_ls --exclude node_modules"
