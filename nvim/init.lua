@@ -236,13 +236,6 @@ require("lazy").setup ({
   {
     "ibhagwan/fzf-lua",
     lazy = false,
-    keys = {
-      {"<leader>p", function() require("fzf-lua").files() end, desc = "find_files"},
-      {"<leader>F", function() require("fzf-lua").live_grep_resume() end, desc = "live_grep"},
-      {"<leader>h", function() require("fzf-lua").git_status() end, desc = "git_status"},
-      {"<leader>l", function() require("fzf-lua").quickfix() end, desc = "quickfix"},
-      {"<leader>e", function() require("fzf-lua").lsp_workspace_diagnostics() end, desc = "diagnostics"},
-    },
     config = function()
       local fzf = require("fzf-lua")
       fzf.setup({
@@ -267,7 +260,15 @@ require("lazy").setup ({
           rg_opts = "--sort=path --column --line-number --no-heading --color=always --smart-case --max-columns=512",
         },
       })
+
       fzf.register_ui_select()
+
+      vim.keymap.set("n", "<Leader>p", fzf.files, {desc = "fzf_find_files"})
+      vim.keymap.set("n", "<Leader>g", fzf.live_grep_resume, {desc = "fzf_live_grep"})
+      vim.keymap.set("n", "<Leader>b", fzf.blines, {desc = "fzf_buffer_lines"})
+      vim.keymap.set("n", "<Leader>h", fzf.git_status, {desc = "fzf_git_status"})
+      vim.keymap.set("n", "<Leader>l", fzf.quickfix, {desc = "fzf_quickfix"})
+      vim.keymap.set("n", "<Leader>d", fzf.lsp_workspace_diagnostics, {desc = "fzf_diagnostics"})
     end,
   },
 },
