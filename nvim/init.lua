@@ -30,11 +30,9 @@ autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.o
 autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end})
 local format = function() vim.lsp.buf.format({filter = function(client) return client.name ~= "elixirls" end }) end
 autocmd("BufWritePost", {pattern = {"*.ex", "*.exs"}, callback = format})
-
 vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set({"n", "v"}, "<Home>", "^")
 vim.keymap.set("i", "<Home>", "<Esc>^i")
-vim.keymap.set("n", "c", "*``cgn", {silent = true})
 vim.keymap.set("x", "c", [["y/\\V\<C-r>=escape(@\", '/')\<CR>\<CR>" . "``cgn"]], {expr = true, silent = true})
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
@@ -48,10 +46,9 @@ vim.keymap.set("n", "yw", "yiw")
 vim.keymap.set("n", "yf", [[:let @+ = expand("%")<cr>]], {desc = "yank_filename"})
 vim.keymap.set("n", "gf", "gF", {desc = "goto_filename"})
 vim.keymap.set({"n", "x"}, "gw", "*N")
-vim.keymap.set("n", "<leader>f", ":%s///gc<Left><Left><Left><Left>", {silent = false, desc = "find_replace"})
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr><cmd>cclose<cr><cmd>only<cr>")
-vim.keymap.set("v", "<Leader>f", [[y:%s/<C-R>"//gc<Left><Left><Left>]], {silent = false, desc = "find_replace"})
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
+vim.keymap.set("n", "<C-q>", "<cmd>qa<cr>")
 vim.keymap.set("", "<Space>", "<Nop>", {noremap = true, silent = true})
 vim.keymap.set("n", "<Leader><Leader>h", "<cmd>terminal gitui<cr>", {silent = true, desc = "gitui"})
 
