@@ -23,6 +23,7 @@ vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:➜ ")
 vim.opt.wildmode = "longest:full,full"
+vim.opt.diffopt = "context:0,closeoff,foldcolumn:0,internal"
 
 local autocmd = vim.api.nvim_create_autocmd
 autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end})
@@ -47,8 +48,8 @@ vim.keymap.set("n", "yw", "yiw")
 vim.keymap.set("n", "yf", [[:let @+ = expand("%")<cr>]], {desc = "yank_filename"})
 vim.keymap.set("n", "gf", "gF", {desc = "goto_filename"})
 vim.keymap.set({"n", "x"}, "gw", "*N")
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr><cmd>cclose<cr>")
 vim.keymap.set("n", "<leader>f", ":%s///gc<Left><Left><Left><Left>", {silent = false, desc = "find_replace"})
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr><cmd>cclose<cr><cmd>only<cr>")
 vim.keymap.set("v", "<Leader>f", [[y:%s/<C-R>"//gc<Left><Left><Left>]], {silent = false, desc = "find_replace"})
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
 vim.keymap.set("", "<Space>", "<Nop>", {noremap = true, silent = true})
@@ -101,6 +102,8 @@ require("lazy").setup ({
           { mode = "x", keys = "g" },
           { mode = "n", keys = "z" },
           { mode = "x", keys = "z" },
+          { mode = "n", keys = "h" },
+          { mode = "x", keys = "h" },
         },
         clues = {
           miniclue.gen_clues.builtin_completion(),
@@ -150,12 +153,21 @@ require("lazy").setup ({
     "lewis6991/gitsigns.nvim",
     lazy = false,
     dependencies = {"nvim-lua/plenary.nvim"},
-    keys = {
-      {"hh", "<cmd>Gitsigns preview_hunk<cr>", desc = "git_preview"},
-      {"hn", "<cmd>Gitsigns next_hunk<cr>", desc = "git_next"},
-      {"hN", "<cmd>Gitsigns prev_hunk<cr>", desc = "git_prev"},
-    },
-    opts = {},
+    config = function()
+      local gitsigns = require("gitsigns")
+      gitsigns.setup({})
+      vim.keymap.set("n", "hh", gitsigns.toggle_deleted, {desc = "gitsigns_togle_deleted"})
+      vim.keymap.set("n", "hs", gitsigns.stage_hunk, {desc = "gitsigns_stage_hunk"})
+      vim.keymap.set("v", "hs", function() gitsigns.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, {desc = "gitsigns_stage_hunk"})
+      vim.keymap.set("n", "hS", gitsigns.stage_buffer, {desc = "gitsigns_stage_buffer"})
+      vim.keymap.set("n", "hR", gitsigns.reset_buffer_index, {desc = "gitsigns_reset_buffer_index"})
+      vim.keymap.set("n", "hu", gitsigns.undo_stage_hunk, {desc = "gitsigns_undo_stage_hunk"})
+      vim.keymap.set("n", "hb", function() gitsigns.blame_line{full=true} end, {desc = "gitsigns_blame_line"})
+      vim.keymap.set("n", "hB", gitsigns.toggle_current_line_blame, {desc = "gitsigns_togle_blame_line"})
+      vim.keymap.set("n", "hd", gitsigns.diffthis, {desc = "gitsigns_diffthis"})
+      vim.keymap.set("n", "hD", function() gitsigns.diffthis("~") end, {desc = "gitsigns_diffthis~"})
+      vim.keymap.set("n", "hn", gitsigns.preview_hunk, {desc = "gitsigns_preview_hunk"})
+    end,
   },
   {
     "ruifm/gitlinker.nvim",
