@@ -101,6 +101,8 @@ require("lazy").setup ({
           { mode = "x", keys = "z" },
           { mode = "n", keys = "h" },
           { mode = "x", keys = "h" },
+          { mode = "n", keys = "[" },
+          { mode = "n", keys = "]" },
         },
         clues = {
           miniclue.gen_clues.builtin_completion(),
