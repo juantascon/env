@@ -73,7 +73,7 @@ require("lazy").setup ({
   {
     "echasnovski/mini.nvim",
     config = function()
-      require("mini.basics").setup({extra_ui = true, autocommands = {relnum_in_visual_mode = true}})
+      require("mini.basics").setup({extra_ui = true})
       require("mini.misc").setup({})
       MiniMisc.setup_restore_cursor()
       require("mini.bracketed").setup({})
