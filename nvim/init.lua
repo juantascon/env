@@ -186,15 +186,6 @@ require("lazy").setup ({
       {"williamboman/mason.nvim"},
       {"folke/neodev.nvim"},
     },
-    keys = {
-      {"K", function() vim.lsp.buf.hover() end},
-      {"gd", function() vim.lsp.buf.definition() end},
-      {"gD", function() vim.lsp.buf.declaration() end},
-      {"gi", function() vim.lsp.buf.implementation() end},
-      {"gr", function() vim.lsp.buf.references() end},
-      {"gs", function() vim.lsp.buf.signature_help() end},
-      {"gl", function() vim.diagnostic.open_float() end},
-    },
     config = function()
       require("mason").setup({})
       require("neodev").setup({
@@ -233,6 +224,14 @@ require("lazy").setup ({
       lspconfig.elixirls.setup({cmd = { "elixir-ls" }})
       lspconfig.erlangls.setup({})
       lspconfig.jsonls.setup({})
+
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "hover"})
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {desc = "lsp_definition"})
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {desc = "lsp_declaration"})
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {desc = "lsp_implementation"})
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, {desc = "lsp_references"})
+      vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, {desc = "lsp_signature_help"})
+      vim.keymap.set("n", "gl", vim.diagnostic.open_float, {desc = "diagnostic_open_float"})
     end,
   },
   {
