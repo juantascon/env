@@ -81,14 +81,16 @@ require("lazy").setup ({
       require("mini.bracketed").setup({})
       require("mini.indentscope").setup({})
       require("mini.comment").setup({})
+      require("mini.statusline").setup({})
+
       require("mini.completion").setup({
           delay = { completion = 0, info = 0, signature = 0 },
       })
-      require("mini.statusline").setup()
+
       require("mini.sessions").setup({autoread = false, autowrite = true, force = {read = true}})
       local session = function() return ({vim.fn.getcwd():gsub("/", "__")})[1] end
-      vim.api.nvim_create_user_command("SessionWrite", function() MiniSessions.write(session()) end, {})
-      vim.api.nvim_create_user_command("SessionRead", function() MiniSessions.read(session()) end, {})
+      usercmd("SessionWrite", function() MiniSessions.write(session()) end, {})
+      usercmd("SessionRead", function() MiniSessions.read(session()) end, {})
       if vim.fn.argc() == 0 then vim.cmd.SessionRead() end
 
       local miniclue = require("mini.clue")
