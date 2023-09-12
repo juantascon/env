@@ -120,37 +120,24 @@ require("lazy").setup ({
   {
     "akinsho/bufferline.nvim",
     lazy = false,
-    keys = {
-      {"<C-t>", "<cmd>enew<cr>"},
-      {"<C-w>", "<cmd>bdelete<cr>"},
-      {"<C-k>", "<cmd>BufferLineCyclePrev<cr>"},
-      {"<C-j>", "<cmd>BufferLineCycleNext<cr>"},
-      {"<C-S-k>", "<cmd>BufferLineMovePrev<cr>"},
-      {"<C-S-j>", "<cmd>BufferLineMoveNext<cr>"},
-      {"<C-1>", "<cmd>BufferLineGoToBuffer 1<cr>"},
-      {"<C-2>", "<cmd>BufferLineGoToBuffer 2<cr>"},
-      {"<C-3>", "<cmd>BufferLineGoToBuffer 3<cr>"},
-      {"<C-4>", "<cmd>BufferLineGoToBuffer 4<cr>"},
-      {"<C-5>", "<cmd>BufferLineGoToBuffer 5<cr>"},
-
-      {"<leader>t", "<cmd>enew<cr>"},
-      {"<leader>w", "<cmd>bdelete<cr>"},
-      {"<leader>k", "<cmd>BufferLineCyclePrev<cr>"},
-      {"<leader>j", "<cmd>BufferLineCycleNext<cr>"},
-      {"<leader>S-k", "<cmd>BufferLineMovePrev<cr>"},
-      {"<leader>S-j", "<cmd>BufferLineMoveNext<cr>"},
-      {"<leader>1", "<cmd>BufferLineGoToBuffer 1<cr>"},
-      {"<leader>2", "<cmd>BufferLineGoToBuffer 2<cr>"},
-      {"<leader>3", "<cmd>BufferLineGoToBuffer 3<cr>"},
-      {"<leader>4", "<cmd>BufferLineGoToBuffer 4<cr>"},
-      {"<leader>5", "<cmd>BufferLineGoToBuffer 5<cr>"},
-    },
-    opts = {
-      options = {
-        diagnostics = "nvim_lsp",
-        separator_style = "slant",
-      }
-    },
+    config = function()
+      local bufferline = require("bufferline")
+      bufferline.setup({
+        options = {
+          diagnostics = "nvim_lsp",
+          separator_style = "thick",
+        },
+      })
+      vim.keymap.set("n", "<C-t>", vim.cmd.enew)
+      vim.keymap.set("n", "<C-w>", vim.cmd.bdelete)
+      vim.keymap.set("n", "<C-j>", function() bufferline.cycle(1) end)
+      vim.keymap.set("n", "<C-k>", function() bufferline.cycle(-1) end)
+      vim.keymap.set("n", "<C-S-j>", function() bufferline.move(1) end)
+      vim.keymap.set("n", "<C-S-k>", function() bufferline.move(-1) end)
+      for i=1, 5 do
+        vim.keymap.set("n", "<C-"..i..">", function() bufferline.go_to(i) end)
+      end
+    end,
   },
   {
     "lewis6991/gitsigns.nvim",
