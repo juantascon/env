@@ -1,3 +1,0 @@
-#!/bin/sh
-host="qogita.atlassian.net"
-JIRA_API_TOKEN=$(pfs $host token) exec /usr/bin/jira -e https://$host -u $(pfs $host user) "$@"
