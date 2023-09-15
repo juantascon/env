@@ -7,11 +7,11 @@ shift
 
 case "$repo" in
   "juan"|"data")
-    export B2_ACCOUNT_ID=$(pfs backblaze.com key.name)
-    export B2_ACCOUNT_KEY=$(pfs backblaze.com key)
-    export RESTIC_REPOSITORY=$(pfs restic:$repo repo)
-    export RESTIC_PASSWORD=$(pfs restic:$repo pass)
-    source_dir=$(pfs restic:$repo source)
+    export B2_ACCOUNT_ID=$(pfs backblaze.com:key.name)
+    export B2_ACCOUNT_KEY=$(pfs backblaze.com:key)
+    export RESTIC_REPOSITORY=$(pfs restic@$repo:repo)
+    export RESTIC_PASSWORD=$(pfs restic@$repo:pass)
+    source_dir=$(pfs restic@$repo:source)
 
     if [[ "$@" == "" ]]; then
       exec /usr/bin/restic -v backup --exclude-file ${source_dir}/.ignore -x ${source_dir}

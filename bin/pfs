@@ -4,82 +4,79 @@ import yaml
 import os
 import argparse
 import fnmatch
-from collections import UserList
+import re
 
 DB_PATH = "~/my/pfs/main.yml"
-
+ENTRY_MATCH_REGEX = r"([^@:]*)@?([^:]*):?(.*)"
 
 class Entry:
-    def __init__(self, line):
-        self.id = line.pop("id")
-        self.alias = line.pop("alias", [])
-        self.alias.append(self.id)
-        self.label = line.pop("label", "default")
-        self.fields = line
+    def __init__(self, id, label, alias, field, value):
+        self.id = id
+        self.label = label
+        self.alias = alias
+        self.field = field
+        self.value = value
 
-    def match(self, pattern):
-        pattern_id, pattern_label = self.split_id_label(pattern)
+    def match_field(self, m):
+        return fnmatch.fnmatch(self.field, m)
+
+    def match_label(self, m):
+        return fnmatch.fnmatch(self.label, m)
+
+    def match_alias(self, m):
         for a in self.alias:
-            if fnmatch.fnmatch(pattern_id, a) or fnmatch.fnmatch(a, pattern_id):
-                if fnmatch.fnmatch(self.label, pattern_label):
-                    return True
+            if fnmatch.fnmatch(m, a) or fnmatch.fnmatch(a, m):
+                return True
         return False
 
-    def id_label(self):
-        return f"{self.id}:{self.label}"
-
-    @classmethod
-    def split_id_label(cls, value):
-        splits = value.split(":", maxsplit=1)
-        if len(splits) == 2:
-            return (splits[0], splits[1])
-        else:
-            return (value, "*")
-
-
-class DB(UserList):
-    def all(self):
-        path = os.path.expanduser(DB_PATH)
-        with open(path) as file:
-            content = yaml.load(file, Loader=yaml.FullLoader)
-        self.data = [Entry(line) for line in content]
-        return self
-
-    def filter(self, fun):
-        self.data = list(filter(fun, self.data))
-        return self
-
     def match(self, pattern):
-        return self.filter(lambda e: e.match(pattern))
+        (id, label, field) = re.match(ENTRY_MATCH_REGEX, pattern).groups()
+        id = id or "*"
+        label = label or "*"
+        field = field or "*"
+        return self.match_field(field) and self.match_label(label) and self.match_alias(id)
+
+    def __str__(self):
+        if self.label == "":
+            return f"{self.id}:{self.field}"
+        else:
+            return f"{self.id}@{self.label}:{self.field}"
+
+
+def get_db():
+    path = os.path.expanduser(DB_PATH)
+    with open(path) as file:
+        content = yaml.load(file, Loader=yaml.FullLoader)
+    _db = []
+    for line in content:
+        id = line.pop("id")
+        alias = line.pop("alias", [])
+        alias.append(id)
+        label = line.pop("label", "")
+        for k, v in line.items():
+            _db.append(Entry(id, label, alias, k, v))
+    return _db
 
 
 parser = argparse.ArgumentParser(prog="pfs")
-parser.add_argument("-m", "--multi", action="store_true", help="returns results from multiple ids")
-parser.add_argument("-i", "--ids-only", action="store_true", help="display ids only")
-parser.add_argument("pattern", metavar="pattern", default="*:*", nargs="?")
-parser.add_argument("key", metavar="key", nargs="?")
+parser.add_argument("-i", "--ids", action="store_true", help="display matching ids")
+parser.add_argument("pattern", metavar="pattern", default="*@*:*", nargs="?")
 args = parser.parse_args()
 
-matches = DB().all().match(args.pattern)
+db = get_db()
+matches = list(filter(lambda e: e.match(args.pattern), db))
+
 if not matches:
     print(f"no matches for {args.pattern}")
     exit(2)
 
-if not args.multi:
-    if len(matches) > 1:
-        print("multiple matches found, toggle -m")
-        exit(2)
+if len(matches) > 1 and not args.ids:
+    print("multiple matches found, toggle -i")
+    exit(3)
 
 for match in matches:
-    if args.ids_only:
-        print(match.id_label())
-    elif args.key:
-        value = match.fields.get(args.key)
-        if not value:
-            print("key not found")
-            exit(2)
-        print(value)
+    if args.ids:
+        print(match)
     else:
-        for k in match.fields.keys():
-            print(f"{match.id_label()} {k}")
+        print(match.value)
 

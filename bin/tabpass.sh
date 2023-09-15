@@ -25,9 +25,8 @@ clean_url() {
 
 url=$(get_url_chrome)
 url=$(clean_url $url)
-choice=$(pfs --multi $url | rofi -dmenu -matching fuzzy -no-custom -p "select:")
-read -r id field <<< $(echo $choice)
-value=$(pfs $id $field)
+choice=$(pfs --ids $url | rofi -dmenu -matching fuzzy -no-custom -p "select:")
+value=$(pfs $choice)
 [ $? -ne 0 ] && exit 1
-[[ $field == totp ]] && value=$(oathtool --totp --base32 $value)
+[[ $choice == *:totp ]] && value=$(oathtool --totp --base32 $value)
 xdotool type --clearmodifiers -- $value
