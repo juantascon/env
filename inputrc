@@ -1,0 +1,7 @@
+$include /etc/inputrc
+
+set bell-style none
+set bell-style visible
+
+# ctrl+backspace deletes word
+"\C-h": backward-kill-word
