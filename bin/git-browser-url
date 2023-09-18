@@ -1,0 +1,12 @@
+#!/bin/bash
+
+url=$(git remote get-url origin | sed 's/^git@\(.*\):\(.*\)$/https:\/\/\1\/\2/')
+commit=$(git rev-parse --verify HEAD)
+path=$1
+line=$2
+
+if [ -z "$line" ]; then
+  echo "$url/-/blob/$commit/$path"
+else
+  echo "$url/-/blob/$commit/$path#L$line"
+fi
