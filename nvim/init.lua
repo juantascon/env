@@ -49,6 +49,7 @@ vim.keymap.set("", "<Space>", "<Nop>")
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
 vim.keymap.set("n", "<C-q>", "<cmd>qa<cr>")
 vim.keymap.set("n", "<Leader><Leader>h", "<cmd>terminal gitui<cr>", {silent = true, desc = "gitui"})
+vim.keymap.set("n", "yh", [[<cmd>let @+=system("git browser-url " . expand("%") . " " . line("."))<cr>]], {silent = true, desc = "yank_giturl"})
 
 require("lazy").setup ({
   {
@@ -154,16 +155,6 @@ require("lazy").setup ({
       vim.keymap.set("n", "hD", function() gitsigns.diffthis("~") end, {desc = "gitsigns_diffthis~"})
       vim.keymap.set("n", "hn", gitsigns.preview_hunk, {desc = "gitsigns_preview_hunk"})
     end,
-  },
-  {
-    "ruifm/gitlinker.nvim",
-    dependencies = {"nvim-lua/plenary.nvim"},
-    config = function()
-      require("gitlinker").setup({
-        mappings = "yh",
-        callbacks = {["gitlab.lan.athonet.com"] = require("gitlinker.hosts").get_gitlab_type_url},
-      })
-    end
   },
   {
     "neovim/nvim-lspconfig",
