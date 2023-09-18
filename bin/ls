@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -t 1 ]; then
-  exec /usr/bin/exa "$@"
+  exec /usr/bin/eza "$@"
 else
   exec /usr/bin/ls "$@"
 fi
