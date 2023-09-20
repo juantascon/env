@@ -162,16 +162,9 @@ require("lazy").setup ({
     lazy = false,
     dependencies = {
       {"williamboman/mason.nvim"},
-      {"folke/neodev.nvim"},
     },
     config = function()
       require("mason").setup({})
-      require("neodev").setup({
-        override = function(root_dir, library)
-          library.enabled = true
-          library.plugins = true
-        end,
-      })
 
       local mix_credo = {
         lintCommand = "mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
@@ -202,6 +195,21 @@ require("lazy").setup ({
       lspconfig.elixirls.setup({cmd = { "elixir-ls" }})
       lspconfig.erlangls.setup({})
       lspconfig.jsonls.setup({})
+
+      local library = {vim.fn.expand("$VIMRUNTIME/lua")}
+      for _, plugin in ipairs(require("lazy").plugins()) do
+        table.insert(library, plugin.dir .. "/lua")
+      end
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            diagnostics = {globals = {"vim"}, disable = {"missing-fields"}},
+            runtime = {path = { "?.lua", "?/init.lua" }, pathStrict = true, version = "LuaJIT"},
+            workspace = {library = library, checkThirdParty = false},
+            telemetry = {enable = false},
+          }
+        }
+      })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "hover"})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {desc = "lsp_definition"})
