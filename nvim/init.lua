@@ -80,6 +80,9 @@ require("lazy").setup ({
       require("mini.comment").setup({})
       require("mini.statusline").setup({})
 
+      require("mini.files").setup({})
+      vim.keymap.set("n", "<Leader>f", MiniFiles.open, {desc = "minifiles_open"})
+
       require("mini.completion").setup({
           delay = { completion = 0, info = 0, signature = 0 },
       })
