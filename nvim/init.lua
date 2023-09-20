@@ -142,7 +142,6 @@ require("lazy").setup ({
   {
     "lewis6991/gitsigns.nvim",
     lazy = false,
-    dependencies = {"nvim-lua/plenary.nvim"},
     config = function()
       local gitsigns = require("gitsigns")
       gitsigns.setup({})
