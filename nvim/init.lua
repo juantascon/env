@@ -162,12 +162,7 @@ require("lazy").setup ({
     "neovim/nvim-lspconfig",
     priority = 1000,
     lazy = false,
-    dependencies = {
-      {"williamboman/mason.nvim"},
-    },
     config = function()
-      require("mason").setup({})
-
       local mix_credo = {
         lintCommand = "mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
         lintStdin = true,
