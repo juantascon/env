@@ -59,16 +59,6 @@ require("lazy").setup ({
     end,
   },
   {
-    "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("nvim-treesitter.configs").setup {
-        highlight = {enable = true},
-        indent = {enable = true},
-        auto_install = true,
-      }
-    end,
-  },
-  {
     "echasnovski/mini.nvim",
     config = function()
       require("mini.basics").setup({extra_ui = true})
@@ -117,44 +107,13 @@ require("lazy").setup ({
     end,
   },
   {
-    "akinsho/bufferline.nvim",
-    lazy = false,
+    "nvim-treesitter/nvim-treesitter",
     config = function()
-      local bufferline = require("bufferline")
-      bufferline.setup({
-        options = {
-          diagnostics = "nvim_lsp",
-          separator_style = "thick",
-        },
-      })
-      vim.keymap.set("n", "<C-t>", vim.cmd.enew)
-      vim.keymap.set("n", "<C-w>", vim.cmd.bdelete)
-      vim.keymap.set("n", "<C-j>", function() bufferline.cycle(1) end)
-      vim.keymap.set("n", "<C-k>", function() bufferline.cycle(-1) end)
-      vim.keymap.set("n", "<C-S-j>", function() bufferline.move(1) end)
-      vim.keymap.set("n", "<C-S-k>", function() bufferline.move(-1) end)
-      for i=1, 5 do
-        vim.keymap.set("n", "<C-"..i..">", function() bufferline.go_to(i) end)
-      end
-    end,
-  },
-  {
-    "lewis6991/gitsigns.nvim",
-    lazy = false,
-    config = function()
-      local gitsigns = require("gitsigns")
-      gitsigns.setup({})
-      vim.keymap.set("n", "hh", gitsigns.toggle_deleted, {desc = "gitsigns_togle_deleted"})
-      vim.keymap.set("n", "hs", gitsigns.stage_hunk, {desc = "gitsigns_stage_hunk"})
-      vim.keymap.set("x", "hs", function() gitsigns.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, {desc = "gitsigns_stage_hunk"})
-      vim.keymap.set("n", "hS", gitsigns.stage_buffer, {desc = "gitsigns_stage_buffer"})
-      vim.keymap.set("n", "hR", gitsigns.reset_buffer_index, {desc = "gitsigns_reset_buffer_index"})
-      vim.keymap.set("n", "hu", gitsigns.undo_stage_hunk, {desc = "gitsigns_undo_stage_hunk"})
-      vim.keymap.set("n", "hb", function() gitsigns.blame_line{full=true} end, {desc = "gitsigns_blame_line"})
-      vim.keymap.set("n", "hB", gitsigns.toggle_current_line_blame, {desc = "gitsigns_togle_blame_line"})
-      vim.keymap.set("n", "hd", gitsigns.diffthis, {desc = "gitsigns_diffthis"})
-      vim.keymap.set("n", "hD", function() gitsigns.diffthis("~") end, {desc = "gitsigns_diffthis~"})
-      vim.keymap.set("n", "hn", gitsigns.preview_hunk, {desc = "gitsigns_preview_hunk"})
+      require("nvim-treesitter.configs").setup {
+        highlight = {enable = true},
+        indent = {enable = true},
+        auto_install = true,
+      }
     end,
   },
   {
@@ -214,6 +173,47 @@ require("lazy").setup ({
       vim.keymap.set("n", "gr", vim.lsp.buf.references, {desc = "lsp_references"})
       vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, {desc = "lsp_signature_help"})
       vim.keymap.set("n", "gl", vim.diagnostic.open_float, {desc = "diagnostic_open_float"})
+    end,
+  },
+  {
+    "akinsho/bufferline.nvim",
+    lazy = false,
+    config = function()
+      local bufferline = require("bufferline")
+      bufferline.setup({
+        options = {
+          diagnostics = "nvim_lsp",
+          separator_style = "thick",
+        },
+      })
+      vim.keymap.set("n", "<C-t>", vim.cmd.enew)
+      vim.keymap.set("n", "<C-w>", vim.cmd.bdelete)
+      vim.keymap.set("n", "<C-j>", function() bufferline.cycle(1) end)
+      vim.keymap.set("n", "<C-k>", function() bufferline.cycle(-1) end)
+      vim.keymap.set("n", "<C-S-j>", function() bufferline.move(1) end)
+      vim.keymap.set("n", "<C-S-k>", function() bufferline.move(-1) end)
+      for i=1, 5 do
+        vim.keymap.set("n", "<C-"..i..">", function() bufferline.go_to(i) end)
+      end
+    end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    lazy = false,
+    config = function()
+      local gitsigns = require("gitsigns")
+      gitsigns.setup({})
+      vim.keymap.set("n", "hh", gitsigns.toggle_deleted, {desc = "gitsigns_togle_deleted"})
+      vim.keymap.set("n", "hs", gitsigns.stage_hunk, {desc = "gitsigns_stage_hunk"})
+      vim.keymap.set("x", "hs", function() gitsigns.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, {desc = "gitsigns_stage_hunk"})
+      vim.keymap.set("n", "hS", gitsigns.stage_buffer, {desc = "gitsigns_stage_buffer"})
+      vim.keymap.set("n", "hR", gitsigns.reset_buffer_index, {desc = "gitsigns_reset_buffer_index"})
+      vim.keymap.set("n", "hu", gitsigns.undo_stage_hunk, {desc = "gitsigns_undo_stage_hunk"})
+      vim.keymap.set("n", "hb", function() gitsigns.blame_line{full=true} end, {desc = "gitsigns_blame_line"})
+      vim.keymap.set("n", "hB", gitsigns.toggle_current_line_blame, {desc = "gitsigns_togle_blame_line"})
+      vim.keymap.set("n", "hd", gitsigns.diffthis, {desc = "gitsigns_diffthis"})
+      vim.keymap.set("n", "hD", function() gitsigns.diffthis("~") end, {desc = "gitsigns_diffthis~"})
+      vim.keymap.set("n", "hn", gitsigns.preview_hunk, {desc = "gitsigns_preview_hunk"})
     end,
   },
   {
