@@ -46,7 +46,6 @@ vim.keymap.set("n", "yf", [[:let @+ = expand("%")<cr>]], {desc = "yank_filename"
 vim.keymap.set("n", "gf", "gF", {desc = "goto_filename"})
 vim.keymap.set("n", "<Esc>", "<cmd>silent nohlsearch<cr><cmd>silent cclose<cr><cmd>silent only<cr>")
 vim.keymap.set("", "<Space>", "<Nop>")
-vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>")
 vim.keymap.set("n", "<C-q>", "<cmd>qa<cr>")
 vim.keymap.set("n", "<Leader><Leader>h", "<cmd>terminal gitui<cr>", {silent = true, desc = "gitui"})
 vim.keymap.set("n", "yh", [[<cmd>let @+=system("git browser-url " . expand("%") . " " . line("."))<cr>]], {silent = true, desc = "yank_giturl"})
