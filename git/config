@@ -26,3 +26,5 @@
   path = ~/env/git/hx
 [includeIf "gitdir:~/my/"]
   path = ~/env/git/hx
+[includeIf "gitdir:~/dev/"]
+  path = ~/env/git/hx
