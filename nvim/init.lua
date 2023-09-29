@@ -119,7 +119,6 @@ require("lazy").setup ({
   {
     "neovim/nvim-lspconfig",
     priority = 1000,
-    lazy = false,
     config = function()
       local mix_credo = {
         lintCommand = "mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
@@ -177,7 +176,6 @@ require("lazy").setup ({
   },
   {
     "akinsho/bufferline.nvim",
-    lazy = false,
     config = function()
       local bufferline = require("bufferline")
       bufferline.setup({
@@ -199,7 +197,6 @@ require("lazy").setup ({
   },
   {
     "lewis6991/gitsigns.nvim",
-    lazy = false,
     config = function()
       local gitsigns = require("gitsigns")
       gitsigns.setup({})
@@ -218,7 +215,6 @@ require("lazy").setup ({
   },
   {
     "ibhagwan/fzf-lua",
-    lazy = false,
     config = function()
       local fzf = require("fzf-lua")
       fzf.setup({
