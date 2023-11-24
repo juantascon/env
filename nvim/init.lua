@@ -234,15 +234,6 @@ require("lazy").setup ({
             ["ctrl-a"] = "select-all+accept",
           },
         },
-        git = {
-          status = {
-            actions = {
-              ["right"] = "",
-              ["left"] = "",
-              ["ctrl-x"] = "",
-            },
-          },
-        },
         files = {
           fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude deps --exclude _build --exclude .elixir_ls --exclude node_modules"
         },
@@ -256,7 +247,7 @@ require("lazy").setup ({
       vim.keymap.set("n", "<Leader>p", fzf.files, {desc = "fzf_find_files"})
       vim.keymap.set("n", "<Leader>g", fzf.live_grep_resume, {desc = "fzf_live_grep"})
       vim.keymap.set("n", "<Leader>b", fzf.blines, {desc = "fzf_buffer_lines"})
-      vim.keymap.set("n", "<Leader>h", fzf.git_status, {desc = "fzf_git_status"})
+      vim.keymap.set("n", "<Leader>h", function() fzf.files({cmd = "git hunks"}) end, {desc = "fzf_git_hunks"})
       vim.keymap.set("n", "<Leader>l", fzf.quickfix, {desc = "fzf_quickfix"})
       vim.keymap.set("n", "<Leader>d", fzf.lsp_workspace_diagnostics, {desc = "fzf_diagnostics"})
     end,
