@@ -1,2 +1,0 @@
-#!/bin/sh
-exec $(ls -d ~/opt/brave*|sort -n | tail -n 1)/brave "$@"
