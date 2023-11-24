@@ -48,6 +48,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>silent nohlsearch<cr><cmd>silent cclose<cr><c
 vim.keymap.set("", "<Space>", "<Nop>")
 vim.keymap.set("n", "<C-q>", "<cmd>qa<cr>")
 vim.keymap.set("n", "<Leader><Leader>h", "<cmd>terminal gitui<cr>", {silent = true, desc = "gitui"})
+vim.keymap.set("n", "<Leader>L", "<cmd>Lazy sync<cr>", {desc = "lazy"})
 vim.keymap.set("n", "yh", [[<cmd>let @+=system("git browser-url " . expand("%") . " " . line("."))<cr>]], {silent = true, desc = "yank_giturl"})
 
 require("lazy").setup ({
