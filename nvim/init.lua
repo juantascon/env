@@ -69,8 +69,18 @@ require("lazy").setup ({
       require("mini.comment").setup({})
       require("mini.statusline").setup({})
 
-      require("mini.files").setup({})
-      vim.keymap.set("n", "<Leader>f", MiniFiles.open, {desc = "minifiles_open"})
+      require("mini.files").setup({
+        options = {
+          use_as_default_explorer = true,
+        },
+        mappings = {
+          close = "<Esc>",
+          go_in_plus = "<Right>",
+          go_out_plus = "<Left>",
+        },
+      })
+      vim.keymap.set("n", "<Leader>f", MiniFiles.open, {desc = "minifiles_open_cwd"})
+      vim.keymap.set("n", "<leader>F", function() MiniFiles.open(vim.api.nvim_buf_get_name(0), true) end, {desc = "minifiles_open_bufdir"})
 
       require("mini.completion").setup({
           delay = { completion = 0, info = 0, signature = 0 },
