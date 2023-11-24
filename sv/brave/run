@@ -1,2 +1,3 @@
-#!/bin/sh
+#!/bin/bash -i
+eval $(rtx env)
 exec brave 2>&1
