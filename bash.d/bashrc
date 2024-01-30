@@ -7,6 +7,5 @@ export BROWSER=browser
 export PAGER=bat
 
 eval "$(xdg-dirs)"
-eval "$(rtx activate bash)"
+eval "$(mise activate bash)"
 eval "$(keychain --quiet --eval --agents ssh id_rsa)"
-
