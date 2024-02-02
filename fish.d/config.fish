@@ -1,3 +1,4 @@
+set -x SHELL fish
 set -x PATH ~/env/bin ~/.pipx/bin /usr/bin
 set -x LANG en_US.UTF-8
 set -x TERM xterm-256color
