@@ -69,6 +69,7 @@ require("lazy").setup ({
       require("mini.indentscope").setup({})
       require("mini.comment").setup({})
       require("mini.statusline").setup({})
+      require("mini.notify").setup({})
 
       require("mini.files").setup({
         options = {
