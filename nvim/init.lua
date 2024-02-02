@@ -227,6 +227,8 @@ require("lazy").setup ({
       vim.keymap.set("n", "hd", gitsigns.diffthis, {desc = "gitsigns_diffthis"})
       vim.keymap.set("n", "hD", function() gitsigns.diffthis("~") end, {desc = "gitsigns_diffthis~"})
       vim.keymap.set("n", "hn", gitsigns.preview_hunk, {desc = "gitsigns_preview_hunk"})
+      vim.keymap.set("n", "]h", gitsigns.next_hunk, {desc = "gitsigns_next_hunk"})
+      vim.keymap.set("n", "[h", gitsigns.prev_hunk, {desc = "gitsigns_prev_hunk"})
     end,
   },
   {
@@ -252,6 +254,7 @@ require("lazy").setup ({
       vim.keymap.set("n", "<Leader>p", fzf.files, {desc = "fzf_find_files"})
       vim.keymap.set("n", "<Leader>g", fzf.live_grep_resume, {desc = "fzf_live_grep"})
       vim.keymap.set("n", "<Leader>b", fzf.blines, {desc = "fzf_buffer_lines"})
+      vim.keymap.set("n", "<Leader>H", fzf.git_status, {desc = "fzf_git_status"})
       vim.keymap.set("n", "<Leader>h", function() fzf.files({cmd = "git hunks"}) end, {desc = "fzf_git_hunks"})
       vim.keymap.set("n", "<Leader>l", fzf.quickfix, {desc = "fzf_quickfix"})
       vim.keymap.set("n", "<Leader>d", fzf.lsp_workspace_diagnostics, {desc = "fzf_diagnostics"})
