@@ -16,9 +16,10 @@
   revise = !pipx run git-revise
   ss = status --short --branch
   s = status
-  b = branch -vv
+  b = branch -vv --all
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --date=short
   f = fetch
+  p = pull
   branch-cleanup = !git branch | grep -v \"\\*\" | awk \"{ print $1 }\" | xargs git branch -d
   changelog = log --format=\"- %ae %ar %s\"
 [includeIf "gitdir:~/ath/"]
