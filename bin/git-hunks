@@ -1,0 +1,11 @@
+#! /bin/bash
+
+git diff --unified=0 --no-prefix --relative |\
+  while read line; do
+    case $line in
+      +++*) file=${line#*+++ } ;;
+      @@*)
+        lineno=$(echo "$line" | awk {'print $3'} | awk -F'[+,]' '{print $2}')
+        echo "${file}:${lineno}" ;;
+    esac
+  done

@@ -11,6 +11,7 @@
 [color]
   ui = true
 [alias]
+  hunks = !git-hunks
   browser-url = !git-browser-url
   revise = !pipx run git-revise
   ss = status --short --branch
