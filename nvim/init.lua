@@ -30,7 +30,7 @@ local usercmd = vim.api.nvim_create_user_command
 autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end})
 autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end})
 usercmd("Format", function() vim.lsp.buf.format({filter = function(client) return client.name ~= "elixirls" end }) end, {})
-autocmd("BufWritePost", {pattern = {"*.ex", "*.exs"}, callback = vim.cmd.Format})
+autocmd("BufWritePost", {pattern = {"*.ex", "*.exs"}, command = "Format"})
 
 vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set({"n", "x"}, "<Home>", "^")
