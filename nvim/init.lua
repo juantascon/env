@@ -139,8 +139,12 @@ require("lazy").setup ({
         lintCategoryMap = { R = "N", D = "I", F = "E", W = "W" },
       }
       local mix_format = {formatCommand = "mix format -", formatStdin = true}
+      local jq_format = {formatCommand = "jq", formatStdin = true}
+      local yq_format = {formatCommand = "yq-go", formatStdin = true}
       local languages = {
-        elixir = { mix_format, mix_credo }
+        elixir = { mix_format, mix_credo },
+        json = { jq_format },
+        yaml = { yq_format },
       }
 
       local efmls_config = {
