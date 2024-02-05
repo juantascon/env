@@ -28,7 +28,6 @@ vim.opt.diffopt = "context:0,closeoff,foldcolumn:0,internal"
 local autocmd = vim.api.nvim_create_autocmd
 local usercmd = vim.api.nvim_create_user_command
 usercmd("Format", function() vim.lsp.buf.format({filter = function(client) return client.name ~= "elixirls" end }) end, {})
-autocmd("BufWritePost", {pattern = {"*.ex", "*.exs"}, command = "Format"})
 
 vim.keymap.set({"i", "c"}, "<S-Insert>", "<MiddleMouse>")
 vim.keymap.set({"n", "x"}, "<Home>", "^")
@@ -45,6 +44,7 @@ vim.keymap.set("n", "gf", "gF", {desc = "goto_filename"})
 vim.keymap.set("n", "<Esc>", "<cmd>silent nohlsearch<cr><cmd>silent cclose<cr><cmd>silent only<cr>")
 vim.keymap.set("", "<Space>", "<Nop>")
 vim.keymap.set("n", "<C-q>", "<cmd>qa<cr>")
+vim.keymap.set("n", "<C-f>", "<cmd>Format<cr>")
 vim.keymap.set("n", "<Leader><Leader>h", "<cmd>terminal gitui<cr>", {silent = true, desc = "gitui"})
 vim.keymap.set("n", "<Leader>L", "<cmd>Lazy sync<cr>", {desc = "lazy"})
 vim.keymap.set("n", "yh", [[<cmd>let @+=system("git browser-url " . expand("%") . " " . line("."))<cr>]], {silent = true, desc = "yank_giturl"})
