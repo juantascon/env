@@ -27,8 +27,6 @@ vim.opt.diffopt = "context:0,closeoff,foldcolumn:0,internal"
 
 local autocmd = vim.api.nvim_create_autocmd
 local usercmd = vim.api.nvim_create_user_command
-autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {callback = function() vim.opt.relativenumber = true end})
-autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {callback = function() vim.opt.relativenumber = false end})
 usercmd("Format", function() vim.lsp.buf.format({filter = function(client) return client.name ~= "elixirls" end }) end, {})
 autocmd("BufWritePost", {pattern = {"*.ex", "*.exs"}, command = "Format"})
 
