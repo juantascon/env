@@ -200,10 +200,10 @@ local efmls_config = {
   },
 }
 
-local library = {vim.fn.expand("$VIMRUNTIME/lua")}
-for _, plugin in ipairs(MiniDeps.get_session()) do
-  table.insert(library, plugin.path .. "/lua")
-end
+local library = vim.tbl_flatten({
+  vim.fn.expand("$VIMRUNTIME/lua"),
+  vim.fn.glob(MiniDeps.config.path.package .. "/pack/deps/*/*/lua", false, true)
+})
 local luals_config = {
   settings = {
     Lua = {
