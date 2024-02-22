@@ -57,6 +57,9 @@ vim.cmd.colorscheme("kanagawa")
 
 
 require("mini.basics").setup({extra_ui = true})
+require("mini.notify").setup({})
+vim.notify = require("mini.notify").make_notify()
+require("mini.statusline").setup({})
 require("mini.bracketed").setup({})
 require("mini.indentscope").setup({})
 require("mini.comment").setup({})
@@ -64,9 +67,6 @@ require("mini.splitjoin").setup({
   mappings = {toggle = 'J'},
   detect = {separator = ' '},
 })
-require("mini.statusline").setup({})
-require("mini.notify").setup({})
-vim.notify = require("mini.notify").make_notify()
 
 require("mini.files").setup({
   options = {
@@ -116,6 +116,61 @@ miniclue.setup({
     miniclue.gen_clues.z(),
   },
 })
+
+
+MiniDeps.add("akinsho/bufferline.nvim")
+local bufferline = require("bufferline")
+bufferline.setup({
+  options = {
+    diagnostics = "nvim_lsp",
+    separator_style = "thick",
+  },
+})
+vim.keymap.set("n", "<C-t>", vim.cmd.enew)
+vim.keymap.set("n", "<C-w>", vim.cmd.bdelete)
+vim.keymap.set("n", "<C-j>", function() bufferline.cycle(1) end)
+vim.keymap.set("n", "<C-k>", function() bufferline.cycle(-1) end)
+vim.keymap.set("n", "<C-S-j>", function() bufferline.move(1) end)
+vim.keymap.set("n", "<C-S-k>", function() bufferline.move(-1) end)
+for i=1, 5 do
+  vim.keymap.set("n", "<C-"..i..">", function() bufferline.go_to(i) end)
+end
+
+
+MiniDeps.add("lewis6991/gitsigns.nvim")
+local gitsigns = require("gitsigns")
+gitsigns.setup({})
+vim.keymap.set("n", "hh", gitsigns.toggle_deleted, {desc = "gitsigns_togle_deleted"})
+vim.keymap.set("n", "hs", gitsigns.stage_hunk, {desc = "gitsigns_stage_hunk"})
+vim.keymap.set("x", "hs", function() gitsigns.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, {desc = "gitsigns_stage_hunk"})
+vim.keymap.set("n", "hS", gitsigns.stage_buffer, {desc = "gitsigns_stage_buffer"})
+vim.keymap.set("n", "hR", gitsigns.reset_buffer_index, {desc = "gitsigns_reset_buffer_index"})
+vim.keymap.set("n", "hu", gitsigns.undo_stage_hunk, {desc = "gitsigns_undo_stage_hunk"})
+vim.keymap.set("n", "hb", function() gitsigns.blame_line{full=true} end, {desc = "gitsigns_blame_line"})
+vim.keymap.set("n", "hB", gitsigns.toggle_current_line_blame, {desc = "gitsigns_togle_blame_line"})
+vim.keymap.set("n", "hd", gitsigns.diffthis, {desc = "gitsigns_diffthis"})
+vim.keymap.set("n", "hD", function() gitsigns.diffthis("~") end, {desc = "gitsigns_diffthis~"})
+vim.keymap.set("n", "hn", gitsigns.preview_hunk, {desc = "gitsigns_preview_hunk"})
+vim.keymap.set("n", "]h", gitsigns.next_hunk, {desc = "gitsigns_next_hunk"})
+vim.keymap.set("n", "[h", gitsigns.prev_hunk, {desc = "gitsigns_prev_hunk"})
+
+
+MiniDeps.add("ibhagwan/fzf-lua")
+local fzf = require("fzf-lua")
+local fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude deps --exclude _build --exclude .elixir_ls --exclude node_modules"
+local rg_opts = "--sort=path --column --line-number --no-heading --color=always --smart-case --max-columns=512"
+fzf.setup({
+  files = {fd_opts = fd_opts},
+  grep = {rg_opts = rg_opts},
+})
+fzf.register_ui_select()
+vim.keymap.set("n", "<Leader>p", fzf.files, {desc = "fzf_find_files"})
+vim.keymap.set("n", "<Leader>g", fzf.live_grep_resume, {desc = "fzf_live_grep"})
+vim.keymap.set("n", "<Leader>b", fzf.blines, {desc = "fzf_buffer_lines"})
+vim.keymap.set("n", "<Leader>H", fzf.git_status, {desc = "fzf_git_status"})
+vim.keymap.set("n", "<Leader>h", function() fzf.files({cmd = "git hunks"}) end, {desc = "fzf_git_hunks"})
+vim.keymap.set("n", "<Leader>l", fzf.quickfix, {desc = "fzf_quickfix"})
+vim.keymap.set("n", "<Leader>d", fzf.lsp_workspace_diagnostics, {desc = "fzf_diagnostics"})
 
 
 MiniDeps.add("neovim/nvim-lspconfig")
@@ -178,7 +233,6 @@ vim.keymap.set("n", "gl", vim.diagnostic.open_float, {desc = "diagnostic_open_fl
 usercmd("Format", function() vim.lsp.buf.format({filter = function(client) return client.name ~= "elixirls" end }) end, {})
 
 
-
 MiniDeps.add({source = "nvim-treesitter/nvim-treesitter", hooks = { post_checkout = vim.cmd.TSUpdateSync }})
 require("nvim-treesitter.configs").setup({
   highlight = {enable = true},
@@ -186,57 +240,3 @@ require("nvim-treesitter.configs").setup({
   auto_install = true,
 })
 
-
-MiniDeps.add("akinsho/bufferline.nvim")
-local bufferline = require("bufferline")
-bufferline.setup({
-  options = {
-    diagnostics = "nvim_lsp",
-    separator_style = "thick",
-  },
-})
-vim.keymap.set("n", "<C-t>", vim.cmd.enew)
-vim.keymap.set("n", "<C-w>", vim.cmd.bdelete)
-vim.keymap.set("n", "<C-j>", function() bufferline.cycle(1) end)
-vim.keymap.set("n", "<C-k>", function() bufferline.cycle(-1) end)
-vim.keymap.set("n", "<C-S-j>", function() bufferline.move(1) end)
-vim.keymap.set("n", "<C-S-k>", function() bufferline.move(-1) end)
-for i=1, 5 do
-  vim.keymap.set("n", "<C-"..i..">", function() bufferline.go_to(i) end)
-end
-
-
-MiniDeps.add("lewis6991/gitsigns.nvim")
-local gitsigns = require("gitsigns")
-gitsigns.setup({})
-vim.keymap.set("n", "hh", gitsigns.toggle_deleted, {desc = "gitsigns_togle_deleted"})
-vim.keymap.set("n", "hs", gitsigns.stage_hunk, {desc = "gitsigns_stage_hunk"})
-vim.keymap.set("x", "hs", function() gitsigns.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, {desc = "gitsigns_stage_hunk"})
-vim.keymap.set("n", "hS", gitsigns.stage_buffer, {desc = "gitsigns_stage_buffer"})
-vim.keymap.set("n", "hR", gitsigns.reset_buffer_index, {desc = "gitsigns_reset_buffer_index"})
-vim.keymap.set("n", "hu", gitsigns.undo_stage_hunk, {desc = "gitsigns_undo_stage_hunk"})
-vim.keymap.set("n", "hb", function() gitsigns.blame_line{full=true} end, {desc = "gitsigns_blame_line"})
-vim.keymap.set("n", "hB", gitsigns.toggle_current_line_blame, {desc = "gitsigns_togle_blame_line"})
-vim.keymap.set("n", "hd", gitsigns.diffthis, {desc = "gitsigns_diffthis"})
-vim.keymap.set("n", "hD", function() gitsigns.diffthis("~") end, {desc = "gitsigns_diffthis~"})
-vim.keymap.set("n", "hn", gitsigns.preview_hunk, {desc = "gitsigns_preview_hunk"})
-vim.keymap.set("n", "]h", gitsigns.next_hunk, {desc = "gitsigns_next_hunk"})
-vim.keymap.set("n", "[h", gitsigns.prev_hunk, {desc = "gitsigns_prev_hunk"})
-
-
-MiniDeps.add("ibhagwan/fzf-lua")
-local fzf = require("fzf-lua")
-local fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude deps --exclude _build --exclude .elixir_ls --exclude node_modules"
-local rg_opts = "--sort=path --column --line-number --no-heading --color=always --smart-case --max-columns=512"
-fzf.setup({
-  files = {fd_opts = fd_opts},
-  grep = {rg_opts = rg_opts},
-})
-fzf.register_ui_select()
-vim.keymap.set("n", "<Leader>p", fzf.files, {desc = "fzf_find_files"})
-vim.keymap.set("n", "<Leader>g", fzf.live_grep_resume, {desc = "fzf_live_grep"})
-vim.keymap.set("n", "<Leader>b", fzf.blines, {desc = "fzf_buffer_lines"})
-vim.keymap.set("n", "<Leader>H", fzf.git_status, {desc = "fzf_git_status"})
-vim.keymap.set("n", "<Leader>h", function() fzf.files({cmd = "git hunks"}) end, {desc = "fzf_git_hunks"})
-vim.keymap.set("n", "<Leader>l", fzf.quickfix, {desc = "fzf_quickfix"})
-vim.keymap.set("n", "<Leader>d", fzf.lsp_workspace_diagnostics, {desc = "fzf_diagnostics"})
