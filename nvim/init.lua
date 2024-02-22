@@ -61,7 +61,7 @@ require("mini.notify").setup({})
 vim.notify = require("mini.notify").make_notify()
 require("mini.statusline").setup({})
 require("mini.bracketed").setup({})
-require("mini.indentscope").setup({})
+require("mini.indentscope").setup({symbol = "│"})
 require("mini.comment").setup({})
 require("mini.splitjoin").setup({
   mappings = {toggle = 'J'},
@@ -239,4 +239,3 @@ require("nvim-treesitter.configs").setup({
   indent = {enable = true},
   auto_install = true,
 })
-
