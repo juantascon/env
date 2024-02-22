@@ -233,7 +233,7 @@ vim.keymap.set("n", "gl", vim.diagnostic.open_float, {desc = "diagnostic_open_fl
 usercmd("Format", function() vim.lsp.buf.format({filter = function(client) return client.name ~= "elixirls" end }) end, {})
 
 
-MiniDeps.add({source = "nvim-treesitter/nvim-treesitter", hooks = { post_checkout = vim.cmd.TSUpdateSync }})
+MiniDeps.add({source = "nvim-treesitter/nvim-treesitter", hooks = { post_checkout = function() vim.cmd("TSUpdateSync") end }})
 require("nvim-treesitter.configs").setup({
   highlight = {enable = true},
   indent = {enable = true},
