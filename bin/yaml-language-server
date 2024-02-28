@@ -1,0 +1,2 @@
+#!/bin/sh
+exec npx yaml-language-server "$@"

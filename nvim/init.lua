@@ -174,23 +174,6 @@ vim.keymap.set("n", "<Leader>d", fzf.lsp_workspace_diagnostics, {desc = "fzf_dia
 
 
 MiniDeps.add("neovim/nvim-lspconfig")
-local jq_format = {formatCommand = "jq", formatStdin = true}
-local yq_format = {formatCommand = "yq-go", formatStdin = true}
-local languages = {
-  json = { jq_format },
-  yaml = { yq_format },
-}
-local efmls_config = {
-  filetypes = vim.tbl_keys(languages),
-  settings = {
-    rootMarkers = { ".git/" },
-    languages = languages,
-  },
-  init_options = {
-    documentFormatting = true,
-    documentRangeFormatting = true,
-  },
-}
 local library = vim.tbl_flatten({
   vim.fn.expand("$VIMRUNTIME/lua"),
   vim.fn.glob(MiniDeps.config.path.package .. "/pack/deps/*/*/lua", false, true)
@@ -206,11 +189,19 @@ local luals_config = {
   }
 }
 
+local yamlls_config = {
+  on_attach = function(client, bufnr) client.server_capabilities.documentFormattingProvider = true end,
+  settings = {
+    redhat = {telemetry = {enabled = false}},
+    yaml = {keyOrdering = false}
+  },
+}
+
 local lspconfig = require("lspconfig")
-lspconfig.efm.setup(efmls_config)
 lspconfig.elixirls.setup({cmd = { "next_ls", "--stdio" }})
 lspconfig.erlangls.setup({})
 lspconfig.jsonls.setup({})
+lspconfig.yamlls.setup(yamlls_config)
 lspconfig.lua_ls.setup(luals_config)
 MiniDeps.later(vim.cmd.LspStart)
 
