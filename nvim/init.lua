@@ -36,7 +36,7 @@ vim.keymap.set("", "<Space>", "<Nop>")
 vim.keymap.set("n", "<C-q>", "<cmd>qa<cr>")
 vim.keymap.set("n", "<C-f>", "<cmd>Format<cr>")
 vim.keymap.set("n", "<Leader><Leader>h", "<cmd>terminal gitui<cr>", {silent = true, desc = "gitui"})
-vim.keymap.set("n", "<Leader>D", "<cmd>DepsUpdate silent<cr>", {desc = "mini_deps_update"})
+vim.keymap.set("n", "<Leader>D", "<cmd>DepsUpdate<cr>", {desc = "mini_deps_update"})
 vim.keymap.set("n", "yh", [[<cmd>let @+=system("git browser-url " . expand("%") . " " . line("."))<cr>]], {silent = true, desc = "yank_giturl"})
 
 local autocmd, usercmd = vim.api.nvim_create_autocmd, vim.api.nvim_create_user_command
