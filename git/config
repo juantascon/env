@@ -8,6 +8,14 @@
   rebase = true
 [rebase]
   autoStash = true
+[merge]
+  conflictStyle = zdiff3
+[commit]
+  verbose = true
+[log]
+  date = iso
+[diff]
+  algorithm = histogram
 [color]
   ui = true
 [alias]
@@ -18,8 +26,8 @@
   s = status
   b = branch -vv --all
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --date=short
-  f = fetch
-  p = pull
+  f = fetch --all
+  p = pull --rebase
   branch-cleanup = !git branch | grep -v \"\\*\" | awk \"{ print $1 }\" | xargs git branch -d
   changelog = log --format=\"- %ae %ar %s\"
 [includeIf "gitdir:~/ath/"]
