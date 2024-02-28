@@ -53,6 +53,6 @@ case "$1" in
     choice=$(echo -e "a2dp\nhsp\noffline" | rofi -dmenu -matching fuzzy -no-custom -p "select:")
     exec $0 $choice
     ;;
-  *) echo "usage: $0 a2dp|hsp|offline"; exit 1 ;;
+  *) echo "usage: $0 get|menu|a2dp|hsp|offline"; exit 1 ;;
 esac
 
