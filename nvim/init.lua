@@ -230,7 +230,7 @@ vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {desc = "lsp_implementatio
 vim.keymap.set("n", "gr", vim.lsp.buf.references, {desc = "lsp_references"})
 vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, {desc = "lsp_signature_help"})
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, {desc = "diagnostic_open_float"})
-usercmd("Format", function() vim.lsp.buf.format({filter = function(client) return client.name ~= "elixirls" end }) end, {})
+usercmd("Format", function() vim.lsp.buf.format({timeout_ms = 5000, filter = function(client) return client.name ~= "elixirls" end }) end, {})
 
 
 MiniDeps.add({source = "nvim-treesitter/nvim-treesitter", hooks = { post_checkout = function() vim.cmd("TSUpdateSync") end }})
@@ -239,3 +239,4 @@ require("nvim-treesitter.configs").setup({
   indent = {enable = true},
   auto_install = true,
 })
+
