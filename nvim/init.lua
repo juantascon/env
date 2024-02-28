@@ -174,17 +174,9 @@ vim.keymap.set("n", "<Leader>d", fzf.lsp_workspace_diagnostics, {desc = "fzf_dia
 
 
 MiniDeps.add("neovim/nvim-lspconfig")
-local mix_credo = {
-  lintCommand = "mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
-  lintStdin = true,
-  lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m" },
-  lintCategoryMap = { R = "N", D = "I", F = "E", W = "W" },
-}
-local mix_format = {formatCommand = "mix format -", formatStdin = true}
 local jq_format = {formatCommand = "jq", formatStdin = true}
 local yq_format = {formatCommand = "yq-go", formatStdin = true}
 local languages = {
-  elixir = { mix_format, mix_credo },
   json = { jq_format },
   yaml = { yq_format },
 }
@@ -199,7 +191,6 @@ local efmls_config = {
     documentRangeFormatting = true,
   },
 }
-
 local library = vim.tbl_flatten({
   vim.fn.expand("$VIMRUNTIME/lua"),
   vim.fn.glob(MiniDeps.config.path.package .. "/pack/deps/*/*/lua", false, true)
@@ -217,7 +208,7 @@ local luals_config = {
 
 local lspconfig = require("lspconfig")
 lspconfig.efm.setup(efmls_config)
-lspconfig.elixirls.setup({cmd = { "elixir-ls" }})
+lspconfig.elixirls.setup({cmd = { "next_ls", "--stdio" }})
 lspconfig.erlangls.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.lua_ls.setup(luals_config)
@@ -230,8 +221,7 @@ vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {desc = "lsp_implementatio
 vim.keymap.set("n", "gr", vim.lsp.buf.references, {desc = "lsp_references"})
 vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, {desc = "lsp_signature_help"})
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, {desc = "diagnostic_open_float"})
-usercmd("Format", function() vim.lsp.buf.format({timeout_ms = 5000, filter = function(client) return client.name ~= "elixirls" end }) end, {})
-
+usercmd("Format", function() vim.lsp.buf.format({timeout_ms = 5000}) end, {})
 
 MiniDeps.add({source = "nvim-treesitter/nvim-treesitter", hooks = { post_checkout = function() vim.cmd("TSUpdateSync") end }})
 require("nvim-treesitter.configs").setup({
@@ -239,4 +229,3 @@ require("nvim-treesitter.configs").setup({
   indent = {enable = true},
   auto_install = true,
 })
-
