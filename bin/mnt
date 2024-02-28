@@ -2,17 +2,11 @@
 
 [ -z "$1" ] && echo "usage: $0 <device>" && exit 1
 dst=/mnt/$(basename $1)
-
-on_exit() {
-  echo
-  echo sudo umount $dst
-  sudo umount $dst
-}
-
-trap on_exit EXIT
-
 mkdir -p $dst
 echo sudo mount -o user,owner=$(id -un),group=$(id -gn) "$1" "$dst"
 sudo mount -o user,owner=$(id -un),group=$(id -gn) "$1" "$dst"
-echo "ctrl+c to umount"
-sleep infinity
+echo "exit the shell to umount"
+echo "$SHELL"
+$SHELL
+echo sudo umount $dst
+sudo umount $dst
