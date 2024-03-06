@@ -1,7 +1,6 @@
 set $win Mod4
 set $alt Mod1
 
-floating_modifier $win
 hide_edge_borders both
 
 bindsym shift+$alt+r restart
@@ -18,6 +17,7 @@ bindsym $alt+F5 workspace 5
 bindsym F12 workspace 5
 
 for_window [class=".*"] border pixel 0
+for_window [floating_from="user"] border pixel 2
 for_window [class="pop-up"] floating enable
 for_window [class="terminal"] move to workspace 5
 for_window [class="nvim"] move to workspace 3
