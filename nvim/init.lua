@@ -220,7 +220,6 @@ lspconfig.erlangls.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.yamlls.setup(yamlls_config)
 lspconfig.lua_ls.setup(luals_config)
-MiniDeps.later(vim.cmd.LspStart)
 
 vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "hover"})
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {desc = "lsp_definition"})
@@ -237,3 +236,5 @@ require("nvim-treesitter.configs").setup({
   indent = {enable = true},
   auto_install = true,
 })
+
+MiniDeps.later(function() vim.api.nvim_exec_autocmds("FileType", {}) end)
