@@ -206,8 +206,16 @@ local yamlls_config = {
   },
 }
 
+local elixirls_config = {
+  cmd = {"next_ls", "--stdio"},
+  init_options = {
+    mix_env = "test",
+    experimental = {completions = {enable = true}},
+  },
+}
+
 local lspconfig = require("lspconfig")
-lspconfig.elixirls.setup({cmd = { "next_ls", "--stdio" }})
+lspconfig.elixirls.setup(elixirls_config)
 lspconfig.erlangls.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.yamlls.setup(yamlls_config)
