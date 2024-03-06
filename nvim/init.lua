@@ -78,8 +78,8 @@ require("mini.files").setup({
     go_out_plus = "<Left>",
   },
 })
-vim.keymap.set("n", "<Leader>f", MiniFiles.open, {desc = "minifiles_open_cwd"})
-vim.keymap.set("n", "<leader>F", function() MiniFiles.open(vim.api.nvim_buf_get_name(0), true) end, {desc = "minifiles_open_bufdir"})
+vim.keymap.set("n", "<Leader>F", MiniFiles.open, {desc = "minifiles_open_cwd"})
+vim.keymap.set("n", "<leader>f", function() MiniFiles.open(vim.api.nvim_buf_get_name(0), true) end, {desc = "minifiles_open_bufdir"})
 
 require("mini.completion").setup({
   delay = { completion = 0, info = 0, signature = 0 },
@@ -157,14 +157,23 @@ vim.keymap.set("n", "[h", gitsigns.prev_hunk, {desc = "gitsigns_prev_hunk"})
 
 MiniDeps.add("ibhagwan/fzf-lua")
 local fzf = require("fzf-lua")
-local fd_opts = "--color=never --type f --no-ignore --hidden --follow --exclude .git --exclude deps --exclude _build --exclude .elixir_ls --exclude node_modules"
+local fd_opts = "--color=never --type f --no-ignore --hidden --follow"
+local fd_opts_exclude = fd_opts .. " --exclude .git --exclude deps --exclude _build --exclude .elixir_ls --exclude node_modules"
 local rg_opts = "--sort=path --column --line-number --no-heading --color=always --smart-case --max-columns=512"
 fzf.setup({
+  winopts = {
+    height = 0.6,
+    width=0.7,
+    preview = {
+      hidden = "hidden",
+    },
+  },
   files = {fd_opts = fd_opts},
   grep = {rg_opts = rg_opts},
 })
 fzf.register_ui_select()
-vim.keymap.set("n", "<Leader>p", fzf.files, {desc = "fzf_find_files"})
+vim.keymap.set("n", "<Leader>P", fzf.files, {desc = "fzf_find_files"})
+vim.keymap.set("n", "<Leader>p", function() fzf.files({fd_opts = fd_opts_exclude}) end, {desc = "fzf_find_files_exclude"})
 vim.keymap.set("n", "<Leader>g", fzf.live_grep_resume, {desc = "fzf_live_grep"})
 vim.keymap.set("n", "<Leader>b", fzf.blines, {desc = "fzf_buffer_lines"})
 vim.keymap.set("n", "<Leader>H", fzf.git_status, {desc = "fzf_git_status"})
