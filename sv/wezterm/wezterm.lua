@@ -3,7 +3,7 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 config.font = wezterm.font "JetBrains Mono"
-config.font_size = 16.0
+config.font_size = 14.0
 config.harfbuzz_features = {"calt=0", "clig=0", "liga=0"}
 config.tab_bar_at_bottom = true
 config.show_new_tab_button_in_tab_bar = false
