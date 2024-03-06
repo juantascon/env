@@ -6,6 +6,7 @@ config.font = wezterm.font "JetBrains Mono"
 config.font_size = 16.0
 config.harfbuzz_features = {"calt=0", "clig=0", "liga=0"}
 config.enable_tab_bar = false
+config.window_close_confirmation = "NeverPrompt"
 config.disable_default_key_bindings = true
 
 config.keys = {
