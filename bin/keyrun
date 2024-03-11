@@ -1,5 +1,4 @@
 #! /bin/bash
-set -x
 case "$1" in
   "XF86AudioPlay") playerctl -a play-pause; sleep 0.5; noti.sh ;;
   "XF86AudioRaiseVolume") pulsemixer --change-volume +2; noti.sh ;;
@@ -7,7 +6,7 @@ case "$1" in
   "XF86AudioMute") pulsemixer --toggle-mute; noti.sh ;;
   "XF86MonBrightnessUp") brillo -A 1; noti.sh ;;
   "XF86MonBrightnessDown") brillo -U 1; noti.sh ;;
-  "super+t") foot ;;
+  "super+t") xterm & foot & ;;
   "super+l") i3lock ;;
   "super+p") tabpass.sh ;;
   "super+v") clipmenu ;;
