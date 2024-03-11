@@ -1,35 +1,8 @@
-super + {Left,Right,space}
-  playerctl -a {previous,next,play-pause}; noti.sh playerctl
-
-XF86AudioPlay
-  playerctl -a play-pause; sleep 0.5; noti.sh playerctl
-
-XF86Audio{RaiseVolume,LowerVolume,Mute}
-  pulsemixer {--change-volume +2,--change-volume -2,--toggle-mute}; noti.sh volume
-
-XF86KbdBrightness{Down,Up}
-  brillo -{U,A} 2; noti.sh brightness
+XF86Audio{RaiseVolume,LowerVolume,Mute,Play}
+  keyrun XF86Audio{RaiseVolume,LowerVolume,Mute,Play}
 
 XF86MonBrightness{Down,Up}
-  brillo -{U,A} 1; noti.sh brightness
+  keyrun XF86MonBrightness{Down,Up}
 
-super + t
-  xterm
-
-super + l
-  i3lock
-
-super + p
-  tabpass.sh
-
-super + v
-  clipmenu
-
-super + s
-  flameshot gui
-
-super + x
-  autorandr -c
-
-super + m
-  btp.sh menu; noti.sh profile
+super + {t,l,p,v,s,x,m}
+  keyrun super+{t,l,p,v,s,x,m}
