@@ -1,11 +1,10 @@
 #! /bin/bash
 
 xrdb $HOME/env/xinit.d/xresources
+xsetroot -solid "#000000"
 
 i3lock &
-xsetroot -solid "#000000"
-xset b 0
 autorandr -c &
 
-exec runsvdir -P $HOME/env/xinit.d/services
+exec $HOME/env/xinit.d/services/init
 

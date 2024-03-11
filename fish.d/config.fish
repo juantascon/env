@@ -16,5 +16,4 @@ bind \cH backward-kill-word
 xdg-dirs | source
 mise activate | source
 keychain --quiet --eval --agents ssh id_rsa | source
-
-[ "$USER" = "juan" ] && [ (tty) = "/dev/tty1" ] && [ -z "$DISPLAY" ] && exec dbus-run-session xinit
+[ "$USER" = "juan" ] && [ (tty) = "/dev/tty1" ] && [ -z "$DISPLAY" ] && exec ~/env/xinit.d/init
