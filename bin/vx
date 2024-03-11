@@ -1,2 +1,0 @@
-#!/bin/bash
-SVDIR=~/env/xinit.d/services exec /usr/bin/vsv "$@"

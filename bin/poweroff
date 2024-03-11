@@ -1,4 +1,4 @@
 #! /bin/bash
-vx stop brave
+vu stop brave
 sleep 0.5
 exec sudo /usr/bin/poweroff "$@"

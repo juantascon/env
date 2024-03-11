@@ -6,5 +6,5 @@ xsetroot -solid "#000000"
 i3lock &
 autorandr -c &
 
-exec $HOME/env/xinit.d/services/init
+exec $HOME/env/service/init
 
