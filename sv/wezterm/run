@@ -1,3 +1,2 @@
-#!/bin/sh
-_cfg=$(pwd)/wezterm.lua
-exec env -C ~ wezterm --config-file $_cfg start --class terminal 2>&1
+#!/bin/bash
+exec env -C ~ wezterm --config-file $(dirname $(realpath $0))/wezterm.lua start --class terminal 2>&1
