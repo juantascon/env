@@ -16,8 +16,6 @@ lnk env/bash.d/bashrc .bash_profile
 lnk env/fish.d .config/fish
 lnk env/nvim/init.lua .config/nvim/init.lua
 lnk env/git .config/git
-lnk env/xinit.d/xinitrc .xinitrc
-lnk env/xinit.d/xserverrc .xserverrc
 lnk env/inputrc .inputrc
 
 popd >/dev/null

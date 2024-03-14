@@ -1,0 +1,2 @@
+#!/bin/sh
+exec dbus-run-session xinit /usr/bin/i3 -c $(dirname $(realpath $0))/i3.cfg

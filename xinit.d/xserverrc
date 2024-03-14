@@ -1,5 +1,0 @@
-#! /bin/bash
-
-TTY=${TTY:-$(tty)}
-TTY=${TTY#/dev/tty}
-exec /usr/bin/X -nolisten tcp vt$TTY -keeptty "$@"
