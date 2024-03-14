@@ -1,3 +1,2 @@
-#!/bin/bash -i
-eval $(mise env -s bash)
-exec brave --force-device-scale-factor=1.25 2>&1
+#!/bin/sh
+exec brave 2>&1
