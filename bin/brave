@@ -1,2 +1,2 @@
 #!/bin/sh
-mise exec brave-browser@latest -- brave --force-device-scale-factor=1.25 "$@"
+mise exec brave-browser@latest -- brave --force-device-scale-factor=1.25 --use-vulkan --enable-features=Vulkan "$@"

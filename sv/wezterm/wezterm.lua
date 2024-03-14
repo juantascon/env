@@ -10,6 +10,7 @@ config.show_new_tab_button_in_tab_bar = false
 config.default_cursor_style = "BlinkingBar"
 config.disable_default_key_bindings = true
 config.use_fancy_tab_bar = false
+-- config.front_end = "WebGpu"
 
 config.keys = {
   {key = "1", mods = "CTRL", action = act.ActivateTab(0)},
