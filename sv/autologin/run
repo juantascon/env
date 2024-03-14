@@ -1,2 +1,0 @@
-#!/bin/sh
-exec setsid agetty --noclear --autologin juan tty1 linux

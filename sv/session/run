@@ -1,0 +1,3 @@
+#!/bin/sh
+cgcreate -g pids:/juan
+exec cgexec -g pids:/juan --sticky -- su juan -l -c ~juan/env/init

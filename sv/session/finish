@@ -1,0 +1,2 @@
+#!/bin/sh
+/bin/kill --timeout 1000 TERM --timeout 1000 KILL --signal QUIT $(cgrps pids /juan) 2>/dev/null || return 0
