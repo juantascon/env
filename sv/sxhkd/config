@@ -1,8 +1,0 @@
-XF86Audio{RaiseVolume,LowerVolume,Mute,Play}
-  keyrun XF86Audio{RaiseVolume,LowerVolume,Mute,Play}
-
-XF86MonBrightness{Down,Up}
-  keyrun XF86MonBrightness{Down,Up}
-
-super + {t,l,p,v,s,x,m}
-  keyrun super+{t,l,p,v,s,x,m}

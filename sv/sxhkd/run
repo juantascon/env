@@ -1,3 +1,0 @@
-#!/bin/sh
-_cfg=$(pwd)/config
-exec env -C ~ sxhkd -c $_cfg 2>&1
