@@ -1,0 +1,2 @@
+#!/bin/sh
+exec dbus-run-session xinit /usr/bin/qtile start -b x11 -c $(dirname $(realpath $0))/config.py -- -dpi 144
